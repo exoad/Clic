@@ -11,8 +11,10 @@ import javax.swing.*;
 import java.io.*;
 import java.util.*;
 
-public class ControllerR extends JPanel implements ActionListener {
+public class ControllerR extends JFrame implements ActionListener, Runnable {
     // init values
+    private final JFrame frame;
+    private final JPanel panel;
     private final JButton MAINX, UPGRADEA, SAVX, CHANGECOLOUR, RESETDATA;
     private JLabel display, otherInfo, news, multiplier, objec, nextMultX;
     private int mainLabel, multX, objNum, multCost;
@@ -21,6 +23,10 @@ public class ControllerR extends JPanel implements ActionListener {
     private File filX;
     private Random rd = new Random();
     private FileWriter fw;
+    
+    public static void main(String[] args) {
+        new ControllerR().run();
+    }
 
     public ControllerR() {
         // settings all the variables and components
@@ -34,6 +40,10 @@ public class ControllerR extends JPanel implements ActionListener {
             displayStartText = "Click the button";
 
         mainText = "Click Me!";
+
+        frame = new JFrame("Clicker Game");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(false);
 
         // settings values for JComponents
         objec = new JLabel("Current Click Objective:" + objNum);
@@ -69,6 +79,7 @@ public class ControllerR extends JPanel implements ActionListener {
         MAINX = new JButton(mainText);
         MAINX.setBackground(Color.BLUE);
         MAINX.addActionListener(this);
+        MAINX.setSize(new Dimension(100, 100));
         MAINX.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         RESETDATA = new JButton("Reset");
@@ -82,21 +93,23 @@ public class ControllerR extends JPanel implements ActionListener {
         CHANGECOLOUR.addActionListener(this);
         CHANGECOLOUR.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        panel = new JPanel();
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        panel.setPreferredSize(new Dimension(500, 500));
 
-        add(MAINX);
-        add(SAVX);
-        add(UPGRADEA);
-        add(CHANGECOLOUR);
-        add(RESETDATA);
-        add(news);
-        add(display);
-        add(multiplier);
-        add(nextMultX);
-        add(objec);
-        add(otherInfo);
+        panel.add(MAINX);
+        panel.add(SAVX);
+        panel.add(UPGRADEA);
+        panel.add(CHANGECOLOUR);
+        panel.add(RESETDATA);
+        panel.add(news);
+        panel.add(display);
+        panel.add(multiplier);
+        panel.add(nextMultX);
+        panel.add(objec);
+        panel.add(otherInfo);
 
-        setPreferredSize(new Dimension(500, 500));
+        frame.add(panel);
 
     }
 
@@ -394,6 +407,12 @@ public class ControllerR extends JPanel implements ActionListener {
                 err.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public void run() {
+        frame.pack();
+        frame.setVisible(true);
     }
 
 }
