@@ -1,7 +1,7 @@
 package Remake;
 /*
  * This is a remake of the FinalProject: ClickerGame
- * Check the TODO: File for more info
+ * Check the TODO File for more info
  */
 
 //import all relevant packages
@@ -11,10 +11,9 @@ import javax.swing.*;
 import java.io.*;
 import java.util.*;
 
-public class ControllerR extends JFrame implements ActionListener, Runnable {
+public class ControllerR extends JPanel implements ActionListener, Runnable {
     // init values
     private final JFrame frame;
-    private final JPanel panel;
     private final JButton MAINX, UPGRADEA, SAVX, CHANGECOLOUR, RESETDATA;
     private JLabel display, otherInfo, news, multiplier, objec, nextMultX;
     private int mainLabel, multX, objNum, multCost;
@@ -43,7 +42,6 @@ public class ControllerR extends JFrame implements ActionListener, Runnable {
 
         frame = new JFrame("Clicker Game");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setResizable(false);
 
         // settings values for JComponents
         objec = new JLabel("Current Click Objective:" + objNum);
@@ -92,25 +90,23 @@ public class ControllerR extends JFrame implements ActionListener, Runnable {
         CHANGECOLOUR.setForeground(Color.BLACK);
         CHANGECOLOUR.addActionListener(this);
         CHANGECOLOUR.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setPreferredSize(new Dimension(500, 500));
 
-        panel = new JPanel();
-        //TODO: Make the layout better
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        panel.setPreferredSize(new Dimension(500, 500));
+        add(MAINX);
+        add(SAVX);
+        add(UPGRADEA);
+        add(CHANGECOLOUR);
+        add(RESETDATA);
+        add(news);
+        add(display);
+        add(multiplier);
+        add(nextMultX);
+        add(objec);
+        add(otherInfo);
 
-        panel.add(MAINX);
-        panel.add(SAVX);
-        panel.add(UPGRADEA);
-        panel.add(CHANGECOLOUR);
-        panel.add(RESETDATA);
-        panel.add(news);
-        panel.add(display);
-        panel.add(multiplier);
-        panel.add(nextMultX);
-        panel.add(objec);
-        panel.add(otherInfo);
-
-        frame.add(panel);
+        frame.add(this);
 
     }
 
