@@ -1,7 +1,7 @@
 package Remake;
 /*
  * This is a remake of the FinalProject: ClickerGame
- * Check the TODO File for more info
+ * Check the TODO: File for more info
  */
 
 //import all relevant packages
@@ -94,6 +94,7 @@ public class ControllerR extends JFrame implements ActionListener, Runnable {
         CHANGECOLOUR.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         panel = new JPanel();
+        //TODO: Make the layout better
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         panel.setPreferredSize(new Dimension(500, 500));
 
