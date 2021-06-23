@@ -1,19 +1,3 @@
-# Site settings
-title: "Clicker Game"
-bye_message: "Thanks for visiting"
-baseurl: "/clicker/"
-url: "https://github.com/exoad/ClickGame"
-disqus: exoad
-
-# Header settings
-source_code:
-    server: "github.com"
-    nick: "gjuniioor"
-blog:
-    server: "wordpress.com"
-    nick: "gjuniioor"
-fingerprint_key: "5E12 9ABC C2A9 564B C048  2DF9 D327 0D10 BC71 CF75"
-
 # Build settings
 markdown: kramdown
-permalink: /:categories/:title/
+remote_theme: b2a3e8/jekyll-theme-console
