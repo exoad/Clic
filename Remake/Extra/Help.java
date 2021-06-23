@@ -1,5 +1,9 @@
 package Remake.Extra;
 
+/*
+ * TODO: Add better help menu
+ */
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -11,12 +15,11 @@ public class Help extends JPanel implements Runnable {
     private final JLabel dis;
 
     public static void main(String[] args) {
-        new Help().run();
-
+        new Help();
     }
     public Help() {
         frame = new JFrame("Help Menu");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         dis = new JLabel("Work in Progress");
         dis.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -33,6 +36,5 @@ public class Help extends JPanel implements Runnable {
         frame.pack();
         frame.setVisible(true);
     }
-
     
 }

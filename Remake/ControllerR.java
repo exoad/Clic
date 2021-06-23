@@ -3,6 +3,9 @@ package Remake;
  * This is a remake of the FinalProject: ClickerGame
  */
 
+//import subclasses (helper classes)
+import Remake.Extra.*;
+
 //import all relevant packages
 import java.awt.*;
 import java.awt.event.*;
@@ -194,7 +197,8 @@ public class ControllerR extends JPanel implements ActionListener, Runnable {
             }
 
         } else if(ex.getSource() == HELP) {
-            
+            Help hp = new Help();
+            hp.run();
         } else {
 
             news.setText(randomNews());
