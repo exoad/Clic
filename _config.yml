@@ -1,3 +1,13 @@
+# Site Settings
+header_pages:
+ - README.md
+ - TODO.md
+
+style: dark
+listen_for_clients_preferred_style: true
+
+footer: 'Made by exoad'
+
 # Build settings
 markdown: kramdown
 remote_theme: b2a3e8/jekyll-theme-console
