@@ -1,7 +1,6 @@
 //package Remake;
 /*
  * This is a remake of the FinalProject: ClickerGame
- * Check the TODO File for more info
  */
 
 //import all relevant packages
