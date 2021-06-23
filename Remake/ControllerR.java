@@ -1,4 +1,4 @@
-
+package Remake;
 /*
  * This is a remake of the FinalProject: ClickerGame
  */
@@ -193,6 +193,8 @@ public class ControllerR extends JPanel implements ActionListener, Runnable {
                 otherInfo.setText("No Data Found.");
             }
 
+        } else if(ex.getSource() == HELP) {
+            
         } else {
 
             news.setText(randomNews());
