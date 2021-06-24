@@ -2,6 +2,8 @@
 header_pages:
  - README.md
  - TODO.md
+ - Final/Final.md
+ -
 
 style: dark
 listen_for_clients_preferred_style: true
