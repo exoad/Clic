@@ -6,7 +6,7 @@ header_pages:
 style: dark
 listen_for_clients_preferred_style: true
 
-footer: 'Made by exoad'
+footer: 'Made by exoad | 2021'
 
 # Build settings
 markdown: kramdown

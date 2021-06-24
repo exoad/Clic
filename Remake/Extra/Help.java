@@ -5,10 +5,14 @@ package Remake.Extra;
  */
 
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
-import java.io.*;
-import java.util.*;
+
+/*
+ * Awaiting Packages
+ * import java.io.*;
+ * import java.util.*;
+ * import java.awt.event.*;
+ */
 
 public class Help extends JPanel implements Runnable {
     private final JFrame frame;
