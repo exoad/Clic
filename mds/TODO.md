@@ -1,4 +1,4 @@
-# TODO
+# [ TODO ]
 This is the todo file where everything is listed of what should be done.
 
 ```

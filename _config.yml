@@ -1,9 +1,11 @@
 # Site Settings
 header_pages:
- - README.md
- - TODO.md
- - Final/Final.md
- -
+ - mds/Main.md
+ - mds/TODO.md
+ - mds/Final.md
+ - mds/Remake.md
+ - mds/Credits.md
+
 
 style: dark
 listen_for_clients_preferred_style: true
