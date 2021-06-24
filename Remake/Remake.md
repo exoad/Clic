@@ -1,4 +1,4 @@
-# Remake
+# [ Remake ]
 This is an improved/revised version of the original project I had to turn in. It aims to be much more "usable" and "enjoyable."
 
 **Avaliable Files:**
