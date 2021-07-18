@@ -1,4 +1,4 @@
-package build;
+
 //package Remake;
 /*
  * This is a remake of the FinalProject: ClickerGame
