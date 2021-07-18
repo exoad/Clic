@@ -1,9 +1,10 @@
+package build;
 //package Remake;
 /*
  * This is a remake of the FinalProject: ClickerGame
  */
 
-package build;
+
 
 //import all relevant packages
 import java.awt.*;
