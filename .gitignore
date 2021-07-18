@@ -1,3 +1,6 @@
 *.jar
 *.class
 .vscode
+.idea
+.build
+.deprecated
