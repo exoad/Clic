@@ -1,8 +1,10 @@
 //package Remake;
 /*
  * This is a remake of the FinalProject: ClickerGame
- * Check the TODO File for more info
  */
+
+//import subclasses (helper classes)
+import Remake.Extra.*;
 
 //import all relevant packages
 import java.awt.*;
@@ -14,7 +16,7 @@ import java.util.*;
 public class ControllerR extends JPanel implements ActionListener, Runnable {
     // init values
     private final JFrame frame;
-    private final JButton MAINX, UPGRADEA, SAVX, CHANGECOLOUR, RESETDATA;
+    private final JButton MAINX, UPGRADEA, SAVX, CHANGECOLOUR, RESETDATA, HELP;
     private JLabel display, otherInfo, news, multiplier, objec, nextMultX;
     private int mainLabel, multX, objNum, multCost;
     private BufferedReader br;
@@ -33,6 +35,7 @@ public class ControllerR extends JPanel implements ActionListener, Runnable {
         multX = readMult();
         objNum = readObj();
         multCost = readMultCost();
+
         if (mainLabel != 0)
             displayStartText = "Current Count: " + mainLabel;
         else
@@ -90,6 +93,11 @@ public class ControllerR extends JPanel implements ActionListener, Runnable {
         CHANGECOLOUR.setForeground(Color.BLACK);
         CHANGECOLOUR.addActionListener(this);
         CHANGECOLOUR.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        HELP = new JButton("Help");
+        HELP.setBackground(Color.ORANGE);
+        HELP.addActionListener(this);
+        HELP.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setPreferredSize(new Dimension(500, 500));
@@ -99,6 +107,7 @@ public class ControllerR extends JPanel implements ActionListener, Runnable {
         add(UPGRADEA);
         add(CHANGECOLOUR);
         add(RESETDATA);
+        add(HELP);
         add(news);
         add(display);
         add(multiplier);
@@ -187,6 +196,9 @@ public class ControllerR extends JPanel implements ActionListener, Runnable {
                 otherInfo.setText("No Data Found.");
             }
 
+        } else if(ex.getSource() == HELP) {
+            Help hp = new Help();
+            hp.run();
         } else {
 
             news.setText(randomNews());
