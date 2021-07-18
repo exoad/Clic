@@ -280,7 +280,7 @@ public class ProductionRunner extends JPanel implements ActionListener, Runnable
     }
 
     private int comparator(int n, boolean isit) {
-        if (isit == true) {
+        if (isit) {
             if (n >= multCost) {
                 UPGRADEA.setVisible(true);
                 display.setText("Upgrade Avaliable. Cost: " + multCost);
