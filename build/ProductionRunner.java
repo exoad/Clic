@@ -12,7 +12,7 @@ import javax.swing.*;
 import java.io.*;
 import java.util.*;
 
-public class ControllerR extends JPanel implements ActionListener, Runnable {
+public class ProductionRunner extends JPanel implements ActionListener, Runnable {
     // init values
     private final JFrame frame;
     private final JButton MAINX, UPGRADEA, SAVX, CHANGECOLOUR, RESETDATA;
@@ -25,10 +25,10 @@ public class ControllerR extends JPanel implements ActionListener, Runnable {
     private FileWriter fw;
     
     public static void main(String[] args) {
-        new ControllerR().run();
+        new ProductionRunner().run();
     }
 
-    public ControllerR() {
+    public ProductionRunner() {
         // settings all the variables and components
         mainLabel = readMain();
         multX = readMult();
