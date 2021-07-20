@@ -14,6 +14,8 @@ This is an improvement of the program, check the `TODO` file for upcoming change
 
 Remake changes will not effect the `/Final/` files, etc..
 
+This is also the master branch.
+
 ### [ [Deprecated](https://github.com/exoad/ClickGame/tree/deprecated) ]
 Older stuffs that were removed for X reasons
 
