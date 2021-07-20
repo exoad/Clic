@@ -1,4 +1,4 @@
-package Remake.Extra;
+package Extra;
 
 /*
  * TODO: Add better help menu
