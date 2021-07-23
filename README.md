@@ -16,8 +16,11 @@ Remake changes will not effect the `/Final/` files, etc..
 
 This is also the master branch.
 
+This edition supports certain handling features, check for their avaliability [here](https://github.com/exoad/ClickGame/security/policy).
+
 ### [ [Deprecated](https://github.com/exoad/ClickGame/tree/deprecated) ]
 Older stuffs that were removed for X reasons
 
 ### [ [Others](https://github.com/exoad/ClickGame/tree/master/Others) ]
 Others...
+
