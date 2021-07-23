@@ -7,27 +7,39 @@
 
 
 //import all relevant packages
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import java.io.*;
-import java.util.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Random;
+import java.util.Scanner;
+
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import Extra.Help;
 
 public class ProductionRunner extends JPanel implements ActionListener, Runnable {
     // init values
     private final JFrame frame;
-    private final JButton MAINX, UPGRADEA, SAVX, CHANGECOLOUR, RESETDATA;
+    private final JButton MAINX, UPGRADEA, SAVX, CHANGECOLOUR, RESETDATA, EXP;
     private JLabel display, otherInfo, news, multiplier, objec, nextMultX;
     private int mainLabel, multX, objNum, multCost;
     private BufferedReader br;
-    private String mainText, li, toFile, displayStartText;
+    private String mainText, li, toFile, displayStartText, save_dir;
     private File filX;
     private Random rd = new Random();
     private FileWriter fw;
-    
-    public static void main(String[] args) {
-        new ProductionRunner().run();
-    }
 
     public ProductionRunner() {
         // settings all the variables and components
@@ -35,6 +47,8 @@ public class ProductionRunner extends JPanel implements ActionListener, Runnable
         multX = readMult();
         objNum = readObj();
         multCost = readMultCost();
+
+        save_dir = "click_game/";
 
         if (mainLabel != 0)
             displayStartText = "Current Count: " + mainLabel;
@@ -93,6 +107,11 @@ public class ProductionRunner extends JPanel implements ActionListener, Runnable
         CHANGECOLOUR.setForeground(Color.BLACK);
         CHANGECOLOUR.addActionListener(this);
         CHANGECOLOUR.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        EXP = new JButton("Exp");
+        EXP.setBackground(Color.orange);
+        EXP.addActionListener(this);
+        EXP.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setPreferredSize(new Dimension(500, 500));
@@ -108,9 +127,14 @@ public class ProductionRunner extends JPanel implements ActionListener, Runnable
         add(nextMultX);
         add(objec);
         add(otherInfo);
+        add(EXP);
 
         frame.add(this);
 
+    }
+    
+    public static void main(String[] args) throws Exception {
+        new ProductionRunner().run();
     }
 
     // Action Listener for much of the program's functions
@@ -147,6 +171,7 @@ public class ProductionRunner extends JPanel implements ActionListener, Runnable
 
         } else if (ex.getSource() == SAVX) {
             // call each method to store the values
+            initGameFolder();
             storeMain();
             storeMult();
             storeMultCost();
@@ -172,24 +197,31 @@ public class ProductionRunner extends JPanel implements ActionListener, Runnable
             multX = 1;
             objNum = 50;
             multCost = 100;
-            File w = new File("USERMULT.txt");
-            File x = new File("USERSAVE.txt");
-            File y = new File("USERMULTCOST.txt");
-            File z = new File("USEROBJ.txt");
+            File w = new File(save_dir + "mult.txt");
+            File x = new File(save_dir + "clicks.txt");
+            File y = new File(save_dir + "mult_cost.txt");
+            File z = new File(save_dir + "objs.txt");
             if (w.exists() || x.exists() || y.exists() || z.exists()) {
                 if (w.delete())
-                    System.out.printf("DELETED USERMULT.txt %n");
+                    System.out.printf("DELETED mult.txt %n");
                 if (x.delete())
-                    System.out.printf("DELETED USERSAVE.txt %n");
+                    System.out.printf("DELETED clicks.txt %n");
                 if (y.delete())
-                    System.out.printf("DELETED USERMULTCOST.txt %n");
+                    System.out.printf("DELETED mult_cost.txt %n");
                 if (z.delete())
-                    System.out.printf("DELETED USEROBJ.txt %n");
+                    System.out.printf("DELETED objs.txt %n");
                 otherInfo.setText("Reset Success.");
             } else {
                 otherInfo.setText("No Data Found.");
             }
 
+        } else if(ex.getSource() == EXP) {
+            try {
+                Help h = new Help();
+                h.askRun();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } else {
 
             news.setText(randomNews());
@@ -214,10 +246,10 @@ public class ProductionRunner extends JPanel implements ActionListener, Runnable
     private int readMain() {
         try {
             String str;
-            if (!new File("USERSAVE.txt").exists()) {
+            if (!new File(save_dir + "clicks.txt").exists()) {
                 return 0;
             }
-            br = new BufferedReader(new FileReader("USERSAVE.txt"));
+            br = new BufferedReader(new FileReader(save_dir + "clicks.txt"));
 
             while ((str = br.readLine()) != null) {
                 return Integer.parseInt(str);
@@ -231,10 +263,10 @@ public class ProductionRunner extends JPanel implements ActionListener, Runnable
     private int readMult() {
         try {
             String str;
-            if (!new File("USERMULT.txt").exists() || br.readLine() == null) {
+            if (!new File(save_dir + "mult.txt").exists() || br.readLine() == null) {
                 return 1;
             }
-            br = new BufferedReader(new FileReader("USERMULT.txt"));
+            br = new BufferedReader(new FileReader(save_dir + "mult.txt"));
 
             while ((str = br.readLine()) != null) {
                 return Integer.parseInt(str);
@@ -248,10 +280,10 @@ public class ProductionRunner extends JPanel implements ActionListener, Runnable
     private int readMultCost() {
         try {
             String str;
-            if (!new File("USERMULTCOST.txt").exists() || br.readLine() == null) {
+            if (!new File(save_dir + "mult_cost.txt").exists() || br.readLine() == null) {
                 return 100;
             }
-            br = new BufferedReader(new FileReader("USERMULTCOST.txt"));
+            br = new BufferedReader(new FileReader(save_dir + "mult_cost.txt"));
 
             while ((str = br.readLine()) != null) {
                 return Integer.parseInt(str);
@@ -265,10 +297,10 @@ public class ProductionRunner extends JPanel implements ActionListener, Runnable
     private int readObj() {
         try {
             String str;
-            if (!new File("USEROBJ.txt").exists() || br.readLine() == null) {
+            if (!new File(save_dir + "objs.txt").exists() || br.readLine() == null) {
                 return 50;
             }
-            br = new BufferedReader(new FileReader("USEROBJ.txt"));
+            br = new BufferedReader(new FileReader(save_dir + "objs.txt"));
 
             while ((str = br.readLine()) != null) {
                 return Integer.parseInt(str);
@@ -298,7 +330,7 @@ public class ProductionRunner extends JPanel implements ActionListener, Runnable
     private void storeMain() {
         String userDat = Integer.toString(mainLabel);
         String oldDat = "";
-        filX = new File("USERSAVE.txt");
+        filX = new File(save_dir + "clicks.txt");
         try {
             if (!filX.exists())
                 filX.createNewFile();
@@ -327,7 +359,7 @@ public class ProductionRunner extends JPanel implements ActionListener, Runnable
         news.setText(randomNews());
         String userDat = Integer.toString(multX);
         String oldDat = "";
-        filX = new File("USERMULT.txt");
+        filX = new File(save_dir + "mult.txt");
         try {
             if (!filX.exists())
                 filX.createNewFile();
@@ -356,7 +388,7 @@ public class ProductionRunner extends JPanel implements ActionListener, Runnable
         news.setText(randomNews());
         String userDat = Integer.toString(multCost);
         String oldDat = "";
-        filX = new File("USERMULTCOST.txt");
+        filX = new File(save_dir + "mult_cost.txt");
         try {
             if (!filX.exists())
                 filX.createNewFile();
@@ -385,7 +417,7 @@ public class ProductionRunner extends JPanel implements ActionListener, Runnable
         news.setText(randomNews());
         String userDat = Integer.toString(objNum);
         String oldDat = "";
-        filX = new File("USEROBJ.txt");
+        filX = new File(save_dir + "objs.txt");
         try {
             if (!filX.exists())
                 filX.createNewFile();
@@ -407,6 +439,12 @@ public class ProductionRunner extends JPanel implements ActionListener, Runnable
                 err.printStackTrace();
             }
         }
+    }
+
+    public void initGameFolder() {
+        filX = new File("click_game");
+        if (!filX.isDirectory())
+            filX.mkdirs();
     }
 
     @Override

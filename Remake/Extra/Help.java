@@ -3,9 +3,14 @@ package Extra;
 /*
  * TODO: Add better help menu
  */
+import java.awt.Component;
+import java.awt.Dimension;
 
-import java.awt.*;
-import javax.swing.*;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /*
  * Awaiting Packages
@@ -16,22 +21,24 @@ import javax.swing.*;
 
 public class Help extends JPanel implements Runnable {
     private final JFrame frame;
-    private final JLabel dis;
+    private final JLabel title;
+    private final JButton readHelpAsTXT;
 
-    public static void main(String[] args) {
-        new Help();
-    }
     public Help() {
         frame = new JFrame("Help Menu");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        dis = new JLabel("Work in Progress");
-        dis.setAlignmentX(Component.CENTER_ALIGNMENT);
+        title = new JLabel("--Helpful Handbook--");
+        title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        readHelpAsTXT = new JButton("Read As TxT");
+        readHelpAsTXT.setAlignmentY(Component.BOTTOM_ALIGNMENT);
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setPreferredSize(new Dimension(500, 500));
+        setPreferredSize(new Dimension(300, 100));
 
-        add(dis);
+        add(title);
+        add(readHelpAsTXT);
 
         frame.add(this);
     }
@@ -39,6 +46,9 @@ public class Help extends JPanel implements Runnable {
     public void run() {
         frame.pack();
         frame.setVisible(true);
+    }
+    public void askRun() {
+        new Help().run();
     }
     
 }
