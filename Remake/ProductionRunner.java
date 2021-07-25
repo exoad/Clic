@@ -12,14 +12,8 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Random;
-import java.util.Scanner;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -27,7 +21,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import Extra.Help;
+import Extra.Utilities.FileScheduler;
+import Extra.Windows.Help;
 
 public class ProductionRunner extends JPanel implements ActionListener, Runnable {
     // init values
@@ -35,18 +30,17 @@ public class ProductionRunner extends JPanel implements ActionListener, Runnable
     private final JButton MAINX, UPGRADEA, SAVX, CHANGECOLOUR, RESETDATA, EXP;
     private JLabel display, otherInfo, news, multiplier, objec, nextMultX;
     private int mainLabel, multX, objNum, multCost;
-    private BufferedReader br;
-    private String mainText, li, toFile, displayStartText, save_dir;
+    private String mainText, displayStartText, save_dir;
     private File filX;
     private Random rd = new Random();
-    private FileWriter fw;
+    private FileScheduler fsr = new FileScheduler();
 
     public ProductionRunner() {
         // settings all the variables and components
-        mainLabel = readMain();
-        multX = readMult();
-        objNum = readObj();
-        multCost = readMultCost();
+        mainLabel = fsr.readMain();
+        multX = fsr.readMult();
+        objNum = fsr.readObj();
+        multCost = fsr.readMultCost();
 
         save_dir = "click_game/";
 
@@ -172,10 +166,10 @@ public class ProductionRunner extends JPanel implements ActionListener, Runnable
         } else if (ex.getSource() == SAVX) {
             // call each method to store the values
             initGameFolder();
-            storeMain();
-            storeMult();
-            storeMultCost();
-            storeObj();
+            fsr.storeMain(mainLabel);
+            fsr.storeMult(multX);
+            fsr.storeMultCost(multCost);
+            fsr.storeObj(objNum);
 
             otherInfo.setText("Saved.");
 
@@ -243,74 +237,6 @@ public class ProductionRunner extends JPanel implements ActionListener, Runnable
         return o;
     }
 
-    private int readMain() {
-        try {
-            String str;
-            if (!new File(save_dir + "clicks.txt").exists()) {
-                return 0;
-            }
-            br = new BufferedReader(new FileReader(save_dir + "clicks.txt"));
-
-            while ((str = br.readLine()) != null) {
-                return Integer.parseInt(str);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return 0;
-    }
-
-    private int readMult() {
-        try {
-            String str;
-            if (!new File(save_dir + "mult.txt").exists() || br.readLine() == null) {
-                return 1;
-            }
-            br = new BufferedReader(new FileReader(save_dir + "mult.txt"));
-
-            while ((str = br.readLine()) != null) {
-                return Integer.parseInt(str);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return 1;
-    }
-
-    private int readMultCost() {
-        try {
-            String str;
-            if (!new File(save_dir + "mult_cost.txt").exists() || br.readLine() == null) {
-                return 100;
-            }
-            br = new BufferedReader(new FileReader(save_dir + "mult_cost.txt"));
-
-            while ((str = br.readLine()) != null) {
-                return Integer.parseInt(str);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return 100;
-    }
-
-    private int readObj() {
-        try {
-            String str;
-            if (!new File(save_dir + "objs.txt").exists() || br.readLine() == null) {
-                return 50;
-            }
-            br = new BufferedReader(new FileReader(save_dir + "objs.txt"));
-
-            while ((str = br.readLine()) != null) {
-                return Integer.parseInt(str);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return 50;
-    }
-
     private int comparator(int n, boolean isit) {
         if (isit) {
             if (n >= multCost) {
@@ -324,121 +250,6 @@ public class ProductionRunner extends JPanel implements ActionListener, Runnable
             return 2;
         }
         return 0;
-    }
-
-    // this void method stores the mainlabel value currently into a txt file
-    private void storeMain() {
-        String userDat = Integer.toString(mainLabel);
-        String oldDat = "";
-        filX = new File(save_dir + "clicks.txt");
-        try {
-            if (!filX.exists())
-                filX.createNewFile();
-            br = new BufferedReader(new FileReader(filX));
-            li = br.readLine();
-            while (li != null) {
-                oldDat = oldDat + li + System.lineSeparator();
-                li = br.readLine();
-            }
-            toFile = oldDat.replaceAll(oldDat, userDat);
-            fw = new FileWriter(filX);
-            fw.write(toFile);
-        } catch (IOException ev) {
-            ev.printStackTrace();
-        } finally {
-            try {
-                fw.close();
-            } catch (IOException err) {
-                err.printStackTrace();
-            }
-        }
-    }
-
-    // this is a void method and when called stores the current value of multX
-    private void storeMult() {
-        news.setText(randomNews());
-        String userDat = Integer.toString(multX);
-        String oldDat = "";
-        filX = new File(save_dir + "mult.txt");
-        try {
-            if (!filX.exists())
-                filX.createNewFile();
-            br = new BufferedReader(new FileReader(filX));
-            li = br.readLine();
-            while (li != null) {
-                oldDat = oldDat + li + System.lineSeparator();
-                li = br.readLine();
-            }
-            toFile = oldDat.replaceAll(oldDat, userDat);
-            fw = new FileWriter(filX);
-            fw.write(toFile);
-        } catch (IOException ev) {
-            ev.printStackTrace();
-        } finally {
-            try {
-                fw.close();
-            } catch (IOException err) {
-                err.printStackTrace();
-            }
-        }
-    }
-
-    // this void method stores the multcost var into a txt file of name USERMULTCOST
-    private void storeMultCost() {
-        news.setText(randomNews());
-        String userDat = Integer.toString(multCost);
-        String oldDat = "";
-        filX = new File(save_dir + "mult_cost.txt");
-        try {
-            if (!filX.exists())
-                filX.createNewFile();
-            br = new BufferedReader(new FileReader(filX));
-            li = br.readLine();
-            while (li != null) {
-                oldDat = oldDat + li + System.lineSeparator();
-                li = br.readLine();
-            }
-            toFile = oldDat.replaceAll(oldDat, userDat);
-            fw = new FileWriter(filX);
-            fw.write(toFile);
-        } catch (IOException ev) {
-            ev.printStackTrace();
-        } finally {
-            try {
-                fw.close();
-            } catch (IOException err) {
-                err.printStackTrace();
-            }
-        }
-    }
-
-    // this method stores info on the objective cases to a text file
-    private void storeObj() {
-        news.setText(randomNews());
-        String userDat = Integer.toString(objNum);
-        String oldDat = "";
-        filX = new File(save_dir + "objs.txt");
-        try {
-            if (!filX.exists())
-                filX.createNewFile();
-            br = new BufferedReader(new FileReader(filX));
-            li = br.readLine();
-            while (li != null) {
-                oldDat = oldDat + li + System.lineSeparator();
-                li = br.readLine();
-            }
-            toFile = oldDat.replaceAll(oldDat, userDat);
-            fw = new FileWriter(filX);
-            fw.write(toFile);
-        } catch (IOException ev) {
-            ev.printStackTrace();
-        } finally {
-            try {
-                fw.close();
-            } catch (IOException err) {
-                err.printStackTrace();
-            }
-        }
     }
 
     public void initGameFolder() {

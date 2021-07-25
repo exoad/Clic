@@ -1,4 +1,4 @@
-package Extra;
+package Extra.Windows;
 
 /*
  * TODO: Add better help menu
