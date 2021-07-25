@@ -1,0 +1,12 @@
+*.jar
+*.class
+.vscode
+build
+.build
+.deprecated
+.idea
+/Final/
+/Others/
+/Updates
+/experimentations
+/src/click_game/
