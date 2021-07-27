@@ -1,7 +1,5 @@
 package src.main.schedulers;
 
-import src.main.schedulers.FilePathHandler;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -15,7 +13,7 @@ public class FileScheduler {
   private FileWriter fw;
   private BufferedReader br;
   private BufferedWriter bw;
-  private String li, toFile;
+  private String li, toFile, fileDir;
 
   public FileScheduler() {
     super();
@@ -25,7 +23,7 @@ public class FileScheduler {
   public void storeMain(int t) {
     String userDat = Integer.toString(t);
     String oldDat = "";
-    f = new File(FilePathHandler.SAVE_PATH.getPath() + "clicks.txt");
+    f = new File(fileDir + "clicks.txt");
     try {
       if (!f.exists())
         f.createNewFile();
@@ -53,7 +51,7 @@ public class FileScheduler {
   public void storeMult(int t) {
     String userDat = Integer.toString(t);
     String oldDat = "";
-    f = new File(FilePathHandler.SAVE_PATH.getPath() + "mult.txt");
+    f = new File(fileDir + "mult.txt");
     try {
       if (!f.exists())
         f.createNewFile();
@@ -81,7 +79,7 @@ public class FileScheduler {
   public void storeMultCost(int t) {
     String userDat = Integer.toString(t);
     String oldDat = "";
-    f = new File(FilePathHandler.SAVE_PATH.getPath() + "mult_cost.txt");
+    f = new File(fileDir + "mult_cost.txt");
     try {
       if (!f.exists())
         f.createNewFile();
@@ -109,7 +107,7 @@ public class FileScheduler {
   public void storeObj(int t) {
     String userDat = Integer.toString(t);
     String oldDat = "";
-    f = new File(FilePathHandler.SAVE_PATH.getPath() + "objs.txt");
+    f = new File(fileDir + "objs.txt");
     try {
       if (!f.exists())
         f.createNewFile();
@@ -136,10 +134,10 @@ public class FileScheduler {
   public int readMain() {
     try {
       String str;
-      if (!new File(FilePathHandler.SAVE_PATH.getPath() + "clicks.txt").exists()) {
+      if (!new File(fileDir + "clicks.txt").exists()) {
         return 0;
       }
-      br = new BufferedReader(new FileReader(FilePathHandler.SAVE_PATH.getPath() + "clicks.txt"));
+      br = new BufferedReader(new FileReader(fileDir + "clicks.txt"));
 
       while ((str = br.readLine()) != null) {
         return Integer.parseInt(str);
@@ -153,10 +151,10 @@ public class FileScheduler {
   public int readMult() {
     try {
       String str;
-      if (!new File(FilePathHandler.SAVE_PATH.getPath() + "mult.txt").exists() || br.readLine() == null) {
+      if (!new File(fileDir + "mult.txt").exists() || br.readLine() == null) {
         return 1;
       }
-      br = new BufferedReader(new FileReader(FilePathHandler.SAVE_PATH.getPath() + "mult.txt"));
+      br = new BufferedReader(new FileReader(fileDir + "mult.txt"));
 
       while ((str = br.readLine()) != null) {
         return Integer.parseInt(str);
@@ -170,10 +168,10 @@ public class FileScheduler {
   public int readMultCost() {
     try {
       String str;
-      if (!new File(FilePathHandler.SAVE_PATH.getPath() + "mult_cost.txt").exists() || br.readLine() == null) {
+      if (!new File(fileDir + "mult_cost.txt").exists() || br.readLine() == null) {
         return 100;
       }
-      br = new BufferedReader(new FileReader(FilePathHandler.SAVE_PATH.getPath() + "mult_cost.txt"));
+      br = new BufferedReader(new FileReader(fileDir + "mult_cost.txt"));
 
       while ((str = br.readLine()) != null) {
         return Integer.parseInt(str);
@@ -187,10 +185,10 @@ public class FileScheduler {
   public int readObj() {
     try {
       String str;
-      if (!new File(FilePathHandler.SAVE_PATH.getPath() + "objs.txt").exists() || br.readLine() == null) {
+      if (!new File(fileDir + "objs.txt").exists() || br.readLine() == null) {
         return 50;
       }
-      br = new BufferedReader(new FileReader(FilePathHandler.SAVE_PATH.getPath() + "objs.txt"));
+      br = new BufferedReader(new FileReader(fileDir + "objs.txt"));
 
       while ((str = br.readLine()) != null) {
         return Integer.parseInt(str);

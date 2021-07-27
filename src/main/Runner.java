@@ -5,17 +5,23 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.File;
 import java.util.Random;
+import java.util.Scanner;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import src.main.schedulers.RunScheduler;
 import src.main.panels.Help;
 import src.main.schedulers.FileScheduler;
+import src.main.handler.InputChoiceHandler;
 
 public class Runner extends JPanel implements ActionListener, Runnable {
   // init values
@@ -117,12 +123,51 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     add(EXP);
 
     frame.add(this);
+    frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+    frame.addWindowListener(new WindowListener() {
+      @Override
+      public void windowClosing(WindowEvent e) {
+        JFrame frame = (JFrame)e.getSource();
 
+        int options = JOptionPane.showConfirmDialog(frame, "You are about leave Click Game? Are you sure?", "ATTENTION", JOptionPane.YES_NO_OPTION);
+        if(options == JOptionPane.YES_OPTION)
+          System.out.print("Exited the Program");
+          frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      }
+
+      @Override
+      public void windowOpened(WindowEvent e) {}
+      @Override
+      public void windowClosed(WindowEvent e) {}
+
+      @Override
+      public void windowIconified(WindowEvent e) {}
+
+      @Override
+      public void windowDeiconified(WindowEvent e) {}
+
+      @Override
+      public void windowActivated(WindowEvent e) {}
+
+      @Override
+      public void windowDeactivated(WindowEvent e) {}
+
+    });
   }
 
 
   public static void main(String[] args) throws Exception {
-    new Runner().run();
+    InputChoiceHandler sr = new InputChoiceHandler();
+    Scanner sc = new Scanner(System.in);
+    String s;
+    do {
+      System.out.print("\nLaunch? (y/n): ");
+      s = sc.nextLine();
+      if(sr.checkYN(s) == 0)
+        new RunScheduler().RunnerCall();
+        System.out.print("\nThe Program is now launched.");
+        break;
+    } while (sr.checkYN(s) != -1);
   }
 
   // Action Listener for much of the program's functions
@@ -131,7 +176,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     // main clicking of the button
     if (ex.getSource() == MAINX) {
       news.setText(randomNews());
-      comparator(mainLabel + multX, true);
+      comparator(mainLabel + multX);
 
       if ((mainLabel + multX) >= objNum) {
         // setting the objectives
@@ -231,19 +276,13 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     return o;
   }
 
-  private int comparator(int n, boolean isit) {
-    if (isit) {
-      if (n >= multCost) {
-        UPGRADEA.setVisible(true);
-        display.setText("Upgrade Avaliable. Cost: " + multCost);
-        return 1;
-      } else {
-        display.setText("Insufficient Clicks");
-      }
+  private void comparator(int n) {
+    if (n >= multCost) {
+      UPGRADEA.setVisible(true);
+      display.setText("Upgrade Avaliable. Cost: " + multCost);
     } else {
-      return 2;
+      display.setText("Insufficient Clicks");
     }
-    return 0;
   }
 
   public void initGameFolder() {
