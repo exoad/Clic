@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
-import java.util.Random;
 import java.util.Scanner;
 
 import javax.swing.BoxLayout;
@@ -22,6 +21,7 @@ import src.main.schedulers.RunScheduler;
 import src.main.panels.Help;
 import src.main.schedulers.FileScheduler;
 import src.main.handler.InputChoiceHandler;
+import src.main.elements.InfoBox;
 
 public class Runner extends JPanel implements ActionListener, Runnable {
   // init values
@@ -31,7 +31,6 @@ public class Runner extends JPanel implements ActionListener, Runnable {
   private int mainLabel, multX, objNum, multCost;
   private String mainText, displayStartText, save_dir;
   private File filX;
-  private Random rd = new Random();
   private final FileScheduler fsr = new FileScheduler();
 
   public Runner() {
@@ -66,7 +65,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     display = new JLabel(displayStartText);
     display.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-    news = new JLabel(randomNews());
+    news = new JLabel(new InfoBox().randomNews());
     news.setAlignmentX(Component.CENTER_ALIGNMENT);
 
     otherInfo = new JLabel(" ");
@@ -168,6 +167,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
         System.out.print("\nThe Program is now launched.");
         break;
     } while (sr.checkYN(s) != -1);
+    sc.close();
   }
 
   // Action Listener for much of the program's functions
@@ -175,7 +175,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
   public void actionPerformed(ActionEvent ex) {
     // main clicking of the button
     if (ex.getSource() == MAINX) {
-      news.setText(randomNews());
+      news.setText(new InfoBox().randomNews());
       comparator(mainLabel + multX);
 
       if ((mainLabel + multX) >= objNum) {
@@ -257,18 +257,10 @@ public class Runner extends JPanel implements ActionListener, Runnable {
       }
     } else {
 
-      news.setText(randomNews());
+      news.setText(new InfoBox().randomNews());
       UPGRADEA.setVisible(false);
 
     }
-  }
-
-  private String randomNews() {
-    // this method returns a random text
-    String[] allNews = { "That is a lot of Clicks!", "Keep Clicking!", "Is there an end?", "Never stop clicking",
-        "Clicking...Clicking...", "Click Click Click" };
-    int i = rd.nextInt(allNews.length);
-    return allNews[i];
   }
 
   private int objectives(int o) {

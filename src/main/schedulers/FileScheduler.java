@@ -1,7 +1,6 @@
 package src.main.schedulers;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -9,10 +8,8 @@ import java.io.IOException;
 
 public class FileScheduler {
   private File f;
-  private FileReader fr;
   private FileWriter fw;
   private BufferedReader br;
-  private BufferedWriter bw;
   private String li, toFile, fileDir;
 
   public FileScheduler() {
