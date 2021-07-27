@@ -29,7 +29,7 @@ public class Help extends JPanel implements Runnable {
         JLabel title = new JLabel("--Helpful Handbook--");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JButton readHelpAsTXT = new JButton("Read As TxT");
+        JButton readHelpAsTXT = new JButton("WIP");
         readHelpAsTXT.setAlignmentY(Component.BOTTOM_ALIGNMENT);
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
