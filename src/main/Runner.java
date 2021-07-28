@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
+import java.io.IOError;
+import java.io.IOException;
 import java.util.Scanner;
 
 import javax.swing.BoxLayout;
@@ -35,10 +37,10 @@ public class Runner extends JPanel implements ActionListener, Runnable {
 
   public Runner() {
     // settings all the variables and components
-    mainLabel = fsr.readMain();
-    multX = fsr.readMult();
-    objNum = fsr.readObj();
-    multCost = fsr.readMultCost();
+    mainLabel = Integer.parseInt(fsr.readLineNumber(0));
+    multX = Integer.parseInt(fsr.readLineNumber(1));
+    objNum = Integer.parseInt(fsr.readLineNumber(2));
+    multCost = Integer.parseInt(fsr.readLineNumber(3));
 
     save_dir = "click_game/";
 
@@ -128,7 +130,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
       public void windowClosing(WindowEvent e) {
         JFrame frame = (JFrame)e.getSource();
 
-        int options = JOptionPane.showConfirmDialog(frame, "You are about leave Click Game? Are you sure?", "ATTENTION", JOptionPane.YES_NO_OPTION);
+        int options = JOptionPane.showConfirmDialog(frame, "Are you sure you want to leave Click Game?\nYour progress is currently saved to the last time you pressed SAVE", "ATTENTION", JOptionPane.YES_NO_OPTION);
         if(options == JOptionPane.YES_OPTION)
           System.out.print("Exited the Program");
           frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -205,10 +207,17 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     } else if (ex.getSource() == SAVX) {
       // call each method to store the values
       initGameFolder();
+      try {
+        fsr.write(mainLabel, multX, multCost, objNum);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+      /*
       fsr.storeMain(mainLabel);
       fsr.storeMult(multX);
       fsr.storeMultCost(multCost);
       fsr.storeObj(objNum);
+      */
 
       otherInfo.setText("Saved.");
 
@@ -230,23 +239,10 @@ public class Runner extends JPanel implements ActionListener, Runnable {
       multX = 1;
       objNum = 50;
       multCost = 100;
-      File w = new File(save_dir + "mult.txt");
-      File x = new File(save_dir + "clicks.txt");
-      File y = new File(save_dir + "mult_cost.txt");
-      File z = new File(save_dir + "objs.txt");
-      if (w.exists() || x.exists() || y.exists() || z.exists()) {
-        if (w.delete())
-          System.out.printf("DELETED mult.txt %n");
-        if (x.delete())
-          System.out.printf("DELETED clicks.txt %n");
-        if (y.delete())
-          System.out.printf("DELETED mult_cost.txt %n");
-        if (z.delete())
-          System.out.printf("DELETED objs.txt %n");
-        otherInfo.setText("Reset Success.");
-      } else {
-        otherInfo.setText("No Data Found.");
-      }
+      if(fsr.resetData()) 
+        System.out.println("\nALL DATA RESET");
+      else
+        System.out.println("\nError Encountered while reseting");
 
     } else if (ex.getSource() == EXP) {
       try {

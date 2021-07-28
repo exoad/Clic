@@ -9,7 +9,7 @@ public class InfoBox {
   public String randomNews() {
     // this method returns a random text
     String[] allNews = { "That is a lot of Clicks!", "Keep Clicking!", "Is there an end?", "Never stop clicking",
-        "Clicking...Clicking...", "Click Click Click" };
+        "Clicking...Clicking...", "Click Click Click", "Make sure to save your progress! ;)" };
     int i = rd.nextInt(allNews.length);
     return allNews[i];
   }

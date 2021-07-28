@@ -12,3 +12,5 @@ build
 /src/click_game/
 /out
 /META-INF/
+.exp
+click_game
