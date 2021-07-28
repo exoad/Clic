@@ -31,7 +31,6 @@ public class Runner extends JPanel implements ActionListener, Runnable {
   private final JLabel display, otherInfo, news, multiplier, objec, nextMultX;
   private int mainLabel, multX, objNum, multCost;
   private String mainText, displayStartText;
-  private File filX;
   private final FileScheduler fsr = new FileScheduler();
 
   public Runner() {
