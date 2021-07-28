@@ -36,10 +36,17 @@ public class Runner extends JPanel implements ActionListener, Runnable {
 
   public Runner() {
     // settings all the variables and components
-    mainLabel = Integer.parseInt(fsr.readLineNumber(0));
-    multX = Integer.parseInt(fsr.readLineNumber(1));
-    objNum = Integer.parseInt(fsr.readLineNumber(2));
-    multCost = Integer.parseInt(fsr.readLineNumber(3));
+    if (Integer.parseInt(fsr.readLineNumber(0)) != 0 && Integer.parseInt(fsr.readLineNumber(1)) != 0 && Integer.parseInt(fsr.readLineNumber(2)) != 0 && Integer.parseInt(fsr.readLineNumber(3)) != 0) {
+      mainLabel = Integer.parseInt(fsr.readLineNumber(0));
+      multX = Integer.parseInt(fsr.readLineNumber(1));
+      objNum = Integer.parseInt(fsr.readLineNumber(2));
+      multCost = Integer.parseInt(fsr.readLineNumber(3));
+    } else {
+      mainLabel = 0;
+      multX = 1;
+      objNum = 50;
+      multCost = 100;
+    }
 
     if (mainLabel != 0)
       displayStartText = "Current Count: " + mainLabel;
@@ -52,7 +59,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     // settings values for JComponents
-    objec = new JLabel("Current Click Objective:" + objNum);
+    objec = new JLabel("Current Click Objective: " + objNum);
     objec.setAlignmentX(Component.CENTER_ALIGNMENT);
 
     multiplier = new JLabel("Current Upgrade: " + multX);
@@ -99,7 +106,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     CHANGECOLOUR.addActionListener(this);
     CHANGECOLOUR.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-    EXP = new JButton("Exp");
+    EXP = new JButton("Help Menu");
     EXP.setBackground(Color.orange);
     EXP.addActionListener(this);
     EXP.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -125,51 +132,64 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     frame.addWindowListener(new WindowListener() {
       @Override
       public void windowClosing(WindowEvent e) {
-        JFrame frame = (JFrame)e.getSource();
+        JFrame frame = (JFrame) e.getSource();
 
-        int options = JOptionPane.showConfirmDialog(frame, "Are you sure you want to leave Click Game?\nYour progress is currently saved to the last time you pressed SAVE", "ATTENTION", JOptionPane.YES_NO_OPTION);
-        if(options == JOptionPane.YES_OPTION)
+        int options = JOptionPane.showConfirmDialog(frame,
+            "Are you sure you want to leave Click Game?\nYour progress is currently saved to the last time you pressed SAVE",
+            "ATTENTION", JOptionPane.YES_NO_OPTION);
+        if (options == JOptionPane.YES_OPTION)
           System.out.print("Exited the Program");
-          frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       }
 
       @Override
-      public void windowOpened(WindowEvent e) {}
-      @Override
-      public void windowClosed(WindowEvent e) {}
+      public void windowOpened(WindowEvent e) {
+      }
 
       @Override
-      public void windowIconified(WindowEvent e) {}
+      public void windowClosed(WindowEvent e) {
+      }
 
       @Override
-      public void windowDeiconified(WindowEvent e) {}
+      public void windowIconified(WindowEvent e) {
+      }
 
       @Override
-      public void windowActivated(WindowEvent e) {}
+      public void windowDeiconified(WindowEvent e) {
+      }
 
       @Override
-      public void windowDeactivated(WindowEvent e) {}
+      public void windowActivated(WindowEvent e) {
+      }
+
+      @Override
+      public void windowDeactivated(WindowEvent e) {
+      }
 
     });
   }
 
-
   public static void main(String[] args) throws Exception {
+    FileScheduler fsb = new FileScheduler();
+    fsb.createNoticeFile();
+    initGameFolder();
     InputChoiceHandler sr = new InputChoiceHandler();
     Scanner sc = new Scanner(System.in);
     String s;
     do {
       System.out.print("\nLaunch? (y/n): ");
       s = sc.nextLine();
-      if(sr.checkYN(s) == 0)
+      if (sr.checkYN(s) == 0)
         new RunScheduler().RunnerCall();
-        System.out.print("\nThe Program is now launched.");
-        break;
+      System.out.print("\nThe Program is now launched.");
+      break;
     } while (sr.checkYN(s) != -1);
     sc.close();
   }
 
-  // Action Listener for much of the program's functions
+  /**
+   * @param ex event recieved from this class
+   */
   @Override
   public void actionPerformed(ActionEvent ex) {
     // main clicking of the button
@@ -202,9 +222,9 @@ public class Runner extends JPanel implements ActionListener, Runnable {
       }
 
     } else if (ex.getSource() == SAVX) {
-      // call each method to store the values
-      initGameFolder();
       try {
+        // call each method to store the values
+
         fsr.write(mainLabel, multX, multCost, objNum);
       } catch (IOException e) {
         e.printStackTrace();
@@ -230,7 +250,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
       multX = 1;
       objNum = 50;
       multCost = 100;
-      if(fsr.resetData()) 
+      if (fsr.resetData())
         System.out.println("\nALL DATA RESET");
       else
         System.out.println("\nError Encountered while reseting");
@@ -264,10 +284,10 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     }
   }
 
-  public void initGameFolder() {
-    filX = new File("click_game");
-    if (!filX.isDirectory())
-      filX.mkdir();
+  public static void initGameFolder() {
+    File filXB = new File("click_game");
+    if (!filXB.isDirectory())
+      filXB.mkdir();
   }
 
   @Override
