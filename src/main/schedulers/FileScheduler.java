@@ -1,23 +1,13 @@
 package src.main.schedulers;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.IOException;
-import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.security.PublicKey;
-import java.util.List;
-import java.util.stream.*;
+import java.util.stream.Stream;
 
 public class FileScheduler {
-  private File f;
-  private FileWriter fw;
-  private BufferedReader br;
-  private String li, toFile, fileDir = "click_game/";
+  private String fileDir = "click_game/";
 
   public FileScheduler() {
     super();

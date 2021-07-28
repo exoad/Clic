@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
-import java.io.IOError;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -31,7 +30,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
   private final JButton MAINX, UPGRADEA, SAVX, CHANGECOLOUR, RESETDATA, EXP;
   private final JLabel display, otherInfo, news, multiplier, objec, nextMultX;
   private int mainLabel, multX, objNum, multCost;
-  private String mainText, displayStartText, save_dir;
+  private String mainText, displayStartText;
   private File filX;
   private final FileScheduler fsr = new FileScheduler();
 
@@ -41,8 +40,6 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     multX = Integer.parseInt(fsr.readLineNumber(1));
     objNum = Integer.parseInt(fsr.readLineNumber(2));
     multCost = Integer.parseInt(fsr.readLineNumber(3));
-
-    save_dir = "click_game/";
 
     if (mainLabel != 0)
       displayStartText = "Current Count: " + mainLabel;
@@ -212,12 +209,6 @@ public class Runner extends JPanel implements ActionListener, Runnable {
       } catch (IOException e) {
         e.printStackTrace();
       }
-      /*
-      fsr.storeMain(mainLabel);
-      fsr.storeMult(multX);
-      fsr.storeMultCost(multCost);
-      fsr.storeObj(objNum);
-      */
 
       otherInfo.setText("Saved.");
 
