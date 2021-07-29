@@ -2,6 +2,8 @@
 
 Clic is WIP (Work in Progress) little Clicker Game I made.
 
+**The most recent release version:** v1.1
+
 It's main framework is based on a project I made for a class at GNSHS 2020-2021 (Check out branch [original](https://github.com/exoad/Clic/tree/original)).
 
 It currently doesn't have many features and this is what the `master` branch is for. For me to make the previous/original program much better and have a much better format so it wouldn't be lame to use/play.
