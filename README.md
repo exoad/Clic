@@ -1,4 +1,4 @@
-# ClickerGame
+# Clic
 This was a simple project created for my Java Class of 2020-2021 at GNSHS. 
 
 ### [ [Final](https://github.com/exoad/ClickGame/tree/Original) ]
