@@ -58,10 +58,10 @@ public class FileScheduler {
   }
 
   /**
-   * @param clicks the clicks value recieved at the time of the save action
-   * @param mult the multiplier current
+   * @param clicks   the clicks value recieved at the time of the save action
+   * @param mult     the multiplier current
    * @param multCost multiplier Cost at current tick
-   * @param objs objnum Number
+   * @param objs     objnum Number
    * @throws IOException
    */
   public void write(int clicks, int mult, int multCost, int objs) throws IOException {

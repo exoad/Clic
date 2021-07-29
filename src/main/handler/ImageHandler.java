@@ -54,6 +54,7 @@ public enum ImageHandler {
   ImageHandler(String request) {
     this.request = request;
   }
+
   public String getVal() {
     return this.request;
   }

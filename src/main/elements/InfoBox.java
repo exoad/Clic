@@ -43,7 +43,10 @@ import java.util.Random;
 
 public class InfoBox {
   private Random rd = new Random();
-  public InfoBox() { super(); }
+
+  public InfoBox() {
+    super();
+  }
 
   public String randomNews() {
     // this method returns a random text
