@@ -10,6 +10,7 @@ Spam loops are code issues where certain actions can corrupt the actions of the 
 | --- | --- | 
 | 1.0z | No Support |
 | Pre-1.1z | No Support |
+| v1.1 | Minimal |
 
 ### Caching
 
@@ -19,6 +20,18 @@ Caching will be mainly introduced for the process of storing and retrieving data
 | --- | --- |
 | 1.0z | n |
 | Pre-1.1z | n |
+| v1.1 | Supported |
+
+### Default Browser Checks
+
+With the introduction of open URLs in browser, it can cuase issues on certain OS
+
+| Version | Support (y/n) |
+| ------- | ------------- |
+| 1.0z | n |
+| Pre-1.1z | n |
+| v1.1 | n |
+
 
 
 ___
