@@ -304,8 +304,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
   }
 
   private int objectives(int o) {
-    o = o * 2;
-    return o;
+    return o * 2;
   }
 
   private void comparator(int n) {
