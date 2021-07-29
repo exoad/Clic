@@ -317,9 +317,9 @@ public class Runner extends JPanel implements ActionListener, Runnable {
   }
 
   public static void initGameFolder() {
-    File filXB = new File("click_game");
+    File filXB = new File("click_game/program_assets/");
     if (!filXB.isDirectory())
-      filXB.mkdir();
+      filXB.mkdirs();
   }
 
   @Override

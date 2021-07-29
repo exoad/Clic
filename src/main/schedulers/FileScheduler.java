@@ -9,6 +9,8 @@ import java.util.stream.Stream;
 import java.io.FileWriter;
 import java.nio.charset.Charset;
 
+import src.main.Runner;
+
 public class FileScheduler {
   private String fileDir = "click_game/";
 
@@ -56,6 +58,8 @@ public class FileScheduler {
   }
 
   public void createNoticeFile() throws IOException {
+    new Runner();
+    Runner.initGameFolder();
     File s = new File(fileDir + "NOTICE_PLEASE_READ.txt");
     FileWriter fw = new FileWriter(s);
     fw.write(
