@@ -24,19 +24,22 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 import src.main.schedulers.RunScheduler;
 import src.main.panels.Help;
 import src.main.schedulers.FileScheduler;
 import src.main.handler.InputChoiceHandler;
 import src.main.elements.InfoBox;
-import src.main.elements.ColorsReturn;
+import src.main.handler.ImageHandler;
 
 public class Runner extends JPanel implements ActionListener, Runnable {
   private final JFrame frame;
   private final JButton MAINX, UPGRADEA, SAVX, CHANGECOLOUR, RESETDATA, EXP;
   private final JLabel display, otherInfo, news, multiplier, objec, nextMultX;
   private int mainLabel, multX, objNum, multCost;
+  private final Icon MAIN_CLICK_IMG, SAVE_CLICK_IMG, RND_CLICK_IMG, RSTSAV_CLICK_IMG, UPD_CLICK_IMG;
   private String mainText, displayStartText;
   private final FileScheduler fsr = new FileScheduler();
 
@@ -44,9 +47,18 @@ public class Runner extends JPanel implements ActionListener, Runnable {
    * @Test Runner main
    */
   public Runner() {
+    UPD_CLICK_IMG = new ImageIcon(ImageHandler.UPG_BTN.getVal());
+    UPGRADEA = new JButton("Upgrade (+1/click) Cost: " + multCost, UPD_CLICK_IMG);
+    UPGRADEA.setVisible(false);
+    UPGRADEA.setBackground(Color.GREEN);
+    UPGRADEA.addActionListener(this);
+    UPGRADEA.setAlignmentX(Component.CENTER_ALIGNMENT);
+
     // settings all the variables and components
     if (Integer.parseInt(fsr.readLineNumber(0)) != 0 && Integer.parseInt(fsr.readLineNumber(1)) != 0 && Integer.parseInt(fsr.readLineNumber(2)) != 0 && Integer.parseInt(fsr.readLineNumber(3)) != 0) {
       mainLabel = Integer.parseInt(fsr.readLineNumber(0));
+      if(mainLabel >= 100) 
+        UPGRADEA.setVisible(true);
       multX = Integer.parseInt(fsr.readLineNumber(1));
       objNum = Integer.parseInt(fsr.readLineNumber(2));
       multCost = Integer.parseInt(fsr.readLineNumber(3));
@@ -87,29 +99,31 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     otherInfo.setVisible(true);
     otherInfo.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-    UPGRADEA = new JButton("Upgrade (+1/click) Cost: " + multCost);
-    UPGRADEA.setVisible(false);
-    UPGRADEA.setBackground(Color.GREEN);
-    UPGRADEA.addActionListener(this);
-    UPGRADEA.setAlignmentX(Component.CENTER_ALIGNMENT);
+    SAVE_CLICK_IMG = new ImageIcon(ImageHandler.SAVE_BTN.getVal()); 
 
-    SAVX = new JButton("Save Content");
+    SAVX = new JButton("Save", SAVE_CLICK_IMG);
     SAVX.setBackground(Color.red);
     SAVX.addActionListener(this);
     SAVX.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-    MAINX = new JButton(mainText);
+    MAIN_CLICK_IMG = new ImageIcon(ImageHandler.MAIN_BTN.getVal());
+
+    MAINX = new JButton(mainText, MAIN_CLICK_IMG);
     MAINX.setBackground(Color.BLUE);
     MAINX.addActionListener(this);
     MAINX.setSize(new Dimension(100, 100));
     MAINX.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-    RESETDATA = new JButton("Reset");
+    RSTSAV_CLICK_IMG = new ImageIcon(ImageHandler.RESET_BTN.getVal());
+
+    RESETDATA = new JButton("Reset", RSTSAV_CLICK_IMG);
     RESETDATA.setBackground(Color.LIGHT_GRAY);
     RESETDATA.addActionListener(this);
     RESETDATA.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-    CHANGECOLOUR = new JButton("Random Color");
+    RND_CLICK_IMG = new ImageIcon(ImageHandler.RNDCLR_BTN.getVal());
+
+    CHANGECOLOUR = new JButton("Random Color", RND_CLICK_IMG);
     CHANGECOLOUR.setBackground(Color.WHITE);
     CHANGECOLOUR.setForeground(Color.BLACK);
     CHANGECOLOUR.addActionListener(this);
@@ -244,14 +258,14 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     } else if (ex.getSource() == CHANGECOLOUR) {
       // changes the color randomly of the buttons when pressed
       MAINX.setBackground(
-          new Color(new ColorsReturn().new256(), new ColorsReturn().new256(), new ColorsReturn().new256()));
+          new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256)));
       if (UPGRADEA.isVisible())
         UPGRADEA.setBackground(
-            new Color(new ColorsReturn().new256(), new ColorsReturn().new256(), new ColorsReturn().new256()));
+            new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256)));
       SAVX.setBackground(
-          new Color(new ColorsReturn().new256(), new ColorsReturn().new256(), new ColorsReturn().new256()));
+          new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256)));
       RESETDATA.setBackground(
-          new Color(new ColorsReturn().new256(), new ColorsReturn().new256(), new ColorsReturn().new256()));
+          new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256)));
 
     } else if (ex.getSource() == RESETDATA) {
       // this method reset all the data and deletes all files with data
