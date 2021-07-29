@@ -1,26 +1,31 @@
 # Clic
-This was a simple project created for my Java Class of 2020-2021 at GNSHS. 
 
-### [ [Final](https://github.com/exoad/ClickGame/tree/Original) ]
+Clic is WIP (Work in Progress) little Clicker Game I made.
 
-If you want the original copy go to the files of `/Final/`
+It's main framework is based on a project I made for a class at GNSHS 2020-2021 (Check out branch [original](https://github.com/exoad/Clic/tree/original)).
 
-There you would find the proper "original" files
+It currently doesn't have many features and this is what the `master` branch is for. For me to make the previous/original program much better and have a much better format so it wouldn't be lame to use/play.
 
-Note: This was the original project I created for 2020-2021 at GNSHS
+## How to run
+1. Go to the release section on the sidebar
+2. Select the latest **FULL** Release (.exp or .z releases are all pre-releases or experimental and should not be used unless for debugging)
+3. Make sure you are running the latest version of Java supported by the version you are downloading
+4. Then download the appropriate executable file for your OS (mainly just download the Universal .JAR)
+5. Save the Jar file
+6. Click on the Jar File or run with the commands: `cd <file path>` then `java -jar <filename>.jar`
+- If you encounter any errors or issues post them in the Issues tab!
+7. The program should be launched.
 
-### [ [Remake](https://github.com/exoad/ClickGame/tree/master) ]
-This is an improvement of the program, check the `TODO` file for upcoming changes.
+## Questions?
+Check out the [Wiki tab](https://github.com/exoad/Clic/wiki) of this repo!
 
-Remake changes will not effect the `/Final/` files, etc..
+## Found a vulnerability or bug?
+Post them in the [Issues tab!](https://github.com/exoad/Clic/issues) Select the appropriate template and describe your issue in detail
 
-This is also the master branch.
-
-This edition supports certain handling features, check for their avaliability [here](https://github.com/exoad/ClickGame/security/policy).
-
-### [ [Deprecated](https://github.com/exoad/ClickGame/tree/deprecated) ]
-Older stuffs that were removed for X reasons
-
-### [ [Others](https://github.com/exoad/ClickGame/tree/master/Others) ]
-Others...
-
+## Branches Info
+`master` - The main branch where I make the program "better"
+`assets` - Resources, such as images for the Wiki tab
+`build-page` - Github Pages builder
+`commit1` - Merged
+`Deprecated` - Legacy or Deprecated Code goes here (incomplete)
+`original` - The original code I wrote for my original project along with my explanation video for the project
