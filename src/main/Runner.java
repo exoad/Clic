@@ -30,6 +30,7 @@ import src.main.panels.Help;
 import src.main.schedulers.FileScheduler;
 import src.main.handler.InputChoiceHandler;
 import src.main.elements.InfoBox;
+import src.main.elements.ColorsReturn;
 
 public class Runner extends JPanel implements ActionListener, Runnable {
   private final JFrame frame;
@@ -243,14 +244,14 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     } else if (ex.getSource() == CHANGECOLOUR) {
       // changes the color randomly of the buttons when pressed
       MAINX.setBackground(
-          new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256)));
+          new Color(new ColorsReturn().new256(), new ColorsReturn().new256(), new ColorsReturn().new256()));
       if (UPGRADEA.isVisible())
         UPGRADEA.setBackground(
-            new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256)));
+            new Color(new ColorsReturn().new256(), new ColorsReturn().new256(), new ColorsReturn().new256()));
       SAVX.setBackground(
-          new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256)));
+          new Color(new ColorsReturn().new256(), new ColorsReturn().new256(), new ColorsReturn().new256()));
       RESETDATA.setBackground(
-          new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256)));
+          new Color(new ColorsReturn().new256(), new ColorsReturn().new256(), new ColorsReturn().new256()));
 
     } else if (ex.getSource() == RESETDATA) {
       // this method reset all the data and deletes all files with data
