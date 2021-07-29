@@ -24,7 +24,7 @@ line (4) AT n = objNum
 
 [assets handlers, idrk]
 
-pathvar assets : <src/main/assets/...> || !src.main.assets.[] [@JAVA]
+pathvar assets : <src/main/assets/RunnerPanel...> || !src.main.assets.[] [@JAVA]
 
 MAIN : main_click_button.png AT.path(assets.mention) = main_click_button
 RND : random_color_click_button.png AT.path(assets.mention) = random_color_click_button
