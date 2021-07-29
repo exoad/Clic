@@ -5,6 +5,7 @@ public enum ImageHandler {
   RNDCLR_BTN("src/main/assets/random_color_click_button.png"),
   RESET_BTN("src/main/assets/reset_save_click_button.png"),
   UPG_BTN("src/main/assets/upgrade_click_button.png"),
+  MFRA_ICN("src/main/assets/mainframe_icon.png"),
   SAVE_BTN("src/main/assets/save_click_button.png");
 
   private final String request;

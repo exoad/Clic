@@ -51,6 +51,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
    * @Test Runner main
    */
   public Runner() {
+    MAIN_CLICK_IMG = new ImageIcon(ImageHandler.MAIN_BTN.getVal());
     UPD_CLICK_IMG = new ImageIcon(ImageHandler.UPG_BTN.getVal());
     UPGRADEA = new JButton("Upgrade (+1/click) Cost: " + multCost, UPD_CLICK_IMG);
     UPGRADEA.setVisible(false);
@@ -79,8 +80,9 @@ public class Runner extends JPanel implements ActionListener, Runnable {
       displayStartText = "Click the button";
 
     mainText = "Click Me!";
-
+    ImageIcon Templar1 = new ImageIcon(ImageHandler.MFRA_ICN.getVal());
     frame = new JFrame("Clicker Game");
+    frame.setIconImage(Templar1.getImage());
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     // settings values for JComponents
@@ -109,8 +111,6 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     SAVX.setBackground(Color.red);
     SAVX.addActionListener(this);
     SAVX.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-    MAIN_CLICK_IMG = new ImageIcon(ImageHandler.MAIN_BTN.getVal());
 
     MAINX = new JButton(mainText, MAIN_CLICK_IMG);
     MAINX.setBackground(Color.BLUE);
@@ -296,10 +296,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
         e.printStackTrace();
       }
     } else {
-
-
       UPGRADEA.setVisible(false);
-
     }
   }
 

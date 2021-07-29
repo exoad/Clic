@@ -32,5 +32,9 @@ SAVE : save.click_button.png AT.path(assets.mention) = save_click_button
 RST : reset_save_click_button.png AT.path(assets.mention) = reset_save_click_button
 URG : upgrade_click_button.png AT.path(assets.mention) = upgrade_click_button
 
+[main frame icons handlers]
+
+FRAMEKEY : assets.mention OF (TYPE: FRAME) AT.path(assets.mention + <mainframe.icon.png>) = MAIN_FRAME_KEY
+
 >>>
 !<<<:certifi, "2.5.3", "70bdd7e7188c804f3a30ee0e7c99655bc35d8ac41c23e12325f36ab449b70651", [:rebar3], [{:parse_trans, "~>3.3", [hex: :parse_trans, repo: "hexpm", optional: false]}], "hexpm", "ed516acb3929b101208a9d700062d520f3953da3b6b918d866106ffa980e1c10">>>!
