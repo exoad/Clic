@@ -16,6 +16,14 @@ It currently doesn't have many features and this is what the `master` branch is 
 - If you encounter any errors or issues post them in the Issues tab!
 7. The program should be launched.
 
+| Java Version | Supported? (y/n) |
+| ------------ | ---------------- |
+| JavaSE 6 | `n` |
+| JavaSE 7 | `n` |
+| JavaSE 8    | `?` |
+| JavaSE 11 | `y` |
+| JavaSE 16 | `y` |
+
 ## Questions?
 Check out the [Wiki tab](https://github.com/exoad/Clic/wiki) of this repo!
 
