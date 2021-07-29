@@ -89,15 +89,19 @@ import src.main.handler.ImageHandler;
 public class Runner extends JPanel implements ActionListener, Runnable {
   private final JFrame frame;
   private final JButton MAINX, UPGRADEA, SAVX, CHANGECOLOUR, RESETDATA, EXP;
-  private final JLabel display, otherInfo;
+  private final JLabel display;
+  private static JLabel otherInfo;
   private static JLabel news;
   private final JLabel multiplier;
   private final JLabel objec;
   private final JLabel nextMultX;
-  private int mainLabel, multX, objNum, multCost;
+  private static int mainLabel;
+  private static int multX;
+  private static int objNum;
+  private static int multCost;
   private final Icon MAIN_CLICK_IMG, SAVE_CLICK_IMG, RND_CLICK_IMG, RSTSAV_CLICK_IMG, UPD_CLICK_IMG;
   private String mainText, displayStartText;
-  private final FileScheduler fsr = new FileScheduler();
+  private final static FileScheduler fsr = new FileScheduler();
 
   /**
    * @Test Runner main
@@ -266,10 +270,15 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     } while (sr.checkYN(s) != -1);
     sc.close();
 
-    // changes the random blurb every X seconds
+    // constants
     while (true) {
-      Thread.sleep(2000);
+      Thread.sleep(4000);
       news.setText(new InfoBox().randomNews());
+      fsr.write(mainLabel, multX, multCost, objNum);
+      otherInfo.setText("Auto saved.");
+      Thread.sleep(1000);
+      otherInfo.setText(null);
+      
     }
   }
 
@@ -309,10 +318,11 @@ public class Runner extends JPanel implements ActionListener, Runnable {
 
     } else if (ex.getSource() == SAVX) {
       try {
-        // call each method to store the values
-
+        otherInfo.setText("Manually Saving...");
         fsr.write(mainLabel, multX, multCost, objNum);
-      } catch (IOException e) {
+        Thread.sleep(2000);
+        otherInfo.setText("Manual Save Done.");
+      } catch (IOException | InterruptedException e) {
         e.printStackTrace();
       }
 
