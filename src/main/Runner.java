@@ -37,7 +37,11 @@ import src.main.handler.ImageHandler;
 public class Runner extends JPanel implements ActionListener, Runnable {
   private final JFrame frame;
   private final JButton MAINX, UPGRADEA, SAVX, CHANGECOLOUR, RESETDATA, EXP;
-  private final JLabel display, otherInfo, news, multiplier, objec, nextMultX;
+  private final JLabel display, otherInfo;
+  private static JLabel news;
+  private final JLabel multiplier;
+  private final JLabel objec;
+  private final JLabel nextMultX;
   private int mainLabel, multX, objNum, multCost;
   private final Icon MAIN_CLICK_IMG, SAVE_CLICK_IMG, RND_CLICK_IMG, RSTSAV_CLICK_IMG, UPD_CLICK_IMG;
   private String mainText, displayStartText;
@@ -208,6 +212,12 @@ public class Runner extends JPanel implements ActionListener, Runnable {
       break;
     } while (sr.checkYN(s) != -1);
     sc.close();
+
+    //changes the random blurb every X seconds
+    while(true) {
+      Thread.sleep(2000);
+      news.setText(new InfoBox().randomNews());
+    }
   }
 
   /**
@@ -217,7 +227,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
   public void actionPerformed(ActionEvent ex) {
     // main clicking of the button
     if (ex.getSource() == MAINX) {
-      news.setText(new InfoBox().randomNews());
+
       comparator(mainLabel + multX);
 
       if ((mainLabel + multX) >= objNum) {
@@ -287,7 +297,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
       }
     } else {
 
-      news.setText(new InfoBox().randomNews());
+
       UPGRADEA.setVisible(false);
 
     }
