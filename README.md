@@ -29,3 +29,16 @@ Post them in the [Issues tab!](https://github.com/exoad/Clic/issues) Select the 
 `commit1` - Merged
 `Deprecated` - Legacy or Deprecated Code goes here (incomplete)
 `original` - The original code I wrote for my original project along with my explanation video for the project
+  
+  
+  ```
+
+   _____ _ _      
+  / ____| (_)     
+ | |    | |_  ___ 
+ | |    | | |/ __|
+ | |____| | | (__ 
+  \_____|_|_|\___|
+                  
+                  
+```
