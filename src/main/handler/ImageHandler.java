@@ -47,6 +47,7 @@ public enum ImageHandler {
   MFRA_ICN("src/main/assets/RunnerPanel/mainframe_icon.png"),
   SAVE_BTN("src/main/assets/RunnerPanel/save_click_button.png"),
 
+  BRWS_BTN("src/main/assets/HelpPanel/browser_click_button.png"),
   HLP_ICN("src/main/assets/HelpPanel/help_icon.png");
 
   private final String request;

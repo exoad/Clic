@@ -39,10 +39,19 @@
 
 package src.main.panels;
 
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Desktop;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 import javax.swing.BoxLayout;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -57,42 +66,78 @@ import src.main.handler.ImageHandler;
  * import java.awt.event.*;
  */
 
-public class Help extends JPanel implements Runnable {
+public class Help extends JPanel implements Runnable, ActionListener {
     private final JFrame frame;
-    private final JButton PAGEPREVIOUS, PAGENEXT;
+    private final JButton VIEWMENU;
 
     public Help() {
         frame = new JFrame("Help Menu");
         ImageIcon templar2 = new ImageIcon(ImageHandler.HLP_ICN.getVal());
+        Icon VMENU = new ImageIcon(ImageHandler.BRWS_BTN.getVal());
         frame.setIconImage(templar2.getImage());
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        JLabel title = new JLabel("--Helpful Handbook--");
+        JLabel title = new JLabel("--View Menu In Your Default Browser--");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        
-        PAGEPREVIOUS = new JButton();
-        PAGEPREVIOUS.setAlignmentY(Component.BOTTOM_ALIGNMENT);
-        PAGEPREVIOUS.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        PAGENEXT = new JButton();
-        PAGENEXT.setAlignmentY(Component.BOTTOM_ALIGNMENT);
-        PAGENEXT.setAlignmentX(Component.RIGHT_ALIGNMENT);
-
+        VIEWMENU = new JButton("View Help", VMENU);
+        VIEWMENU.setAlignmentX(Component.CENTER_ALIGNMENT);
+        VIEWMENU.setBackground(Color.ORANGE);
+        VIEWMENU.addActionListener(this);
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setPreferredSize(new Dimension(300, 100));
 
         add(title);
+        add(VIEWMENU);
 
         frame.add(this);
     }
+
     @Override
     public void run() {
         frame.pack();
         frame.setVisible(true);
     }
+
     public void askRun() {
         new Help().run();
     }
-    
+
+    public static boolean openWebpage(URI uri) {
+        Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+        if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+            try {
+                desktop.browse(uri);
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
+    public static boolean openWebpage(URL url) {
+        try {
+            return openWebpage(url.toURI());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent ex) {
+        // open the help menu in the client's default browser
+        if (ex.getSource() == VIEWMENU) {
+            try {
+                openWebpage(new URL("https://github.com/exoad/ClickGame/wiki"));
+            } catch (MalformedURLException e) {
+                System.out.println("Something went horribly wrong when trying to open the Help Menu in your default browser!\n\n\n");
+                e.printStackTrace();
+            }
+        }
+
+    }
+
 }
