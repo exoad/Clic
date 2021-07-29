@@ -278,7 +278,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
       otherInfo.setText("Auto saved.");
       Thread.sleep(1000);
       otherInfo.setText(null);
-      
+
     }
   }
 
@@ -346,6 +346,11 @@ public class Runner extends JPanel implements ActionListener, Runnable {
       multX = 1;
       objNum = 50;
       multCost = 100;
+      display.setText("Current Count: " + mainLabel);
+      multiplier.setText("Current Upgrade: " + multX);
+      nextMultX.setText("Upgrade Cost: " + multCost);
+      objec.setText("Current Objective: " + objNum);
+
       if (fsr.resetData())
         System.out.println("\nALL DATA RESET");
       else
