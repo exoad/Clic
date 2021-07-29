@@ -1,3 +1,10 @@
+/**
+ * A simple Clicker game.
+ * 
+ * @author Jack Meng
+ * @version 1.0z (EXP)
+ * 
+ */
 package src.main;
 
 import java.awt.Color;
@@ -25,7 +32,6 @@ import src.main.handler.InputChoiceHandler;
 import src.main.elements.InfoBox;
 
 public class Runner extends JPanel implements ActionListener, Runnable {
-  // init values
   private final JFrame frame;
   private final JButton MAINX, UPGRADEA, SAVX, CHANGECOLOUR, RESETDATA, EXP;
   private final JLabel display, otherInfo, news, multiplier, objec, nextMultX;
@@ -33,6 +39,9 @@ public class Runner extends JPanel implements ActionListener, Runnable {
   private String mainText, displayStartText;
   private final FileScheduler fsr = new FileScheduler();
 
+  /**
+   * @Test Runner main
+   */
   public Runner() {
     // settings all the variables and components
     if (Integer.parseInt(fsr.readLineNumber(0)) != 0 && Integer.parseInt(fsr.readLineNumber(1)) != 0 && Integer.parseInt(fsr.readLineNumber(2)) != 0 && Integer.parseInt(fsr.readLineNumber(3)) != 0) {
