@@ -16,6 +16,14 @@ It currently doesn't have many features and this is what the `master` branch is 
 - If you encounter any errors or issues post them in the Issues tab!
 7. The program should be launched.
 
+| Java Version | Supported? (y/n) |
+| ------------ | ---------------- |
+| JavaSE 6 | `n` |
+| JavaSE 7 | `n` |
+| JavaSE 8    | `?` |
+| JavaSE 11 | `y` |
+| JavaSE 16 | `y` |
+
 ## Questions?
 Check out the [Wiki tab](https://github.com/exoad/Clic/wiki) of this repo!
 
@@ -26,7 +34,7 @@ Post them in the [Issues tab!](https://github.com/exoad/Clic/issues) Select the 
 `master` - The main branch where I make the program "better"
 `assets` - Resources, such as images for the Wiki tab
 `build-page` - Github Pages builder
-`commit1` - Merged
+`commit1` - Merged [Does not Exist]
 `Deprecated` - Legacy or Deprecated Code goes here (incomplete)
 `original` - The original code I wrote for my original project along with my explanation video for the project
   
