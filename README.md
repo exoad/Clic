@@ -2,6 +2,8 @@
 
 Clic is WIP (Work in Progress) little Clicker Game I made.
 
+The Kotlin Version is more of a work in progress as I figure out how to use Kotlin :)
+
 **The most recent release version:** v1.1
 
 It's main framework is based on a project I made for a class at GNSHS 2020-2021 (Check out branch [original](https://github.com/exoad/Clic/tree/original)).
