@@ -64,10 +64,10 @@ public class Help extends JPanel implements Runnable, ActionListener {
 
     public Help() {
         frame = new JFrame("Help Menu");
-        URL vM = ClassLoader.getSystemResource("assets/HelpPanel/browser_click_button.png");
+        URL vM = ClassLoader.getSystemResource("assets/help_panel/browser_click_button.png");
         Icon VMENU = new ImageIcon(vM);
 
-        URL templar2 = ClassLoader.getSystemResource("assets/HelpPanel/help_icon.png");
+        URL templar2 = ClassLoader.getSystemResource("assets/help_panel/help_icon.png");
         ImageIcon temp2 = new ImageIcon(templar2);
         frame.setIconImage(temp2.getImage());
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

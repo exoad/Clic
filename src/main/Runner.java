@@ -110,8 +110,8 @@ public class Runner extends JPanel implements ActionListener, Runnable {
    * @Test Runner main
    */
   public Runner() {
-    URL MAIN_CLICK = ClassLoader.getSystemResource("assets/RunnerPanel/main_click_button.png");
-    URL UPD_CLICK = ClassLoader.getSystemResource("assets/RunnerPanel/main_click_button.png");
+    URL MAIN_CLICK = ClassLoader.getSystemResource("assets/runner_panel/main_click_button.png");
+    URL UPD_CLICK = ClassLoader.getSystemResource("assets/runner_panel/main_click_button.png");
     Icon MAIN_CLICK_IMG = new ImageIcon(MAIN_CLICK);
     UPD_CLICK_IMG = new ImageIcon(UPD_CLICK);
     UPGRADEA = new JButton("Upgrade (+1/click) Cost: " + multCost, UPD_CLICK_IMG);
@@ -142,7 +142,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
       displayStartText = "Click the button";
 
     mainText = "Click Me!";
-    URL frTem = ClassLoader.getSystemResource("assets/RunnerPanel/mainframe_icon.png");
+    URL frTem = ClassLoader.getSystemResource("assets/runner_panel/mainframe_icon.png");
     ImageIcon Templar1 = new ImageIcon(frTem);
     frame = new JFrame("Clic 1.2EXP");
     frame.setIconImage(Templar1.getImage());
@@ -168,7 +168,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     otherInfo.setVisible(true);
     otherInfo.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-    URL SAVE_CLICK = ClassLoader.getSystemResource("assets/RunnerPanel/save_click_button.png");
+    URL SAVE_CLICK = ClassLoader.getSystemResource("assets/runner_panel/save_click_button.png");
     SAVE_CLICK_IMG = new ImageIcon(SAVE_CLICK);
 
     SAVX = new JButton("Save", SAVE_CLICK_IMG);
@@ -182,7 +182,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     MAINX.setSize(new Dimension(100, 100));
     MAINX.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-    URL RST_CLICK = ClassLoader.getSystemResource("assets/RunnerPanel/reset_save_click_button.png");
+    URL RST_CLICK = ClassLoader.getSystemResource("assets/runner_panel/reset_save_click_button.png");
     RSTSAV_CLICK_IMG = new ImageIcon(RST_CLICK);
 
     RESETDATA = new JButton("Reset", RSTSAV_CLICK_IMG);
@@ -190,7 +190,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     RESETDATA.addActionListener(this);
     RESETDATA.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-    URL RND_CLICK = ClassLoader.getSystemResource("assets/RunnerPanel/random_color_click_button.png");
+    URL RND_CLICK = ClassLoader.getSystemResource("assets/runner_panel/random_color_click_button.png");
     RND_CLICK_IMG = new ImageIcon(RND_CLICK);
 
     CHANGECOLOUR = new JButton("Random Color", RND_CLICK_IMG);
