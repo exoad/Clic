@@ -1,5 +1,7 @@
 # Clic
+![](https://img.shields.io/github/languages/code-size/exoad/Clic?style=flat-square)![](https://img.shields.io/github/repo-size/exoad/Clic?style=flat-square)![](https://img.shields.io/github/issues/exoad/Clic?style=flat-square)![](https://img.shields.io/github/languages/top/exoad/Clic?style=flat-square)
 
+___
 Clic is WIP (Work in Progress) little Clicker Game I made.
 
 The Kotlin Version is more of a work in progress as I figure out how to use Kotlin :)
