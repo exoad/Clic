@@ -46,10 +46,15 @@ Post them in the [Issues tab!](https://github.com/exoad/Clic/issues) Select the 
 
 ## Branches Info
 `master` - The main branch where I make the program "better"
+
 `assets` - Resources, such as images for the Wiki tab
+
 `build-page` - Github Pages builder
+
 `commit1` - Merged [Does not Exist]
+
 `Deprecated` - Legacy or Deprecated Code goes here (incomplete)
+
 `original` - The original code I wrote for my original project along with my explanation video for the project
   
   
