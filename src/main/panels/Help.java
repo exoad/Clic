@@ -112,13 +112,12 @@ public class Help extends JPanel implements Runnable, ActionListener {
         return false;
     }
 
-    public static boolean openWebpage(URL url) {
+    public static void openWebpage(URL url) {
         try {
-            return openWebpage(url.toURI());
+            openWebpage(url.toURI());
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
-        return false;
     }
 
     @Override

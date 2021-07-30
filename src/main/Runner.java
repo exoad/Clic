@@ -99,11 +99,6 @@ public class Runner extends JPanel implements ActionListener, Runnable {
   private static int multX;
   private static int objNum;
   private static int multCost;
-  private final Icon SAVE_CLICK_IMG;
-  private final Icon RND_CLICK_IMG;
-  private final Icon RSTSAV_CLICK_IMG;
-  private final Icon UPD_CLICK_IMG;
-  private String mainText, displayStartText;
   private final static FileScheduler fsr = new FileScheduler();
 
   /**
@@ -113,7 +108,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     URL MAIN_CLICK = ClassLoader.getSystemResource("assets/runner_panel/main_click_button.png");
     URL UPD_CLICK = ClassLoader.getSystemResource("assets/runner_panel/main_click_button.png");
     Icon MAIN_CLICK_IMG = new ImageIcon(MAIN_CLICK);
-    UPD_CLICK_IMG = new ImageIcon(UPD_CLICK);
+    Icon UPD_CLICK_IMG = new ImageIcon(UPD_CLICK);
     UPGRADEA = new JButton("Upgrade (+1/click) Cost: " + multCost, UPD_CLICK_IMG);
     UPGRADEA.setVisible(false);
     UPGRADEA.setBackground(Color.GREEN);
@@ -136,12 +131,13 @@ public class Runner extends JPanel implements ActionListener, Runnable {
       multCost = 100;
     }
 
+    String displayStartText;
     if (mainLabel != 0)
       displayStartText = "Current Count: " + mainLabel;
     else
       displayStartText = "Click the button";
 
-    mainText = "Click Me!";
+    String mainText = "Click Me!";
     URL frTem = ClassLoader.getSystemResource("assets/runner_panel/mainframe_icon.png");
     ImageIcon Templar1 = new ImageIcon(frTem);
     frame = new JFrame("Clic 1.2EXP");
@@ -169,7 +165,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     otherInfo.setAlignmentX(Component.CENTER_ALIGNMENT);
 
     URL SAVE_CLICK = ClassLoader.getSystemResource("assets/runner_panel/save_click_button.png");
-    SAVE_CLICK_IMG = new ImageIcon(SAVE_CLICK);
+    Icon SAVE_CLICK_IMG = new ImageIcon(SAVE_CLICK);
 
     SAVX = new JButton("Save", SAVE_CLICK_IMG);
     SAVX.setBackground(Color.red);
@@ -183,7 +179,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     MAINX.setAlignmentX(Component.CENTER_ALIGNMENT);
 
     URL RST_CLICK = ClassLoader.getSystemResource("assets/runner_panel/reset_save_click_button.png");
-    RSTSAV_CLICK_IMG = new ImageIcon(RST_CLICK);
+    Icon RSTSAV_CLICK_IMG = new ImageIcon(RST_CLICK);
 
     RESETDATA = new JButton("Reset", RSTSAV_CLICK_IMG);
     RESETDATA.setBackground(Color.LIGHT_GRAY);
@@ -191,7 +187,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     RESETDATA.setAlignmentX(Component.CENTER_ALIGNMENT);
 
     URL RND_CLICK = ClassLoader.getSystemResource("assets/runner_panel/random_color_click_button.png");
-    RND_CLICK_IMG = new ImageIcon(RND_CLICK);
+    Icon RND_CLICK_IMG = new ImageIcon(RND_CLICK);
 
     CHANGECOLOUR = new JButton("Random Color", RND_CLICK_IMG);
     CHANGECOLOUR.setBackground(Color.WHITE);

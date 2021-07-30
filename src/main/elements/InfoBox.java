@@ -42,7 +42,7 @@ package src.main.elements;
 import java.util.Random;
 
 public class InfoBox {
-  private Random rd = new Random();
+  private final Random rd = new Random();
 
   public InfoBox() {
     super();

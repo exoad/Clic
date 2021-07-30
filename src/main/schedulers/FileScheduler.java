@@ -51,7 +51,7 @@ import java.nio.charset.Charset;
 import src.main.Runner;
 
 public class FileScheduler {
-  private String fileDir = "click_game/";
+  private final String fileDir = "click_game/";
 
   public FileScheduler() {
     super();
@@ -62,7 +62,7 @@ public class FileScheduler {
    * @param mult     the multiplier current
    * @param multCost multiplier Cost at current tick
    * @param objs     objnum Number
-   * @throws IOException
+   * @throws IOException an exception when it is encountered
    */
   public void write(int clicks, int mult, int multCost, int objs) throws IOException {
     if (new File(fileDir).isDirectory()) {
