@@ -128,7 +128,8 @@ public class Help extends JPanel implements Runnable, ActionListener {
             try {
                 openWebpage(new URL("https://github.com/exoad/ClickGame/wiki"));
             } catch (MalformedURLException e) {
-                System.out.println("Something went horribly wrong when trying to open the Help Menu in your default browser!\n\n\n");
+                System.out.println(
+                        "Something went horribly wrong when trying to open the Help Menu in your default browser!\n\n\n");
                 e.printStackTrace();
             }
         }
