@@ -35,6 +35,7 @@ It currently doesn't have many features and this is what the `master` branch is 
 | Manjaro (Arch) | y |
 | Debian | y |
 | MacOS | y |
+
 *If your OS is able to use Java16 or Java11, you can most likely run this program*
 
 ## Questions?
