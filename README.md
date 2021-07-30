@@ -28,6 +28,15 @@ It currently doesn't have many features and this is what the `master` branch is 
 | JavaSE 11 | `y` |
 | JavaSE 16 | `y` |
 
+| OS Name | Supported? (y/n) |
+| ------- | ---------------- |
+| Windows 10 | y |
+| ChromeOS (Crostini) | y |
+| Manjaro (Arch) | y |
+| Debian | y |
+| MacOS | y |
+*If your OS is able to use Java16 or Java11, you can most likely run this program*
+
 ## Questions?
 Check out the [Wiki tab](https://github.com/exoad/Clic/wiki) of this repo!
 
