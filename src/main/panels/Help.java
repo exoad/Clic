@@ -58,24 +58,18 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-/*
- * Awaiting Packages
- * import java.io.*;
- * import java.util.*;
- * import java.awt.event.*;
- */
-
 public class Help extends JPanel implements Runnable, ActionListener {
     private final JFrame frame;
     private final JButton VIEWMENU;
 
     public Help() {
         frame = new JFrame("Help Menu");
-        URL frTem = ClassLoader.getSystemResource("help_icon.png");
-        ImageIcon templar2 = new ImageIcon(frTem);
-        URL vM = ClassLoader.getSystemResource("browser_click_button.png");
+        URL vM = ClassLoader.getSystemResource("assets/HelpPanel/browser_click_button.png");
         Icon VMENU = new ImageIcon(vM);
-        frame.setIconImage(templar2.getImage());
+
+        URL templar2 = ClassLoader.getSystemResource("assets/HelpPanel/help_icon.png");
+        ImageIcon temp2 = new ImageIcon(templar2);
+        frame.setIconImage(temp2.getImage());
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JLabel title = new JLabel("--View Menu In Your Default Browser--");
