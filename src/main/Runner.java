@@ -144,7 +144,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     mainText = "Click Me!";
     URL frTem = ClassLoader.getSystemResource("mainframe_icon.png");
     ImageIcon Templar1 = new ImageIcon(frTem);
-    frame = new JFrame("Clicker Game");
+    frame = new JFrame("Clic 1.2EXP");
     frame.setIconImage(Templar1.getImage());
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
