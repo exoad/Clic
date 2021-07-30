@@ -88,14 +88,14 @@ import src.main.elements.InfoBox;
 import src.main.panels.Settings;
 
 public class Runner extends JPanel implements ActionListener, Runnable {
-  private final JFrame frame;
-  private final JButton MAINX, UPGRADEA, SAVX, CHANGECOLOUR, RESETDATA, EXP, SETTINGS;
-  private final JLabel display;
-  private static JLabel otherInfo;
-  private static JLabel news;
-  private final JLabel multiplier;
-  private final JLabel objec;
-  private final JLabel nextMultX;
+  public JFrame frame;
+  public JButton MAINX, UPGRADEA, SAVX, CHANGECOLOUR, RESETDATA, EXP, SETTINGS;
+  public JLabel display;
+  public static JLabel otherInfo;
+  public static JLabel news;
+  public JLabel multiplier;
+  public JLabel objec;
+  public JLabel nextMultX;
   private static int mainLabel;
   private static int multX;
   private static int objNum;
