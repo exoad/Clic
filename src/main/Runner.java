@@ -85,7 +85,6 @@ import src.main.panels.Help;
 import src.main.schedulers.FileScheduler;
 import src.main.handler.InputChoiceHandler;
 import src.main.elements.InfoBox;
-import src.main.handler.ImageHandler;
 
 public class Runner extends JPanel implements ActionListener, Runnable {
   private final JFrame frame;
