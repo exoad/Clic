@@ -68,6 +68,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Scanner;
 
 import javax.swing.BoxLayout;
@@ -99,7 +100,10 @@ public class Runner extends JPanel implements ActionListener, Runnable {
   private static int multX;
   private static int objNum;
   private static int multCost;
-  private final Icon MAIN_CLICK_IMG, SAVE_CLICK_IMG, RND_CLICK_IMG, RSTSAV_CLICK_IMG, UPD_CLICK_IMG;
+  private final Icon SAVE_CLICK_IMG;
+  private final Icon RND_CLICK_IMG;
+  private final Icon RSTSAV_CLICK_IMG;
+  private final Icon UPD_CLICK_IMG;
   private String mainText, displayStartText;
   private final static FileScheduler fsr = new FileScheduler();
 
@@ -107,8 +111,10 @@ public class Runner extends JPanel implements ActionListener, Runnable {
    * @Test Runner main
    */
   public Runner() {
-    MAIN_CLICK_IMG = new ImageIcon(ImageHandler.MAIN_BTN.getVal());
-    UPD_CLICK_IMG = new ImageIcon(ImageHandler.UPG_BTN.getVal());
+    URL MAIN_CLICK = ClassLoader.getSystemResource("main_click_button.png");
+    URL UPD_CLICK = ClassLoader.getSystemResource("upgrade_click_button.png");
+    Icon MAIN_CLICK_IMG = new ImageIcon(MAIN_CLICK);
+    UPD_CLICK_IMG = new ImageIcon(UPD_CLICK);
     UPGRADEA = new JButton("Upgrade (+1/click) Cost: " + multCost, UPD_CLICK_IMG);
     UPGRADEA.setVisible(false);
     UPGRADEA.setBackground(Color.GREEN);
@@ -137,7 +143,8 @@ public class Runner extends JPanel implements ActionListener, Runnable {
       displayStartText = "Click the button";
 
     mainText = "Click Me!";
-    ImageIcon Templar1 = new ImageIcon(ImageHandler.MFRA_ICN.getVal());
+    URL frTem = ClassLoader.getSystemResource("mainframe_icon.png");
+    ImageIcon Templar1 = new ImageIcon(frTem);
     frame = new JFrame("Clicker Game");
     frame.setIconImage(Templar1.getImage());
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -162,7 +169,8 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     otherInfo.setVisible(true);
     otherInfo.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-    SAVE_CLICK_IMG = new ImageIcon(ImageHandler.SAVE_BTN.getVal());
+    URL SAVE_CLICK = ClassLoader.getSystemResource("save_click_button.png");
+    SAVE_CLICK_IMG = new ImageIcon(SAVE_CLICK);
 
     SAVX = new JButton("Save", SAVE_CLICK_IMG);
     SAVX.setBackground(Color.red);
@@ -175,14 +183,16 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     MAINX.setSize(new Dimension(100, 100));
     MAINX.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-    RSTSAV_CLICK_IMG = new ImageIcon(ImageHandler.RESET_BTN.getVal());
+    URL RST_CLICK = ClassLoader.getSystemResource("reset_save_click_button.png");
+    RSTSAV_CLICK_IMG = new ImageIcon(RST_CLICK);
 
     RESETDATA = new JButton("Reset", RSTSAV_CLICK_IMG);
     RESETDATA.setBackground(Color.LIGHT_GRAY);
     RESETDATA.addActionListener(this);
     RESETDATA.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-    RND_CLICK_IMG = new ImageIcon(ImageHandler.RNDCLR_BTN.getVal());
+    URL RND_CLICK = ClassLoader.getSystemResource("random_color_click_button.png");
+    RND_CLICK_IMG = new ImageIcon(RND_CLICK);
 
     CHANGECOLOUR = new JButton("Random Color", RND_CLICK_IMG);
     CHANGECOLOUR.setBackground(Color.WHITE);
