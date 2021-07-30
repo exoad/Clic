@@ -8,6 +8,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/assets" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/assets/help_panel" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/assets/runner_panel" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/assets/settings_panel" type="java-resource" />
       <excludeFolder url="file://$MODULE_DIR$/.deprecated" />
       <excludeFolder url="file://$MODULE_DIR$/srcKT/mainKT" />
       <excludeFolder url="file://$MODULE_DIR$/srcKT" />

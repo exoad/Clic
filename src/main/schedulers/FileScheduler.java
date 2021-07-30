@@ -2,7 +2,7 @@
  * A simple Clicker game.
  * 
  * @author Jack Meng
- * @version 1.0z (EXP)
+ * @version 1.2 (EXP)
  * 
  * BSD 3-Clause License
  * 
@@ -105,5 +105,7 @@ public class FileScheduler {
         "EDIT THE CONTENTS OF FILES IN THIS FOLDER AT YOUR OWN RISK!\nPLEASE THE GITHUB WIKI HERE FOR MORE INFO: https://github.com/exoad/ClickGame/wiki\n\n\nYOU ARE RESPONSIBLE FOR ANY MISHANDLINGS");
     fw.close();
   }
+
+  
 
 }

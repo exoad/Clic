@@ -23,7 +23,7 @@
  * A simple Clicker game.
  *
  * @author Jack Meng
- * @version 1.0z (EXP)
+ * @version 1.2 (EXP)
  *
  * BSD 3-Clause License
  *
@@ -85,10 +85,11 @@ import src.main.panels.Help;
 import src.main.schedulers.FileScheduler;
 import src.main.handler.InputChoiceHandler;
 import src.main.elements.InfoBox;
+import src.main.panels.Settings;
 
 public class Runner extends JPanel implements ActionListener, Runnable {
   private final JFrame frame;
-  private final JButton MAINX, UPGRADEA, SAVX, CHANGECOLOUR, RESETDATA, EXP;
+  private final JButton MAINX, UPGRADEA, SAVX, CHANGECOLOUR, RESETDATA, EXP, SETTINGS;
   private final JLabel display;
   private static JLabel otherInfo;
   private static JLabel news;
@@ -200,6 +201,12 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     EXP.addActionListener(this);
     EXP.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+    SETTINGS = new JButton("Settings Menu");
+    SETTINGS.setBackground(Color.gray);
+    SETTINGS.addActionListener(this);
+    SETTINGS.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+
     setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     setPreferredSize(new Dimension(500, 500));
 
@@ -215,6 +222,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     add(objec);
     add(otherInfo);
     add(EXP);
+    add(SETTINGS);
 
     frame.add(this);
     frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -363,8 +371,13 @@ public class Runner extends JPanel implements ActionListener, Runnable {
 
     } else if (ex.getSource() == EXP) {
       try {
-        Help h = new Help();
-        h.askRun();
+        new Help().askRun();
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    } else if (ex.getSource() == SETTINGS) {
+      try {
+        new Settings().askRun();
       } catch (Exception e) {
         e.printStackTrace();
       }
@@ -388,8 +401,10 @@ public class Runner extends JPanel implements ActionListener, Runnable {
 
   public static void initGameFolder() {
     File filXB = new File("click_game/program_assets/");
+    File fileyB = new File("click_game/program_properties");
     if (!filXB.isDirectory())
       filXB.mkdirs();
+      fileyB.mkdirs();
   }
 
   @Override

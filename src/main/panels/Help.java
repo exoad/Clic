@@ -2,7 +2,7 @@
  * A simple Clicker game.
  * 
  * @author Jack Meng
- * @version 1.0z (EXP)
+ * @version 1.2 (EXP) (EXP)
  * 
  * BSD 3-Clause License
  * 
