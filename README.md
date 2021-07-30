@@ -45,7 +45,7 @@ Check out the [Wiki tab](https://github.com/exoad/Clic/wiki) of this repo!
 Post them in the [Issues tab!](https://github.com/exoad/Clic/issues) Select the appropriate template and describe your issue in detail
 
 ## Branches Info
-`master` - The main branch where I make the program "better"
+`production` - The main branch where I make the program "better"
 
 `assets` - Resources, such as images for the Wiki tab
 
