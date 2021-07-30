@@ -21,29 +21,29 @@
  *         \::/    /                \::/    /        \::/    /                \::/    /        
  *          \/____/                  \/____/          \/____/                  \/____/       
  * A simple Clicker game.
- * 
+ *
  * @author Jack Meng
  * @version 1.0z (EXP)
- * 
+ *
  * BSD 3-Clause License
- * 
+ *
  * Copyright (c) 2021, Jack Meng
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
  * list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  * this list of conditions and the following disclaimer in the documentation
  * and/or other materials provided with the distribution.
- * 
+ *
  * 3. Neither the name of the copyright holder nor the names of its
  * contributors may be used to endorse or promote products derived from
  * this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -54,8 +54,8 @@
  * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
- * 
+ *
+ *
  */
 package src.main;
 
@@ -110,8 +110,8 @@ public class Runner extends JPanel implements ActionListener, Runnable {
    * @Test Runner main
    */
   public Runner() {
-    URL MAIN_CLICK = ClassLoader.getSystemResource("main_click_button.png");
-    URL UPD_CLICK = ClassLoader.getSystemResource("upgrade_click_button.png");
+    URL MAIN_CLICK = ClassLoader.getSystemResource("assets/RunnerPanel/main_click_button.png");
+    URL UPD_CLICK = ClassLoader.getSystemResource("assets/RunnerPanel/main_click_button.png");
     Icon MAIN_CLICK_IMG = new ImageIcon(MAIN_CLICK);
     UPD_CLICK_IMG = new ImageIcon(UPD_CLICK);
     UPGRADEA = new JButton("Upgrade (+1/click) Cost: " + multCost, UPD_CLICK_IMG);
@@ -122,7 +122,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
 
     // settings all the variables and components
     if (Integer.parseInt(fsr.readLineNumber(0)) != 0 && Integer.parseInt(fsr.readLineNumber(1)) != 0
-        && Integer.parseInt(fsr.readLineNumber(2)) != 0 && Integer.parseInt(fsr.readLineNumber(3)) != 0) {
+            && Integer.parseInt(fsr.readLineNumber(2)) != 0 && Integer.parseInt(fsr.readLineNumber(3)) != 0) {
       mainLabel = Integer.parseInt(fsr.readLineNumber(0));
       if (mainLabel >= 100)
         UPGRADEA.setVisible(true);
@@ -142,7 +142,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
       displayStartText = "Click the button";
 
     mainText = "Click Me!";
-    URL frTem = ClassLoader.getSystemResource("mainframe_icon.png");
+    URL frTem = ClassLoader.getSystemResource("assets/RunnerPanel/mainframe_icon.png");
     ImageIcon Templar1 = new ImageIcon(frTem);
     frame = new JFrame("Clic 1.2EXP");
     frame.setIconImage(Templar1.getImage());
@@ -168,7 +168,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     otherInfo.setVisible(true);
     otherInfo.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-    URL SAVE_CLICK = ClassLoader.getSystemResource("save_click_button.png");
+    URL SAVE_CLICK = ClassLoader.getSystemResource("assets/RunnerPanel/save_click_button.png");
     SAVE_CLICK_IMG = new ImageIcon(SAVE_CLICK);
 
     SAVX = new JButton("Save", SAVE_CLICK_IMG);
@@ -182,7 +182,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     MAINX.setSize(new Dimension(100, 100));
     MAINX.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-    URL RST_CLICK = ClassLoader.getSystemResource("reset_save_click_button.png");
+    URL RST_CLICK = ClassLoader.getSystemResource("assets/RunnerPanel/reset_save_click_button.png");
     RSTSAV_CLICK_IMG = new ImageIcon(RST_CLICK);
 
     RESETDATA = new JButton("Reset", RSTSAV_CLICK_IMG);
@@ -190,7 +190,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     RESETDATA.addActionListener(this);
     RESETDATA.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-    URL RND_CLICK = ClassLoader.getSystemResource("random_color_click_button.png");
+    URL RND_CLICK = ClassLoader.getSystemResource("assets/RunnerPanel/random_color_click_button.png");
     RND_CLICK_IMG = new ImageIcon(RND_CLICK);
 
     CHANGECOLOUR = new JButton("Random Color", RND_CLICK_IMG);
@@ -228,8 +228,8 @@ public class Runner extends JPanel implements ActionListener, Runnable {
         JFrame frame = (JFrame) e.getSource();
 
         int options = JOptionPane.showConfirmDialog(frame,
-            "Are you sure you want to leave Click Game?\nYour progress is currently saved to the last time you pressed SAVE",
-            "ATTENTION", JOptionPane.YES_NO_OPTION);
+                "Are you sure you want to leave Click Game?\nYour progress is currently saved to the last time you pressed SAVE",
+                "ATTENTION", JOptionPane.YES_NO_OPTION);
         if (options == JOptionPane.YES_OPTION)
           System.out.print("Exited the Program");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -340,14 +340,14 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     } else if (ex.getSource() == CHANGECOLOUR) {
       // changes the color randomly of the buttons when pressed
       MAINX.setBackground(
-          new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256)));
+              new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256)));
       if (UPGRADEA.isVisible())
         UPGRADEA.setBackground(
-            new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256)));
+                new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256)));
       SAVX.setBackground(
-          new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256)));
+              new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256)));
       RESETDATA.setBackground(
-          new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256)));
+              new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256)));
 
     } else if (ex.getSource() == RESETDATA) {
       // this method reset all the data and deletes all files with data
