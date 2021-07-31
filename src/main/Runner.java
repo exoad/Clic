@@ -69,6 +69,7 @@ import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.FileAlreadyExistsException;
 import java.util.Scanner;
 
 import javax.swing.BoxLayout;
@@ -86,6 +87,7 @@ import src.main.schedulers.FileScheduler;
 import src.main.handler.InputChoiceHandler;
 import src.main.elements.InfoBox;
 import src.main.panels.Settings;
+import src.main.schedulers.ActionLogger;
 
 public class Runner extends JPanel implements ActionListener, Runnable {
   public JFrame frame;
@@ -118,7 +120,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
 
     // settings all the variables and components
     if (Integer.parseInt(fsr.readLineNumber(0)) != 0 && Integer.parseInt(fsr.readLineNumber(1)) != 0
-            && Integer.parseInt(fsr.readLineNumber(2)) != 0 && Integer.parseInt(fsr.readLineNumber(3)) != 0) {
+        && Integer.parseInt(fsr.readLineNumber(2)) != 0 && Integer.parseInt(fsr.readLineNumber(3)) != 0) {
       mainLabel = Integer.parseInt(fsr.readLineNumber(0));
       if (mainLabel >= 100)
         UPGRADEA.setVisible(true);
@@ -206,7 +208,6 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     SETTINGS.addActionListener(this);
     SETTINGS.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-
     setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     setPreferredSize(new Dimension(500, 500));
 
@@ -232,11 +233,16 @@ public class Runner extends JPanel implements ActionListener, Runnable {
         JFrame frame = (JFrame) e.getSource();
 
         int options = JOptionPane.showConfirmDialog(frame,
-                "Are you sure you want to leave Click Game?\nYour progress is currently saved to the last time you pressed SAVE",
-                "ATTENTION", JOptionPane.YES_NO_OPTION);
+            "Are you sure you want to leave Click Game?\nYour progress is currently saved to the last time you pressed SAVE",
+            "ATTENTION", JOptionPane.YES_NO_OPTION);
         if (options == JOptionPane.YES_OPTION)
           System.out.print("Exited the Program");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+          try {
+            new ActionLogger().Log("Exited the program");
+          } catch (IOException e1) {
+            e1.printStackTrace();
+          }
+          frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       }
 
       @Override
@@ -267,6 +273,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
   }
 
   public static void main(String[] args) throws Exception {
+    new ActionLogger().Log("Program Started");
     FileScheduler fsb = new FileScheduler();
     fsb.createNoticeFile();
     initGameFolder();
@@ -300,89 +307,97 @@ public class Runner extends JPanel implements ActionListener, Runnable {
    */
   @Override
   public void actionPerformed(ActionEvent ex) {
-    // main clicking of the button
-    if (ex.getSource() == MAINX) {
+    try {
+      new ActionLogger().Log(ex.toString());
+      // main clicking of the button
+      if (ex.getSource() == MAINX) {
+        comparator(mainLabel + multX);
 
-      comparator(mainLabel + multX);
+        if ((mainLabel + multX) >= objNum) {
+          // setting the objectives
+          objNum = objectives(objNum);
+          mainLabel = mainLabel + (objNum / 5);
+          objec.setText("New Click Objective: " + objNum);
+        }
 
-      if ((mainLabel + multX) >= objNum) {
-        // setting the objectives
-        objNum = objectives(objNum);
-        mainLabel = mainLabel + (objNum / 5);
-        objec.setText("New Click Objective: " + objNum);
-      }
+        mainLabel = mainLabel + multX;
+        display.setText("Current Count: " + mainLabel);
 
-      mainLabel = mainLabel + multX;
-      display.setText("Current Count: " + mainLabel);
+      } else if (ex.getSource() == UPGRADEA) {
+        // get an upgrade with a cost of multCost
+        if (mainLabel >= multCost) {
+          multX = multX + 1;
+          mainLabel = mainLabel - multCost;
+          multCost = multCost + (multCost);
+          display.setText("Current Count: " + mainLabel);
+          multiplier.setText("Current Upgrade: " + multX);
+          nextMultX.setText("Upgrade Cost: " + multCost);
+          otherInfo.setText("Purchased Upgrade");
+        } else {
+          otherInfo.setText("Invalid Count");
+        }
 
-    } else if (ex.getSource() == UPGRADEA) {
-      // get an upgrade with a cost of multCost
-      if (mainLabel >= multCost) {
-        multX = multX + 1;
-        mainLabel = mainLabel - multCost;
-        multCost = multCost + (multCost);
+      } else if (ex.getSource() == SAVX) {
+        try {
+          otherInfo.setText("Manually Saving...");
+          fsr.write(mainLabel, multX, multCost, objNum);
+          Thread.sleep(2000);
+          otherInfo.setText("Manual Save Done.");
+        } catch (IOException | InterruptedException e) {
+          e.printStackTrace();
+        }
+
+        otherInfo.setText("Saved.");
+
+      } else if (ex.getSource() == CHANGECOLOUR) {
+        // changes the color randomly of the buttons when pressed
+        MAINX.setBackground(
+            new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256)));
+        if (UPGRADEA.isVisible())
+          UPGRADEA.setBackground(
+              new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256)));
+        SAVX.setBackground(
+            new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256)));
+        RESETDATA.setBackground(
+            new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256)));
+
+      } else if (ex.getSource() == RESETDATA) {
+        // this method reset all the data and deletes all files with data
+        mainLabel = 0;
+        multX = 1;
+        objNum = 50;
+        multCost = 100;
         display.setText("Current Count: " + mainLabel);
         multiplier.setText("Current Upgrade: " + multX);
         nextMultX.setText("Upgrade Cost: " + multCost);
-        otherInfo.setText("Purchased Upgrade");
+        objec.setText("Current Objective: " + objNum);
+
+        if (fsr.resetData())
+          System.out.println("\nALL DATA RESET");
+        else
+          System.out.println("\nError Encountered while reseting");
+
+      } else if (ex.getSource() == EXP) {
+        try {
+          new Help().askRun();
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      } else if (ex.getSource() == SETTINGS) {
+        try {
+          new Settings().askRun();
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
       } else {
-        otherInfo.setText("Invalid Count");
+        UPGRADEA.setVisible(false);
       }
-
-    } else if (ex.getSource() == SAVX) {
+    } catch (IOException e) {
       try {
-        otherInfo.setText("Manually Saving...");
-        fsr.write(mainLabel, multX, multCost, objNum);
-        Thread.sleep(2000);
-        otherInfo.setText("Manual Save Done.");
-      } catch (IOException | InterruptedException e) {
-        e.printStackTrace();
+        new ActionLogger().Log(e.toString());
+      } catch (IOException e1) {
+        e1.printStackTrace();
       }
-
-      otherInfo.setText("Saved.");
-
-    } else if (ex.getSource() == CHANGECOLOUR) {
-      // changes the color randomly of the buttons when pressed
-      MAINX.setBackground(
-              new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256)));
-      if (UPGRADEA.isVisible())
-        UPGRADEA.setBackground(
-                new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256)));
-      SAVX.setBackground(
-              new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256)));
-      RESETDATA.setBackground(
-              new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256)));
-
-    } else if (ex.getSource() == RESETDATA) {
-      // this method reset all the data and deletes all files with data
-      mainLabel = 0;
-      multX = 1;
-      objNum = 50;
-      multCost = 100;
-      display.setText("Current Count: " + mainLabel);
-      multiplier.setText("Current Upgrade: " + multX);
-      nextMultX.setText("Upgrade Cost: " + multCost);
-      objec.setText("Current Objective: " + objNum);
-
-      if (fsr.resetData())
-        System.out.println("\nALL DATA RESET");
-      else
-        System.out.println("\nError Encountered while reseting");
-
-    } else if (ex.getSource() == EXP) {
-      try {
-        new Help().askRun();
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
-    } else if (ex.getSource() == SETTINGS) {
-      try {
-        new Settings().askRun();
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
-    } else {
-      UPGRADEA.setVisible(false);
     }
   }
 
@@ -399,12 +414,16 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     }
   }
 
-  public static void initGameFolder() {
+  public static void initGameFolder() throws IOException {
+    
     File filXB = new File("click_game/program_assets/");
     File fileyB = new File("click_game/program_properties");
+    File filezB = new File("click_game/logs");
     if (!filXB.isDirectory())
       filXB.mkdirs();
       fileyB.mkdirs();
+      filezB.mkdirs();
+      new ActionLogger().Log(filXB.toString() + "," + fileyB.toString() + "," + filezB.toString() + " Created");
   }
 
   @Override

@@ -106,6 +106,4 @@ public class FileScheduler {
     fw.close();
   }
 
-  
-
 }

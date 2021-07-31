@@ -39,6 +39,36 @@
 
 package src.main.handler;
 
-public class MakeOperableGameFiles {
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileWriter;
+import java.nio.file.Files;
+import java.io.FileReader;
 
+import src.main.Runner;
+import src.main.elements.DefaultValues;
+
+public class ReadMakeFilesHandler {
+  private File gp;
+
+  public ReadMakeFilesHandler() {
+    gp = new File("/click_game/program_properties/colors.properties");
+  }
+
+  public boolean defFileExists() {
+    try {
+      if (gp.exists() || !new File("/click_game").isDirectory()) {
+        new src.main.Runner();
+        Runner.initGameFolder();
+        return true;
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return false;
+  }
+
+  public void makeFiles() {
+    
+  }
 }
