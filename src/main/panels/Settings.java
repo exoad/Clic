@@ -44,6 +44,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.net.URL;
 
 import javax.swing.BoxLayout;
@@ -54,10 +55,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import src.main.Runner;
+import src.main.schedulers.ActionLogger;
 
 public class Settings extends JPanel implements ActionListener, Runnable {
   private final JFrame frame;
-  private JButton THEMEMODE;
+  private JButton THEMEMODE, WIPELOGS;
   private final Runner tester;
   private final URL windowIMG = ClassLoader.getSystemResource("assets/settings_panel/settings_icon.png");
   private final URL checkedCheckBoxIMG = ClassLoader.getSystemResource("assets/settings_panel/selected_checkbox.png");
@@ -78,7 +80,7 @@ public class Settings extends JPanel implements ActionListener, Runnable {
     if(tester.getBackground() == new Color(40, 44, 52)) 
       THEMEMODE = new JButton("Light Mode", checkbox_unchecked);
     else
-      THEMEMODE = new JButton("Dark Mode", checkbox_checked);
+    THEMEMODE = new JButton("Dark Mode", checkbox_checked);
     THEMEMODE.setIcon(checkbox_unchecked);
     THEMEMODE.setSelectedIcon(checkbox_checked);
     THEMEMODE.setPressedIcon(checkbox_checked);
@@ -87,9 +89,14 @@ public class Settings extends JPanel implements ActionListener, Runnable {
     THEMEMODE.setAlignmentX(Component.CENTER_ALIGNMENT);
     THEMEMODE.addActionListener(this);
 
+    WIPELOGS = new JButton("Destroy logs");
+    WIPELOGS.addActionListener(this);
+    WIPELOGS.setAlignmentX(Component.CENTER_ALIGNMENT);
+
     setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     setPreferredSize(new Dimension(600, 600));
     add(THEMEMODE);
+    add(WIPELOGS);
 
     frame.add(this);
     frame.setAlwaysOnTop(true);
@@ -121,6 +128,13 @@ public class Settings extends JPanel implements ActionListener, Runnable {
       System.out.println("\nTheme changed");
     }
     */
+    if(e.getSource() == WIPELOGS) {
+      try {
+        new ActionLogger().wipeLogs();
+      } catch (IOException ex) {
+        ex.printStackTrace();
+      }
+    }
   }
   
 }
