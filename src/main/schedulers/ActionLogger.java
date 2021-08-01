@@ -21,23 +21,21 @@ public class ActionLogger {
     cT = rn.toString();
     fr = new File("click_game/logs/" + date + ".log");
     fr.createNewFile();
+    Log("Created Log file");
     if (!new File("click_game/logs/").isDirectory()) {
       new src.main.Runner();
       Runner.initGameFolder();
     } else if (!new File("click_game/logs/" + date + ".log").exists()) {
       fr.createNewFile();
     }
-
   }
 
   public void Log(String action) throws IOException {
-    if (Wiped != false) {
       FileWriter fw = new FileWriter(fr, true);
       fw.write("\n[" + cT + "] " + action);
 
       fw.flush();
       fw.close();
-    }
   }
 
   // destroy all files

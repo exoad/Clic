@@ -69,25 +69,24 @@ import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.FileAlreadyExistsException;
 import java.util.Scanner;
 
 import javax.swing.BoxLayout;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 
-import src.main.schedulers.RunScheduler;
-import src.main.panels.Help;
-import src.main.schedulers.FileScheduler;
-import src.main.handler.InputChoiceHandler;
 import src.main.elements.InfoBox;
+import src.main.handler.InputChoiceHandler;
+import src.main.panels.Help;
 import src.main.panels.Settings;
 import src.main.schedulers.ActionLogger;
+import src.main.schedulers.FileScheduler;
+import src.main.schedulers.RunScheduler;
 
 public class Runner extends JPanel implements ActionListener, Runnable {
   public JFrame frame;
