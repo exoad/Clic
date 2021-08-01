@@ -30,12 +30,17 @@ public class ActionLogger {
     }
   }
 
+  /**
+   * 
+   * @param action the action that is to logged most use toString()
+   * @throws IOException when something is caught
+   */
   public void Log(String action) throws IOException {
-      FileWriter fw = new FileWriter(fr, true);
-      fw.write("\n[" + cT + "] " + action);
+    FileWriter fw = new FileWriter(fr, true);
+    fw.write("\n[" + cT + "] " + action);
 
-      fw.flush();
-      fw.close();
+    fw.flush();
+    fw.close();
   }
 
   // destroy all files
@@ -51,6 +56,11 @@ public class ActionLogger {
     Wiped = true;
   }
 
+  /**
+   * 
+   * @param xb overloaded method
+   * @throws IOException catch this exception when it is made
+   */
   public void wipeLogs(File xb) throws IOException {
     xb = new File("click_game/logs/");
     for (File subfile : xb.listFiles()) {

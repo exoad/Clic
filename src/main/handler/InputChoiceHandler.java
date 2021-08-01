@@ -43,7 +43,6 @@ public class InputChoiceHandler {
   public InputChoiceHandler() {
     super();
   }
-
   /**
    * @param s is the input to check
    * @return returns the status code that which will be used to check
