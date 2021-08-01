@@ -49,7 +49,7 @@ import src.main.Runner;
 import src.main.elements.DefaultValues;
 
 public class ReadMakeFilesHandler {
-  private File gp;
+  private final File gp;
 
   public ReadMakeFilesHandler() {
     gp = new File("/click_game/program_properties/colors.properties");

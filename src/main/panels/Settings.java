@@ -46,6 +46,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 
 import javax.swing.BoxLayout;
 import javax.swing.Icon;
@@ -59,31 +60,31 @@ import src.main.schedulers.ActionLogger;
 
 public class Settings extends JPanel implements ActionListener, Runnable {
   private final JFrame frame;
-  private JButton THEMEMODE, WIPELOGS;
+  private final JButton THEMEMODE;
+  private final JButton WIPELOGS;
   private final Runner tester;
-  private final URL windowIMG = ClassLoader.getSystemResource("assets/settings_panel/settings_icon.png");
-  private final URL checkedCheckBoxIMG = ClassLoader.getSystemResource("assets/settings_panel/selected_checkbox.png");
-  private final URL uncheckCheckBoxIMG = ClassLoader.getSystemResource("assets/settings_panel/unselected_checkbox.png");
-  private final URL nullCheckBoxIMG = ClassLoader.getSystemResource("assets/settings_panel/null_checkbox.png");
-
-  private final ImageIcon window_frame_icon = new ImageIcon(windowIMG);
-  private final Icon checkbox_checked = new ImageIcon(checkedCheckBoxIMG);
-  private final Icon checkbox_unchecked = new ImageIcon(uncheckCheckBoxIMG);
-  private final Icon checkbox_null = new ImageIcon(nullCheckBoxIMG);
 
   public Settings() {
     tester = new Runner();
 
     frame = new JFrame("Clic - Settings");
+    URL windowIMG = ClassLoader.getSystemResource("assets/settings_panel/settings_icon.png");
+    ImageIcon window_frame_icon = new ImageIcon(windowIMG);
     frame.setIconImage(window_frame_icon.getImage());
 
-    if(tester.getBackground() == new Color(40, 44, 52)) 
+    URL checkedCheckBoxIMG = ClassLoader.getSystemResource("assets/settings_panel/selected_checkbox.png");
+    Icon checkbox_checked = new ImageIcon(checkedCheckBoxIMG);
+    URL uncheckCheckBoxIMG = ClassLoader.getSystemResource("assets/settings_panel/unselected_checkbox.png");
+    Icon checkbox_unchecked = new ImageIcon(uncheckCheckBoxIMG);
+    if(Objects.equals(tester.getBackground(), new Color(40, 44, 52)))
       THEMEMODE = new JButton("Light Mode", checkbox_unchecked);
     else
     THEMEMODE = new JButton("Dark Mode", checkbox_checked);
     THEMEMODE.setIcon(checkbox_unchecked);
     THEMEMODE.setSelectedIcon(checkbox_checked);
     THEMEMODE.setPressedIcon(checkbox_checked);
+    URL nullCheckBoxIMG = ClassLoader.getSystemResource("assets/settings_panel/null_checkbox.png");
+    Icon checkbox_null = new ImageIcon(nullCheckBoxIMG);
     THEMEMODE.setDisabledIcon(checkbox_null);
     THEMEMODE.setDisabledSelectedIcon(checkbox_null);
     THEMEMODE.setAlignmentX(Component.CENTER_ALIGNMENT);

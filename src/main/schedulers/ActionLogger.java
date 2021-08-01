@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Objects;
 
 import src.main.Runner;
 
@@ -46,7 +47,7 @@ public class ActionLogger {
   // destroy all files
   public void wipeLogs() throws IOException {
     File fi = new File("click_game/logs/");
-    for (File subfile : fi.listFiles()) {
+    for (File subfile : Objects.requireNonNull(fi.listFiles())) {
 
       if (subfile.isDirectory())
         wipeLogs(subfile);
@@ -63,7 +64,7 @@ public class ActionLogger {
    */
   public void wipeLogs(File xb) throws IOException {
     xb = new File("click_game/logs/");
-    for (File subfile : xb.listFiles()) {
+    for (File subfile : Objects.requireNonNull(xb.listFiles())) {
 
       if (subfile.isDirectory())
         wipeLogs(subfile);
