@@ -21,7 +21,7 @@ public class ActionLogger {
     cT = rn.toString();
     fr = new File("click_game/logs/" + date + ".log");
     fr.createNewFile();
-    if (!new File("click_game/logs").isDirectory()) {
+    if (!new File("click_game/logs/").isDirectory()) {
       new src.main.Runner();
       Runner.initGameFolder();
     } else if (!new File("click_game/logs/" + date + ".log").exists()) {
@@ -42,7 +42,7 @@ public class ActionLogger {
 
   // destroy all files
   public void wipeLogs() throws IOException {
-    File fi = new File("click_game/logs");
+    File fi = new File("click_game/logs/");
     for (File subfile : fi.listFiles()) {
 
       if (subfile.isDirectory())
@@ -54,7 +54,7 @@ public class ActionLogger {
   }
 
   public void wipeLogs(File xb) throws IOException {
-    xb = new File("click_game/logs");
+    xb = new File("click_game/logs/");
     for (File subfile : xb.listFiles()) {
 
       if (subfile.isDirectory())

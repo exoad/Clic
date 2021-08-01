@@ -64,10 +64,10 @@ public class FileScheduler {
    * @param objs     objnum Number
    * @throws IOException an exception when it is encountered
    */
-  public void write(int clicks, int mult, int multCost, int objs) throws IOException {
+  public void write(int clicks, int mult, int multCost, int objs, int displayUpgrade) throws IOException {
     if (new File(fileDir).isDirectory()) {
       String msg = Integer.toString(clicks) + "\n" + Integer.toString(mult) + "\n" + Integer.toString(multCost) + "\n"
-          + Integer.toString(objs) + "\n";
+          + Integer.toString(objs) + "\n" + Integer.toString(displayUpgrade) + "\n";
       Files.write(Paths.get(fileDir + "saves"), msg.getBytes());
     }
   }

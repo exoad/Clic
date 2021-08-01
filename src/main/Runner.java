@@ -102,6 +102,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
   private static int multX;
   private static int objNum;
   private static int multCost;
+  private static int gotUpgrade;
   private final static FileScheduler fsr = new FileScheduler();
 
   /**
@@ -109,11 +110,17 @@ public class Runner extends JPanel implements ActionListener, Runnable {
    */
   public Runner() {
     URL MAIN_CLICK = ClassLoader.getSystemResource("assets/runner_panel/main_click_button.png");
-    URL UPD_CLICK = ClassLoader.getSystemResource("assets/runner_panel/main_click_button.png");
+    URL UPD_CLICK = ClassLoader.getSystemResource("assets/runner_panel/upgrade_click_button.png");
     Icon MAIN_CLICK_IMG = new ImageIcon(MAIN_CLICK);
     Icon UPD_CLICK_IMG = new ImageIcon(UPD_CLICK);
     UPGRADEA = new JButton("Upgrade (+1/click) Cost: " + multCost, UPD_CLICK_IMG);
-    UPGRADEA.setVisible(false);
+    if(Integer.parseInt(fsr.readLineNumber(4)) == 1) {
+      UPGRADEA.setVisible(true);
+      gotUpgrade = 1;
+    } else {
+      UPGRADEA.setVisible(false);
+      gotUpgrade = 0;
+    }
     UPGRADEA.setBackground(Color.GREEN);
     UPGRADEA.addActionListener(this);
     UPGRADEA.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -294,7 +301,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     while (true) {
       Thread.sleep(4000);
       news.setText(new InfoBox().randomNews());
-      fsr.write(mainLabel, multX, multCost, objNum);
+      fsr.write(mainLabel, multX, multCost, objNum, gotUpgrade);
       otherInfo.setText("Auto saved.");
       Thread.sleep(1000);
       otherInfo.setText(null);
@@ -326,6 +333,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
       } else if (ex.getSource() == UPGRADEA) {
         // get an upgrade with a cost of multCost
         if (mainLabel >= multCost) {
+          gotUpgrade = 1;
           multX = multX + 1;
           mainLabel = mainLabel - multCost;
           multCost = multCost + (multCost);
@@ -333,14 +341,16 @@ public class Runner extends JPanel implements ActionListener, Runnable {
           multiplier.setText("Current Upgrade: " + multX);
           nextMultX.setText("Upgrade Cost: " + multCost);
           otherInfo.setText("Purchased Upgrade");
+          UPGRADEA.setText("Upgrade (+1/click) Cost: " + multCost);
         } else {
+          gotUpgrade = 0;
           otherInfo.setText("Invalid Count");
         }
 
       } else if (ex.getSource() == SAVX) {
         try {
           otherInfo.setText("Manually Saving...");
-          fsr.write(mainLabel, multX, multCost, objNum);
+          fsr.write(mainLabel, multX, multCost, objNum, gotUpgrade);
           Thread.sleep(2000);
           otherInfo.setText("Manual Save Done.");
         } catch (IOException | InterruptedException e) {
@@ -407,9 +417,11 @@ public class Runner extends JPanel implements ActionListener, Runnable {
 
   private void comparator(int n) {
     if (n >= multCost) {
+      gotUpgrade = 1;
       UPGRADEA.setVisible(true);
       display.setText("Upgrade Avaliable. Cost: " + multCost);
     } else {
+      gotUpgrade = 0;
       display.setText("Insufficient Clicks");
     }
   }
