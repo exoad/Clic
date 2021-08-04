@@ -79,6 +79,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import src.main.elements.InfoBox;
 import src.main.handler.InputChoiceHandler;
@@ -90,7 +92,7 @@ import src.main.schedulers.RunScheduler;
 
 public class Runner extends JPanel implements ActionListener, Runnable {
   public JFrame frame;
-  public JButton MAINX, UPGRADEA, SAVX, CHANGECOLOUR, RESETDATA, EXP, SETTINGS;
+  public JButton MAINX, UPGRADEA, SAVX, RESETDATA, EXP, SETTINGS;
   public JLabel display;
   public static JLabel otherInfo;
   public static JLabel news;
@@ -195,14 +197,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     RESETDATA.addActionListener(this);
     RESETDATA.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-    URL RND_CLICK = ClassLoader.getSystemResource("assets/runner_panel/random_color_click_button.png");
-    Icon RND_CLICK_IMG = new ImageIcon(RND_CLICK);
 
-    CHANGECOLOUR = new JButton("Random Color", RND_CLICK_IMG);
-    CHANGECOLOUR.setBackground(Color.WHITE);
-    CHANGECOLOUR.setForeground(Color.BLACK);
-    CHANGECOLOUR.addActionListener(this);
-    CHANGECOLOUR.setAlignmentX(Component.CENTER_ALIGNMENT);
 
     EXP = new JButton("Help Menu");
     EXP.setBackground(Color.orange);
@@ -214,13 +209,19 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     SETTINGS.addActionListener(this);
     SETTINGS.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+    SETTINGS.setOpaque(true);
+    EXP.setOpaque(true);
+    MAINX.setOpaque(true);
+    UPGRADEA.setOpaque(true);
+    RESETDATA.setOpaque(true);
+    SAVX.setOpaque(true);
+
     setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     setPreferredSize(new Dimension(500, 500));
 
     add(MAINX);
     add(SAVX);
     add(UPGRADEA);
-    add(CHANGECOLOUR);
     add(RESETDATA);
     add(news);
     add(display);
@@ -279,6 +280,12 @@ public class Runner extends JPanel implements ActionListener, Runnable {
   }
 
   public static void main(String[] args) throws Exception {
+    try {
+      UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+    } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+        | UnsupportedLookAndFeelException e2) {
+      e2.printStackTrace();
+    }
     new ActionLogger().Log("Program Started");
     FileScheduler fsb = new FileScheduler();
     fsb.createNoticeFile();
@@ -358,18 +365,6 @@ public class Runner extends JPanel implements ActionListener, Runnable {
 
         otherInfo.setText("Saved.");
 
-      } else if (ex.getSource() == CHANGECOLOUR) {
-        // changes the color randomly of the buttons when pressed
-        MAINX.setBackground(
-            new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256)));
-        if (UPGRADEA.isVisible())
-          UPGRADEA.setBackground(
-              new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256)));
-        SAVX.setBackground(
-            new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256)));
-        RESETDATA.setBackground(
-            new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256)));
-
       } else if (ex.getSource() == RESETDATA) {
         // this method reset all the data and deletes all files with data
         mainLabel = 0;
@@ -442,5 +437,6 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     frame.pack();
     frame.setVisible(true);
   }
+
 
 }

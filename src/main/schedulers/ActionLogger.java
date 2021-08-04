@@ -32,11 +32,10 @@ public class ActionLogger {
   }
 
   /**
-   * 
    * @param action the action that is to logged most use toString()
    * @throws IOException when something is caught
    */
-  public void Log(String action) throws IOException {
+  public < E > void Log(E action) throws IOException {
     FileWriter fw = new FileWriter(fr, true);
     fw.write("\n[" + cT + "] " + action);
 
