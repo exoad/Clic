@@ -1,0 +1,39 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Launch Java Program",
+      "request": "launch",
+      "mainClass": "src.main.Runner"
+    },
+    {
+      "type": "java",
+      "name": "Launch Runner",
+      "request": "launch",
+      "mainClass": "src.main.Runner",
+      "projectName": "ClickGame2_8258cd7b"
+    },
+    {
+      "type": "java",
+      "name": "Launch test",
+      "request": "launch",
+      "mainClass": "test",
+      "projectName": "ClickGame2_8258cd7b"
+    },
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "d:\\Programs & Projects\\ClickGame2",
+      "environment": [],
+      "program": "d:\\Programs & Projects\\ClickGame2\\build\\Debug\\outDebug",
+      "internalConsoleOptions": "openOnSessionStart",
+      "MIMode": "gdb",
+      "miDebuggerPath": "C:\\cygwin64\\bin\\gdb.exe",
+      "externalConsole": true
+    }
+  ]
+}

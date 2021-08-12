@@ -1,0 +1,156 @@
+Index: src/main/Runner.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/**\r\n *           _____                    _____            _____                    _____          \r\n *          /\\    \\                  /\\    \\          /\\    \\                  /\\    \\         \r\n *         /::\\    \\                /::\\____\\        /::\\    \\                /::\\    \\        \r\n *        /::::\\    \\              /:::/    /        \\:::\\    \\              /::::\\    \\       \r\n *       /::::::\\    \\            /:::/    /          \\:::\\    \\            /::::::\\    \\      \r\n *      /:::/\\:::\\    \\          /:::/    /            \\:::\\    \\          /:::/\\:::\\    \\     \r\n *     /:::/  \\:::\\    \\        /:::/    /              \\:::\\    \\        /:::/  \\:::\\    \\    \r\n *    /:::/    \\:::\\    \\      /:::/    /               /::::\\    \\      /:::/    \\:::\\    \\   \r\n *   /:::/    / \\:::\\    \\    /:::/    /       ____    /::::::\\    \\    /:::/    / \\:::\\    \\  \r\n *  /:::/    /   \\:::\\    \\  /:::/    /       /\\   \\  /:::/\\:::\\    \\  /:::/    /   \\:::\\    \\ \r\n * /:::/____/     \\:::\\____\\/:::/____/       /::\\   \\/:::/  \\:::\\____\\/:::/____/     \\:::\\____\\\r\n * \\:::\\    \\      \\::/    /\\:::\\    \\       \\:::\\  /:::/    \\::/    /\\:::\\    \\      \\::/    /\r\n *  \\:::\\    \\      \\/____/  \\:::\\    \\       \\:::\\/:::/    / \\/____/  \\:::\\    \\      \\/____/ \r\n *   \\:::\\    \\               \\:::\\    \\       \\::::::/    /            \\:::\\    \\             \r\n *    \\:::\\    \\               \\:::\\    \\       \\::::/____/              \\:::\\    \\            \r\n *     \\:::\\    \\               \\:::\\    \\       \\:::\\    \\               \\:::\\    \\           \r\n *      \\:::\\    \\               \\:::\\    \\       \\:::\\    \\               \\:::\\    \\          \r\n *       \\:::\\    \\               \\:::\\    \\       \\:::\\    \\               \\:::\\    \\         \r\n *        \\:::\\____\\               \\:::\\____\\       \\:::\\____\\               \\:::\\____\\        \r\n *         \\::/    /                \\::/    /        \\::/    /                \\::/    /        \r\n *          \\/____/                  \\/____/          \\/____/                  \\/____/       \r\n * A simple Clicker game.\r\n * \r\n * @author Jack Meng\r\n * @version 1.0z (EXP)\r\n * \r\n * BSD 3-Clause License\r\n * \r\n * Copyright (c) 2021, Jack Meng\r\n * All rights reserved.\r\n * \r\n * Redistribution and use in source and binary forms, with or without\r\n * modification, are permitted provided that the following conditions are met:\r\n * \r\n * 1. Redistributions of source code must retain the above copyright notice, this\r\n * list of conditions and the following disclaimer.\r\n * \r\n * 2. Redistributions in binary form must reproduce the above copyright notice,\r\n * this list of conditions and the following disclaimer in the documentation\r\n * and/or other materials provided with the distribution.\r\n * \r\n * 3. Neither the name of the copyright holder nor the names of its\r\n * contributors may be used to endorse or promote products derived from\r\n * this software without specific prior written permission.\r\n * \r\n * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\r\n * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\r\n * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\r\n * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\r\n * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\r\n * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\r\n * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\r\n * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\r\n * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\r\n * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\r\n * \r\n * \r\n */\r\npackage src.main;\r\n\r\nimport java.awt.Color;\r\nimport java.awt.Component;\r\nimport java.awt.Dimension;\r\nimport java.awt.event.ActionEvent;\r\nimport java.awt.event.ActionListener;\r\nimport java.awt.event.WindowEvent;\r\nimport java.awt.event.WindowListener;\r\nimport java.io.File;\r\nimport java.io.IOException;\r\nimport java.net.URL;\r\nimport java.util.Scanner;\r\n\r\nimport javax.swing.BoxLayout;\r\nimport javax.swing.JButton;\r\nimport javax.swing.JFrame;\r\nimport javax.swing.JLabel;\r\nimport javax.swing.JOptionPane;\r\nimport javax.swing.JPanel;\r\nimport javax.swing.Icon;\r\nimport javax.swing.ImageIcon;\r\n\r\nimport src.main.schedulers.RunScheduler;\r\nimport src.main.panels.Help;\r\nimport src.main.schedulers.FileScheduler;\r\nimport src.main.handler.InputChoiceHandler;\r\nimport src.main.elements.InfoBox;\r\n\r\npublic class Runner extends JPanel implements ActionListener, Runnable {\r\n  private final JFrame frame;\r\n  private final JButton MAINX, UPGRADEA, SAVX, CHANGECOLOUR, RESETDATA, EXP;\r\n  private final JLabel display;\r\n  private static JLabel otherInfo;\r\n  private static JLabel news;\r\n  private final JLabel multiplier;\r\n  private final JLabel objec;\r\n  private final JLabel nextMultX;\r\n  private static int mainLabel;\r\n  private static int multX;\r\n  private static int objNum;\r\n  private static int multCost;\r\n  private final Icon SAVE_CLICK_IMG;\r\n  private final Icon RND_CLICK_IMG;\r\n  private final Icon RSTSAV_CLICK_IMG;\r\n  private final Icon UPD_CLICK_IMG;\r\n  private String mainText, displayStartText;\r\n  private final static FileScheduler fsr = new FileScheduler();\r\n\r\n  /**\r\n   * @Test Runner main\r\n   */\r\n  public Runner() {\r\n    URL MAIN_CLICK = ClassLoader.getSystemResource(\"main_click_button.png\");\r\n    URL UPD_CLICK = ClassLoader.getSystemResource(\"upgrade_click_button.png\");\r\n    Icon MAIN_CLICK_IMG = new ImageIcon(MAIN_CLICK);\r\n    UPD_CLICK_IMG = new ImageIcon(UPD_CLICK);\r\n    UPGRADEA = new JButton(\"Upgrade (+1/click) Cost: \" + multCost, UPD_CLICK_IMG);\r\n    UPGRADEA.setVisible(false);\r\n    UPGRADEA.setBackground(Color.GREEN);\r\n    UPGRADEA.addActionListener(this);\r\n    UPGRADEA.setAlignmentX(Component.CENTER_ALIGNMENT);\r\n\r\n    // settings all the variables and components\r\n    if (Integer.parseInt(fsr.readLineNumber(0)) != 0 && Integer.parseInt(fsr.readLineNumber(1)) != 0\r\n        && Integer.parseInt(fsr.readLineNumber(2)) != 0 && Integer.parseInt(fsr.readLineNumber(3)) != 0) {\r\n      mainLabel = Integer.parseInt(fsr.readLineNumber(0));\r\n      if (mainLabel >= 100)\r\n        UPGRADEA.setVisible(true);\r\n      multX = Integer.parseInt(fsr.readLineNumber(1));\r\n      objNum = Integer.parseInt(fsr.readLineNumber(2));\r\n      multCost = Integer.parseInt(fsr.readLineNumber(3));\r\n    } else {\r\n      mainLabel = 0;\r\n      multX = 1;\r\n      objNum = 50;\r\n      multCost = 100;\r\n    }\r\n\r\n    if (mainLabel != 0)\r\n      displayStartText = \"Current Count: \" + mainLabel;\r\n    else\r\n      displayStartText = \"Click the button\";\r\n\r\n    mainText = \"Click Me!\";\r\n    URL frTem = ClassLoader.getSystemResource(\"mainframe_icon.png\");\r\n    ImageIcon Templar1 = new ImageIcon(frTem);\r\n    frame = new JFrame(\"Clic 1.2EXP\");\r\n    frame.setIconImage(Templar1.getImage());\r\n    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);\r\n\r\n    // settings values for JComponents\r\n    objec = new JLabel(\"Current Click Objective: \" + objNum);\r\n    objec.setAlignmentX(Component.CENTER_ALIGNMENT);\r\n\r\n    multiplier = new JLabel(\"Current Upgrade: \" + multX);\r\n    multiplier.setAlignmentX(Component.CENTER_ALIGNMENT);\r\n\r\n    nextMultX = new JLabel(\"Next Upgrade Cost: \" + multCost);\r\n    nextMultX.setAlignmentX(Component.CENTER_ALIGNMENT);\r\n\r\n    display = new JLabel(displayStartText);\r\n    display.setAlignmentX(Component.CENTER_ALIGNMENT);\r\n\r\n    news = new JLabel(new InfoBox().randomNews());\r\n    news.setAlignmentX(Component.CENTER_ALIGNMENT);\r\n\r\n    otherInfo = new JLabel(\" \");\r\n    otherInfo.setVisible(true);\r\n    otherInfo.setAlignmentX(Component.CENTER_ALIGNMENT);\r\n\r\n    URL SAVE_CLICK = ClassLoader.getSystemResource(\"save_click_button.png\");\r\n    SAVE_CLICK_IMG = new ImageIcon(SAVE_CLICK);\r\n\r\n    SAVX = new JButton(\"Save\", SAVE_CLICK_IMG);\r\n    SAVX.setBackground(Color.red);\r\n    SAVX.addActionListener(this);\r\n    SAVX.setAlignmentX(Component.CENTER_ALIGNMENT);\r\n\r\n    MAINX = new JButton(mainText, MAIN_CLICK_IMG);\r\n    MAINX.setBackground(Color.BLUE);\r\n    MAINX.addActionListener(this);\r\n    MAINX.setSize(new Dimension(100, 100));\r\n    MAINX.setAlignmentX(Component.CENTER_ALIGNMENT);\r\n\r\n    URL RST_CLICK = ClassLoader.getSystemResource(\"reset_save_click_button.png\");\r\n    RSTSAV_CLICK_IMG = new ImageIcon(RST_CLICK);\r\n\r\n    RESETDATA = new JButton(\"Reset\", RSTSAV_CLICK_IMG);\r\n    RESETDATA.setBackground(Color.LIGHT_GRAY);\r\n    RESETDATA.addActionListener(this);\r\n    RESETDATA.setAlignmentX(Component.CENTER_ALIGNMENT);\r\n\r\n    URL RND_CLICK = ClassLoader.getSystemResource(\"random_color_click_button.png\");\r\n    RND_CLICK_IMG = new ImageIcon(RND_CLICK);\r\n\r\n    CHANGECOLOUR = new JButton(\"Random Color\", RND_CLICK_IMG);\r\n    CHANGECOLOUR.setBackground(Color.WHITE);\r\n    CHANGECOLOUR.setForeground(Color.BLACK);\r\n    CHANGECOLOUR.addActionListener(this);\r\n    CHANGECOLOUR.setAlignmentX(Component.CENTER_ALIGNMENT);\r\n\r\n    EXP = new JButton(\"Help Menu\");\r\n    EXP.setBackground(Color.orange);\r\n    EXP.addActionListener(this);\r\n    EXP.setAlignmentX(Component.CENTER_ALIGNMENT);\r\n\r\n    setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));\r\n    setPreferredSize(new Dimension(500, 500));\r\n\r\n    add(MAINX);\r\n    add(SAVX);\r\n    add(UPGRADEA);\r\n    add(CHANGECOLOUR);\r\n    add(RESETDATA);\r\n    add(news);\r\n    add(display);\r\n    add(multiplier);\r\n    add(nextMultX);\r\n    add(objec);\r\n    add(otherInfo);\r\n    add(EXP);\r\n\r\n    frame.add(this);\r\n    frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);\r\n    frame.addWindowListener(new WindowListener() {\r\n      @Override\r\n      public void windowClosing(WindowEvent e) {\r\n        JFrame frame = (JFrame) e.getSource();\r\n\r\n        int options = JOptionPane.showConfirmDialog(frame,\r\n            \"Are you sure you want to leave Click Game?\\nYour progress is currently saved to the last time you pressed SAVE\",\r\n            \"ATTENTION\", JOptionPane.YES_NO_OPTION);\r\n        if (options == JOptionPane.YES_OPTION)\r\n          System.out.print(\"Exited the Program\");\r\n        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);\r\n      }\r\n\r\n      @Override\r\n      public void windowOpened(WindowEvent e) {\r\n      }\r\n\r\n      @Override\r\n      public void windowClosed(WindowEvent e) {\r\n      }\r\n\r\n      @Override\r\n      public void windowIconified(WindowEvent e) {\r\n      }\r\n\r\n      @Override\r\n      public void windowDeiconified(WindowEvent e) {\r\n      }\r\n\r\n      @Override\r\n      public void windowActivated(WindowEvent e) {\r\n      }\r\n\r\n      @Override\r\n      public void windowDeactivated(WindowEvent e) {\r\n      }\r\n\r\n    });\r\n  }\r\n\r\n  public static void main(String[] args) throws Exception {\r\n    FileScheduler fsb = new FileScheduler();\r\n    fsb.createNoticeFile();\r\n    initGameFolder();\r\n    InputChoiceHandler sr = new InputChoiceHandler();\r\n    Scanner sc = new Scanner(System.in);\r\n    String s;\r\n    do {\r\n      System.out.print(\"\\nLaunch? (y/n): \");\r\n      s = sc.nextLine();\r\n      if (sr.checkYN(s) == 0)\r\n        new RunScheduler().RunnerCall();\r\n      System.out.print(\"\\nThe Program is now launched.\");\r\n      break;\r\n    } while (sr.checkYN(s) != -1);\r\n    sc.close();\r\n\r\n    // constants\r\n    while (true) {\r\n      Thread.sleep(4000);\r\n      news.setText(new InfoBox().randomNews());\r\n      fsr.write(mainLabel, multX, multCost, objNum);\r\n      otherInfo.setText(\"Auto saved.\");\r\n      Thread.sleep(1000);\r\n      otherInfo.setText(null);\r\n\r\n    }\r\n  }\r\n\r\n  /**\r\n   * @param ex event recieved from this class\r\n   */\r\n  @Override\r\n  public void actionPerformed(ActionEvent ex) {\r\n    // main clicking of the button\r\n    if (ex.getSource() == MAINX) {\r\n\r\n      comparator(mainLabel + multX);\r\n\r\n      if ((mainLabel + multX) >= objNum) {\r\n        // setting the objectives\r\n        objNum = objectives(objNum);\r\n        mainLabel = mainLabel + (objNum / 5);\r\n        objec.setText(\"New Click Objective: \" + objNum);\r\n      }\r\n\r\n      mainLabel = mainLabel + multX;\r\n      display.setText(\"Current Count: \" + mainLabel);\r\n\r\n    } else if (ex.getSource() == UPGRADEA) {\r\n      // get an upgrade with a cost of multCost\r\n      if (mainLabel >= multCost) {\r\n        multX = multX + 1;\r\n        mainLabel = mainLabel - multCost;\r\n        multCost = multCost + (multCost);\r\n        display.setText(\"Current Count: \" + mainLabel);\r\n        multiplier.setText(\"Current Upgrade: \" + multX);\r\n        nextMultX.setText(\"Upgrade Cost: \" + multCost);\r\n        otherInfo.setText(\"Purchased Upgrade\");\r\n      } else {\r\n        otherInfo.setText(\"Invalid Count\");\r\n      }\r\n\r\n    } else if (ex.getSource() == SAVX) {\r\n      try {\r\n        otherInfo.setText(\"Manually Saving...\");\r\n        fsr.write(mainLabel, multX, multCost, objNum);\r\n        Thread.sleep(2000);\r\n        otherInfo.setText(\"Manual Save Done.\");\r\n      } catch (IOException | InterruptedException e) {\r\n        e.printStackTrace();\r\n      }\r\n\r\n      otherInfo.setText(\"Saved.\");\r\n\r\n    } else if (ex.getSource() == CHANGECOLOUR) {\r\n      // changes the color randomly of the buttons when pressed\r\n      MAINX.setBackground(\r\n          new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256)));\r\n      if (UPGRADEA.isVisible())\r\n        UPGRADEA.setBackground(\r\n            new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256)));\r\n      SAVX.setBackground(\r\n          new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256)));\r\n      RESETDATA.setBackground(\r\n          new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256)));\r\n\r\n    } else if (ex.getSource() == RESETDATA) {\r\n      // this method reset all the data and deletes all files with data\r\n      mainLabel = 0;\r\n      multX = 1;\r\n      objNum = 50;\r\n      multCost = 100;\r\n      display.setText(\"Current Count: \" + mainLabel);\r\n      multiplier.setText(\"Current Upgrade: \" + multX);\r\n      nextMultX.setText(\"Upgrade Cost: \" + multCost);\r\n      objec.setText(\"Current Objective: \" + objNum);\r\n\r\n      if (fsr.resetData())\r\n        System.out.println(\"\\nALL DATA RESET\");\r\n      else\r\n        System.out.println(\"\\nError Encountered while reseting\");\r\n\r\n    } else if (ex.getSource() == EXP) {\r\n      try {\r\n        Help h = new Help();\r\n        h.askRun();\r\n      } catch (Exception e) {\r\n        e.printStackTrace();\r\n      }\r\n    } else {\r\n      UPGRADEA.setVisible(false);\r\n    }\r\n  }\r\n\r\n  private int objectives(int o) {\r\n    return o * 2;\r\n  }\r\n\r\n  private void comparator(int n) {\r\n    if (n >= multCost) {\r\n      UPGRADEA.setVisible(true);\r\n      display.setText(\"Upgrade Avaliable. Cost: \" + multCost);\r\n    } else {\r\n      display.setText(\"Insufficient Clicks\");\r\n    }\r\n  }\r\n\r\n  public static void initGameFolder() {\r\n    File filXB = new File(\"click_game/program_assets/\");\r\n    if (!filXB.isDirectory())\r\n      filXB.mkdirs();\r\n  }\r\n\r\n  @Override\r\n  public void run() {\r\n    frame.pack();\r\n    frame.setVisible(true);\r\n  }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/Runner.java b/src/main/Runner.java
+--- a/src/main/Runner.java	(revision 870d4b3100e7f6d1358cca52fdfaaf6b618e51e0)
++++ b/src/main/Runner.java	(date 1627670988000)
+@@ -21,29 +21,29 @@
+  *         \::/    /                \::/    /        \::/    /                \::/    /        
+  *          \/____/                  \/____/          \/____/                  \/____/       
+  * A simple Clicker game.
+- * 
++ *
+  * @author Jack Meng
+  * @version 1.0z (EXP)
+- * 
++ *
+  * BSD 3-Clause License
+- * 
++ *
+  * Copyright (c) 2021, Jack Meng
+  * All rights reserved.
+- * 
++ *
+  * Redistribution and use in source and binary forms, with or without
+  * modification, are permitted provided that the following conditions are met:
+- * 
++ *
+  * 1. Redistributions of source code must retain the above copyright notice, this
+  * list of conditions and the following disclaimer.
+- * 
++ *
+  * 2. Redistributions in binary form must reproduce the above copyright notice,
+  * this list of conditions and the following disclaimer in the documentation
+  * and/or other materials provided with the distribution.
+- * 
++ *
+  * 3. Neither the name of the copyright holder nor the names of its
+  * contributors may be used to endorse or promote products derived from
+  * this software without specific prior written permission.
+- * 
++ *
+  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+@@ -54,8 +54,8 @@
+  * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+- * 
+- * 
++ *
++ *
+  */
+ package src.main;
+ 
+@@ -110,8 +110,8 @@
+    * @Test Runner main
+    */
+   public Runner() {
+-    URL MAIN_CLICK = ClassLoader.getSystemResource("main_click_button.png");
+-    URL UPD_CLICK = ClassLoader.getSystemResource("upgrade_click_button.png");
++    URL MAIN_CLICK = ClassLoader.getSystemResource("assets/RunnerPanel/main_click_button.png");
++    URL UPD_CLICK = ClassLoader.getSystemResource("assets/RunnerPanel/main_click_button.png");
+     Icon MAIN_CLICK_IMG = new ImageIcon(MAIN_CLICK);
+     UPD_CLICK_IMG = new ImageIcon(UPD_CLICK);
+     UPGRADEA = new JButton("Upgrade (+1/click) Cost: " + multCost, UPD_CLICK_IMG);
+@@ -142,7 +142,7 @@
+       displayStartText = "Click the button";
+ 
+     mainText = "Click Me!";
+-    URL frTem = ClassLoader.getSystemResource("mainframe_icon.png");
++    URL frTem = ClassLoader.getSystemResource("assets/RunnerPanel/mainframe_icon.png");
+     ImageIcon Templar1 = new ImageIcon(frTem);
+     frame = new JFrame("Clic 1.2EXP");
+     frame.setIconImage(Templar1.getImage());
+@@ -168,7 +168,7 @@
+     otherInfo.setVisible(true);
+     otherInfo.setAlignmentX(Component.CENTER_ALIGNMENT);
+ 
+-    URL SAVE_CLICK = ClassLoader.getSystemResource("save_click_button.png");
++    URL SAVE_CLICK = ClassLoader.getSystemResource("assets/RunnerPanel/save_click_button.png");
+     SAVE_CLICK_IMG = new ImageIcon(SAVE_CLICK);
+ 
+     SAVX = new JButton("Save", SAVE_CLICK_IMG);
+@@ -182,7 +182,7 @@
+     MAINX.setSize(new Dimension(100, 100));
+     MAINX.setAlignmentX(Component.CENTER_ALIGNMENT);
+ 
+-    URL RST_CLICK = ClassLoader.getSystemResource("reset_save_click_button.png");
++    URL RST_CLICK = ClassLoader.getSystemResource("assets/RunnerPanel/reset_save_click_button.png");
+     RSTSAV_CLICK_IMG = new ImageIcon(RST_CLICK);
+ 
+     RESETDATA = new JButton("Reset", RSTSAV_CLICK_IMG);
+@@ -190,7 +190,7 @@
+     RESETDATA.addActionListener(this);
+     RESETDATA.setAlignmentX(Component.CENTER_ALIGNMENT);
+ 
+-    URL RND_CLICK = ClassLoader.getSystemResource("random_color_click_button.png");
++    URL RND_CLICK = ClassLoader.getSystemResource("assets/RunnerPanel/random_color_click_button.png");
+     RND_CLICK_IMG = new ImageIcon(RND_CLICK);
+ 
+     CHANGECOLOUR = new JButton("Random Color", RND_CLICK_IMG);
+Index: src/main/panels/Help.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/**\r\n * A simple Clicker game.\r\n * \r\n * @author Jack Meng\r\n * @version 1.0z (EXP)\r\n * \r\n * BSD 3-Clause License\r\n * \r\n * Copyright (c) 2021, Jack Meng\r\n * All rights reserved.\r\n * \r\n * Redistribution and use in source and binary forms, with or without\r\n * modification, are permitted provided that the following conditions are met:\r\n * \r\n * 1. Redistributions of source code must retain the above copyright notice, this\r\n * list of conditions and the following disclaimer.\r\n * \r\n * 2. Redistributions in binary form must reproduce the above copyright notice,\r\n * this list of conditions and the following disclaimer in the documentation\r\n * and/or other materials provided with the distribution.\r\n * \r\n * 3. Neither the name of the copyright holder nor the names of its\r\n * contributors may be used to endorse or promote products derived from\r\n * this software without specific prior written permission.\r\n * \r\n * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\r\n * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\r\n * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\r\n * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\r\n * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\r\n * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\r\n * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\r\n * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\r\n * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\r\n * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\r\n * \r\n * \r\n */\r\n\r\npackage src.main.panels;\r\n\r\nimport java.awt.Color;\r\nimport java.awt.Component;\r\nimport java.awt.Desktop;\r\nimport java.awt.Dimension;\r\nimport java.awt.event.ActionEvent;\r\nimport java.awt.event.ActionListener;\r\nimport java.net.MalformedURLException;\r\nimport java.net.URI;\r\nimport java.net.URISyntaxException;\r\nimport java.net.URL;\r\n\r\nimport javax.swing.BoxLayout;\r\nimport javax.swing.Icon;\r\nimport javax.swing.ImageIcon;\r\nimport javax.swing.JButton;\r\nimport javax.swing.JFrame;\r\nimport javax.swing.JLabel;\r\nimport javax.swing.JPanel;\r\n\r\n/*\r\n * Awaiting Packages\r\n * import java.io.*;\r\n * import java.util.*;\r\n * import java.awt.event.*;\r\n */\r\n\r\npublic class Help extends JPanel implements Runnable, ActionListener {\r\n    private final JFrame frame;\r\n    private final JButton VIEWMENU;\r\n\r\n    public Help() {\r\n        frame = new JFrame(\"Help Menu\");\r\n        URL frTem = ClassLoader.getSystemResource(\"help_icon.png\");\r\n        ImageIcon templar2 = new ImageIcon(frTem);\r\n        URL vM = ClassLoader.getSystemResource(\"browser_click_button.png\");\r\n        Icon VMENU = new ImageIcon(vM);\r\n        frame.setIconImage(templar2.getImage());\r\n        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);\r\n\r\n        JLabel title = new JLabel(\"--View Menu In Your Default Browser--\");\r\n        title.setAlignmentX(Component.CENTER_ALIGNMENT);\r\n\r\n        VIEWMENU = new JButton(\"View Help\", VMENU);\r\n        VIEWMENU.setAlignmentX(Component.CENTER_ALIGNMENT);\r\n        VIEWMENU.setBackground(Color.ORANGE);\r\n        VIEWMENU.addActionListener(this);\r\n\r\n        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));\r\n        setPreferredSize(new Dimension(300, 100));\r\n\r\n        add(title);\r\n        add(VIEWMENU);\r\n\r\n        frame.add(this);\r\n    }\r\n\r\n    @Override\r\n    public void run() {\r\n        frame.pack();\r\n        frame.setVisible(true);\r\n    }\r\n\r\n    public void askRun() {\r\n        new Help().run();\r\n    }\r\n\r\n    public static boolean openWebpage(URI uri) {\r\n        Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;\r\n        if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {\r\n            try {\r\n                desktop.browse(uri);\r\n                return true;\r\n            } catch (Exception e) {\r\n                e.printStackTrace();\r\n            }\r\n        }\r\n        return false;\r\n    }\r\n\r\n    public static boolean openWebpage(URL url) {\r\n        try {\r\n            return openWebpage(url.toURI());\r\n        } catch (URISyntaxException e) {\r\n            e.printStackTrace();\r\n        }\r\n        return false;\r\n    }\r\n\r\n    @Override\r\n    public void actionPerformed(ActionEvent ex) {\r\n        // open the help menu in the client's default browser\r\n        if (ex.getSource() == VIEWMENU) {\r\n            try {\r\n                openWebpage(new URL(\"https://github.com/exoad/ClickGame/wiki\"));\r\n            } catch (MalformedURLException e) {\r\n                System.out.println(\"Something went horribly wrong when trying to open the Help Menu in your default browser!\\n\\n\\n\");\r\n                e.printStackTrace();\r\n            }\r\n        }\r\n\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/panels/Help.java b/src/main/panels/Help.java
+--- a/src/main/panels/Help.java	(revision 870d4b3100e7f6d1358cca52fdfaaf6b618e51e0)
++++ b/src/main/panels/Help.java	(date 1627670970000)
+@@ -58,24 +58,18 @@
+ import javax.swing.JLabel;
+ import javax.swing.JPanel;
+ 
+-/*
+- * Awaiting Packages
+- * import java.io.*;
+- * import java.util.*;
+- * import java.awt.event.*;
+- */
+-
+ public class Help extends JPanel implements Runnable, ActionListener {
+     private final JFrame frame;
+     private final JButton VIEWMENU;
+ 
+     public Help() {
+         frame = new JFrame("Help Menu");
+-        URL frTem = ClassLoader.getSystemResource("help_icon.png");
+-        ImageIcon templar2 = new ImageIcon(frTem);
+-        URL vM = ClassLoader.getSystemResource("browser_click_button.png");
++        URL vM = ClassLoader.getSystemResource("assets/HelpPanel/browser_click_button.png");
+         Icon VMENU = new ImageIcon(vM);
+-        frame.setIconImage(templar2.getImage());
++
++        URL templar2 = ClassLoader.getSystemResource("assets/HelpPanel/help_icon.png");
++        ImageIcon temp2 = new ImageIcon(templar2);
++        frame.setIconImage(temp2.getImage());
+         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+ 
+         JLabel title = new JLabel("--View Menu In Your Default Browser--");
+@@ -134,7 +128,8 @@
+             try {
+                 openWebpage(new URL("https://github.com/exoad/ClickGame/wiki"));
+             } catch (MalformedURLException e) {
+-                System.out.println("Something went horribly wrong when trying to open the Help Menu in your default browser!\n\n\n");
++                System.out.println(
++                        "Something went horribly wrong when trying to open the Help Menu in your default browser!\n\n\n");
+                 e.printStackTrace();
+             }
+         }

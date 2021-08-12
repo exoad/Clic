@@ -281,7 +281,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
 
   public static void main(String[] args) throws Exception {
     try {
-      UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+      UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
     } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
         | UnsupportedLookAndFeelException e2) {
       e2.printStackTrace();
