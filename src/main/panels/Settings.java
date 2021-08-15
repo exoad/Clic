@@ -59,9 +59,9 @@ import src.main.Runner;
 import src.main.schedulers.ActionLogger;
 import src.main.elements.RndColor;
 
-public class Settings extends JPanel implements Runnable {
+public class Settings extends JPanel implements Runnable, ActionListener {
   private final JFrame frame;
-  private final JButton WIPELOGS, CHANGECOLOUR;
+  private final JButton WIPELOGS, CHANGECOLOUR, HELPMENU;
   private final Runner tester;
 
   public Settings() {
@@ -78,12 +78,17 @@ public class Settings extends JPanel implements Runnable {
     CHANGECOLOUR = new JButton("Random Color", RND_CLICK_IMG);
     CHANGECOLOUR.setBackground(Color.WHITE);
     CHANGECOLOUR.setForeground(Color.BLACK);
-    CHANGECOLOUR.addActionListener(new SettingsListener());
+    CHANGECOLOUR.addActionListener(this);
     CHANGECOLOUR.setAlignmentX(Component.CENTER_ALIGNMENT);
 
     WIPELOGS = new JButton("Destroy logs");
-    WIPELOGS.addActionListener(new SettingsListener());
+    WIPELOGS.addActionListener(this);
     WIPELOGS.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+    HELPMENU = new JButton("Help");
+    HELPMENU.setBackground(Color.orange);
+    HELPMENU.addActionListener(this);
+    HELPMENU.setAlignmentX(Component.CENTER_ALIGNMENT);
 
     setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     setPreferredSize(new Dimension(600, 600));
@@ -104,27 +109,18 @@ public class Settings extends JPanel implements Runnable {
     new Settings().run();
   }
 
-  private class SettingsListener implements ActionListener {
-    @Override
-    public void actionPerformed(ActionEvent e) {
-      RndColor rd = new RndColor();
-      if (e.getSource() == WIPELOGS) {
-        try {
-          new ActionLogger().wipeLogs();
-        } catch (IOException ex) {
-          ex.printStackTrace();
-        }
-      } else if (e.getSource() == CHANGECOLOUR) {
-        new src.main.panels.Help().setBackground(rd.returnRND());
-        tester.UPGRADEA.setBackground(rd.returnRND());
-        tester.RESETDATA.setBackground(rd.returnRND());
-        tester.MAINX.setBackground(rd.returnRND());
-        tester.SAVX.setBackground(rd.returnRND());
-        tester.SETTINGS.setBackground(rd.returnRND());
-        tester.EXP.setBackground(rd.returnRND());
-
-        tester.frame.getContentPane().setBackground(rd.returnRND());
+  @Override
+  public void actionPerformed(ActionEvent e) {
+    if (e.getSource() == WIPELOGS) {
+      try {
+        new ActionLogger().wipeLogs();
+      } catch (IOException ex) {
+        ex.printStackTrace();
       }
+    } else if (e.getSource() == CHANGECOLOUR) {
+      Runner.setButtonClr(new RndColor().returnRND());
+    } else if(e.getSource() == HELPMENU) {
+      new src.main.panels.Help().askRun();
     }
   }
 }

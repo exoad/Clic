@@ -69,7 +69,6 @@ import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Scanner;
 
 import javax.swing.BoxLayout;
 import javax.swing.Icon;
@@ -79,20 +78,16 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 import src.main.elements.InfoBox;
-import src.main.handler.InputChoiceHandler;
 import src.main.panels.Help;
 import src.main.panels.Settings;
 import src.main.schedulers.ActionLogger;
 import src.main.schedulers.FileScheduler;
-import src.main.schedulers.RunScheduler;
 
 public class Runner extends JPanel implements ActionListener, Runnable {
   public JFrame frame;
-  public JButton MAINX, UPGRADEA, SAVX, RESETDATA, EXP, SETTINGS;
+  public JButton MAINX, UPGRADEA, SAVX, RESETDATA, EXP, SETTINGS, UPGRAD2;
   public JLabel display;
   public static JLabel otherInfo;
   public static JLabel news;
@@ -104,6 +99,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
   private static int objNum;
   private static int multCost;
   private static int gotUpgrade;
+  private static int upgradeCost2;
   private final static FileScheduler fsr = new FileScheduler();
 
   /**
@@ -112,10 +108,11 @@ public class Runner extends JPanel implements ActionListener, Runnable {
   public Runner() {
     URL MAIN_CLICK = ClassLoader.getSystemResource("assets/runner_panel/main_click_button.png");
     URL UPD_CLICK = ClassLoader.getSystemResource("assets/runner_panel/upgrade_click_button.png");
+    URL UPD2_CLICK = ClassLoader.getSystemResource("assets/runner_panel/upgrade2_click_button.png");
     Icon MAIN_CLICK_IMG = new ImageIcon(MAIN_CLICK);
     Icon UPD_CLICK_IMG = new ImageIcon(UPD_CLICK);
     UPGRADEA = new JButton("Upgrade (+1/click) Cost: " + multCost, UPD_CLICK_IMG);
-    if(Integer.parseInt(fsr.readLineNumber(4)) == 1) {
+    if (Integer.parseInt(fsr.readLineNumber(4)) == 1) {
       UPGRADEA.setVisible(true);
       gotUpgrade = 1;
     } else {
@@ -125,6 +122,9 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     UPGRADEA.setBackground(Color.GREEN);
     UPGRADEA.addActionListener(this);
     UPGRADEA.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+    //deprecatd for now
+    UPGRAD2 = new JButton("Upgrade 2 (Random) Cost: ");
 
     // settings all the variables and components
     if (Integer.parseInt(fsr.readLineNumber(0)) != 0 && Integer.parseInt(fsr.readLineNumber(1)) != 0
@@ -197,8 +197,6 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     RESETDATA.addActionListener(this);
     RESETDATA.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-
-
     EXP = new JButton("Help Menu");
     EXP.setBackground(Color.orange);
     EXP.addActionListener(this);
@@ -209,13 +207,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     SETTINGS.addActionListener(this);
     SETTINGS.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-    SETTINGS.setOpaque(true);
-    EXP.setOpaque(true);
-    MAINX.setOpaque(true);
-    UPGRADEA.setOpaque(true);
-    RESETDATA.setOpaque(true);
-    SAVX.setOpaque(true);
-
+    setOpaque(true);
     setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     setPreferredSize(new Dimension(500, 500));
 
@@ -244,12 +236,12 @@ public class Runner extends JPanel implements ActionListener, Runnable {
             "ATTENTION", JOptionPane.YES_NO_OPTION);
         if (options == JOptionPane.YES_OPTION)
           System.out.print("Exited the Program");
-          try {
-            new ActionLogger().Log("Exited the program");
-          } catch (IOException e1) {
-            e1.printStackTrace();
-          }
-          frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        try {
+          new ActionLogger().Log("Exited the program");
+        } catch (IOException e1) {
+          e1.printStackTrace();
+        }
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       }
 
       @Override
@@ -280,29 +272,17 @@ public class Runner extends JPanel implements ActionListener, Runnable {
   }
 
   public static void main(String[] args) throws Exception {
-    try {
-      UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-    } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-        | UnsupportedLookAndFeelException e2) {
-      e2.printStackTrace();
-    }
+    /*
+     * try { UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+     * } catch (ClassNotFoundException | InstantiationException |
+     * IllegalAccessException | UnsupportedLookAndFeelException e2) {
+     * e2.printStackTrace(); }
+     */
     new ActionLogger().Log("Program Started");
     FileScheduler fsb = new FileScheduler();
     fsb.createNoticeFile();
     initGameFolder();
-    InputChoiceHandler sr = new InputChoiceHandler();
-    Scanner sc = new Scanner(System.in);
-    String s;
-    do {
-      System.out.print("\nLaunch? (y/n): ");
-      s = sc.nextLine();
-      if (sr.checkYN(s) == 0)
-        new RunScheduler().RunnerCall();
-      System.out.print("\nThe Program is now launched.");
-      break;
-    } while (sr.checkYN(s) != -1);
-    sc.close();
-
+    System.out.println("Program Launched with all assets launched.");
     // constants
     while (true) {
       Thread.sleep(4000);
@@ -421,15 +401,37 @@ public class Runner extends JPanel implements ActionListener, Runnable {
   }
 
   public static void initGameFolder() throws IOException {
-    
     File filXB = new File("click_game/program_assets/");
     File fileyB = new File("click_game/program_properties");
     File filezB = new File("click_game/logs");
     if (!filXB.isDirectory())
       filXB.mkdirs();
-      fileyB.mkdirs();
-      filezB.mkdirs();
-      new ActionLogger().Log(filXB.toString() + "," + fileyB.toString() + "," + filezB.toString() + " Created");
+    fileyB.mkdirs();
+    filezB.mkdirs();
+    new ActionLogger().Log(filXB.toString() + "," + fileyB.toString() + "," + filezB.toString() + " Created");
+  }
+
+  // is called from the settingss panel when it is necessary for a color change
+  public static void setButtonClr(Color color) {
+    new Runner().SETTINGS.setOpaque(true);
+    new Runner().SETTINGS.setBorderPainted(false);
+    new Runner().EXP.setOpaque(true);
+    new Runner().EXP.setBorderPainted(false);
+    new Runner().MAINX.setOpaque(true);
+    new Runner().MAINX.setBorderPainted(false);
+    new Runner().UPGRADEA.setOpaque(true);
+    new Runner().UPGRADEA.setBorderPainted(false);
+    new Runner().RESETDATA.setOpaque(true);
+    new Runner().RESETDATA.setBorderPainted(false);
+    new Runner().SAVX.setOpaque(true);
+    new Runner().SAVX.setBorderPainted(false);
+    new Runner().MAINX.setBackground(color);
+    new Runner().EXP.setBackground(color);
+    new Runner().RESETDATA.setBackground(color);
+    new Runner().SETTINGS.setBackground(color);
+    new Runner().SAVX.setBackground(color);
+    if (new Runner().UPGRADEA.isVisible())
+      new Runner().UPGRADEA.setBackground(color);
   }
 
   @Override
@@ -437,6 +439,5 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     frame.pack();
     frame.setVisible(true);
   }
-
 
 }
