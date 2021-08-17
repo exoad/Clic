@@ -58,13 +58,13 @@ import src.main.schedulers.ActionLogger;
 import src.main.Runner;
 import src.main.schedulers.FileScheduler;
 
-public class Settings extends JPanel implements Runnable, ActionListener {
+public class Settings extends src.main.Runner implements ActionListener {
   private final JFrame frame;
   private final JButton WIPELOGS, HELPMENU, RESETDATA;
-  private Runner rr;
-  private final FileScheduler fsr = new FileScheduler();
+
 
   public Settings() {
+    JPanel jp = new JPanel();
     URL windowIMG = ClassLoader.getSystemResource("assets/settings_panel/settings_icon.png");
     URL resetIMG = ClassLoader.getSystemResource("assets/runner_panel/reset_save_click_button.png");
 
@@ -75,7 +75,6 @@ public class Settings extends JPanel implements Runnable, ActionListener {
     WIPELOGS = new JButton("Destroy logs");
     RESETDATA = new JButton("Reset Save", resetIcon);
     HELPMENU = new JButton("Help");
-    rr = new Runner();
     
     frame.setIconImage(window_frame_icon.getImage());
 
@@ -94,13 +93,13 @@ public class Settings extends JPanel implements Runnable, ActionListener {
     RESETDATA.setBackground(Color.red);
     
 
-    setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-    setPreferredSize(new Dimension(300, 150));
-    add(WIPELOGS);
-    add(HELPMENU);
-    add(RESETDATA);
+    jp.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+    jp.setPreferredSize(new Dimension(300, 150));
+    jp.add(WIPELOGS);
+    jp.add(HELPMENU);
+    jp.add(RESETDATA);
 
-    frame.add(this);
+    frame.add(jp);
     frame.setAlwaysOnTop(true);
   }
 
@@ -125,14 +124,15 @@ public class Settings extends JPanel implements Runnable, ActionListener {
     } else if(e.getSource() == HELPMENU) {
       new src.main.panels.Help().askRun();
     } else if(e.getSource() == RESETDATA) {
-      float newMainx = 0;
-      float newMult = 1;
-      float newObjNum = 50;
-      float newMultCost = 100;
-      rr.display.setText("Current Count: " + newMainx);
-      rr.multiplier.setText("Current Upgrade: " + newMult);
-      rr.nextMultX.setText("Upgrade Cost: " + newMultCost);
-      rr.objec.setText("Current Objective: " + newObjNum);
+      mainLabel = 0;
+      multX = 1;
+      multCost = 100;
+      objNum = 50;
+      gotUpgrade = 0;
+      display.setText("Current Count: " + mainLabel);
+      multiplier.setText("Current Upgrade: " + multX);
+      nextMultX.setText("Upgrade Cost: " + multCost);
+      objec.setText("Current Objective: " + objNum);
 
       if (fsr.resetData())
         System.out.println("\nALL DATA RESET");

@@ -41,6 +41,7 @@ package src.main.schedulers;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -106,4 +107,25 @@ public class FileScheduler {
     fw.close();
   }
 
+  /**
+   * @param number is the line number to be read
+   * @param typ the file directory to be read, specifically the directory
+   * @return
+   */
+  public String readLineNumber(int number, File typ) {
+    if (typ.exists()) {
+      String t = "";
+      try (Stream<String> lines = Files.lines(Paths.get(typ.toString()))) {
+        t = lines.skip(number).findFirst().get();
+        List<String> f = Files.readAllLines(Paths.get(typ.toString()), Charset.defaultCharset());
+        f.forEach((m) -> {
+          System.out.print("\nSuccess on reading: " + m + "\n");
+        });
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+      return t;
+    }
+    return "0";
+  }
 }
