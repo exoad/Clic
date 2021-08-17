@@ -46,7 +46,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
 
 import javax.swing.BoxLayout;
 import javax.swing.Icon;
@@ -55,45 +54,51 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import src.main.Runner;
 import src.main.schedulers.ActionLogger;
-import src.main.elements.RndColor;
+import src.main.Runner;
+import src.main.schedulers.FileScheduler;
 
 public class Settings extends JPanel implements Runnable, ActionListener {
   private final JFrame frame;
-  private final JButton WIPELOGS, CHANGECOLOUR, HELPMENU;
-  private final Runner tester;
+  private final JButton WIPELOGS, HELPMENU, RESETDATA;
+  private Runner rr;
+  private final FileScheduler fsr = new FileScheduler();
 
   public Settings() {
-    tester = new Runner();
+    URL windowIMG = ClassLoader.getSystemResource("assets/settings_panel/settings_icon.png");
+    URL resetIMG = ClassLoader.getSystemResource("assets/runner_panel/reset_save_click_button.png");
+
+    ImageIcon window_frame_icon = new ImageIcon(windowIMG);
+    Icon resetIcon = new ImageIcon(resetIMG);
 
     frame = new JFrame("Clic - Settings");
-    URL windowIMG = ClassLoader.getSystemResource("assets/settings_panel/settings_icon.png");
-    ImageIcon window_frame_icon = new ImageIcon(windowIMG);
+    WIPELOGS = new JButton("Destroy logs");
+    RESETDATA = new JButton("Reset Save", resetIcon);
+    HELPMENU = new JButton("Help");
+    rr = new Runner();
+    
     frame.setIconImage(window_frame_icon.getImage());
 
-    URL RND_CLICK = ClassLoader.getSystemResource("assets/runner_panel/random_color_click_button.png");
-    Icon RND_CLICK_IMG = new ImageIcon(RND_CLICK);
-
-    CHANGECOLOUR = new JButton("Random Color", RND_CLICK_IMG);
-    CHANGECOLOUR.setBackground(Color.WHITE);
-    CHANGECOLOUR.setForeground(Color.BLACK);
-    CHANGECOLOUR.addActionListener(this);
-    CHANGECOLOUR.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-    WIPELOGS = new JButton("Destroy logs");
+    frame.setResizable(false);
+    
     WIPELOGS.addActionListener(this);
-    WIPELOGS.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-    HELPMENU = new JButton("Help");
-    HELPMENU.setBackground(Color.orange);
+    RESETDATA.addActionListener(this);
     HELPMENU.addActionListener(this);
+
+    WIPELOGS.setAlignmentX(Component.CENTER_ALIGNMENT);
     HELPMENU.setAlignmentX(Component.CENTER_ALIGNMENT);
+    RESETDATA.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+    WIPELOGS.setBackground(Color.blue);
+    HELPMENU.setBackground(Color.orange);
+    RESETDATA.setBackground(Color.red);
+    
 
     setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-    setPreferredSize(new Dimension(600, 600));
+    setPreferredSize(new Dimension(300, 150));
     add(WIPELOGS);
-    add(CHANGECOLOUR);
+    add(HELPMENU);
+    add(RESETDATA);
 
     frame.add(this);
     frame.setAlwaysOnTop(true);
@@ -117,10 +122,22 @@ public class Settings extends JPanel implements Runnable, ActionListener {
       } catch (IOException ex) {
         ex.printStackTrace();
       }
-    } else if (e.getSource() == CHANGECOLOUR) {
-      Runner.setButtonClr(new RndColor().returnRND());
     } else if(e.getSource() == HELPMENU) {
       new src.main.panels.Help().askRun();
+    } else if(e.getSource() == RESETDATA) {
+      float newMainx = 0;
+      float newMult = 1;
+      float newObjNum = 50;
+      float newMultCost = 100;
+      rr.display.setText("Current Count: " + newMainx);
+      rr.multiplier.setText("Current Upgrade: " + newMult);
+      rr.nextMultX.setText("Upgrade Cost: " + newMultCost);
+      rr.objec.setText("Current Objective: " + newObjNum);
+
+      if (fsr.resetData())
+        System.out.println("\nALL DATA RESET");
+      else
+        System.out.println("\nError Encountered while reseting");
     }
   }
 }

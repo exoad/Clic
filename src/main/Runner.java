@@ -87,19 +87,19 @@ import src.main.schedulers.FileScheduler;
 
 public class Runner extends JPanel implements ActionListener, Runnable {
   public JFrame frame;
-  public JButton MAINX, UPGRADEA, SAVX, RESETDATA, EXP, SETTINGS, UPGRAD2;
+  public JButton MAINX, UPGRADEA, SAVX, EXP, SETTINGS, UPGRAD2;
   public JLabel display;
   public static JLabel otherInfo;
   public static JLabel news;
   public JLabel multiplier;
   public JLabel objec;
   public JLabel nextMultX;
-  private static int mainLabel;
-  private static int multX;
-  private static int objNum;
-  private static int multCost;
-  private static int gotUpgrade;
-  private static int upgradeCost2;
+  public static int mainLabel;
+  public static int multX;
+  public static int objNum;
+  public static int multCost;
+  public static int gotUpgrade;
+  public static int upgradeCost2;
   private final static FileScheduler fsr = new FileScheduler();
 
   /**
@@ -154,6 +154,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     frame = new JFrame("Clic 1.2EXP");
     frame.setIconImage(Templar1.getImage());
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.setResizable(false);
 
     // settings values for JComponents
     objec = new JLabel("Current Click Objective: " + objNum);
@@ -189,14 +190,6 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     MAINX.setSize(new Dimension(100, 100));
     MAINX.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-    URL RST_CLICK = ClassLoader.getSystemResource("assets/runner_panel/reset_save_click_button.png");
-    Icon RSTSAV_CLICK_IMG = new ImageIcon(RST_CLICK);
-
-    RESETDATA = new JButton("Reset", RSTSAV_CLICK_IMG);
-    RESETDATA.setBackground(Color.LIGHT_GRAY);
-    RESETDATA.addActionListener(this);
-    RESETDATA.setAlignmentX(Component.CENTER_ALIGNMENT);
-
     EXP = new JButton("Help Menu");
     EXP.setBackground(Color.orange);
     EXP.addActionListener(this);
@@ -214,7 +207,6 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     add(MAINX);
     add(SAVX);
     add(UPGRADEA);
-    add(RESETDATA);
     add(news);
     add(display);
     add(multiplier);
@@ -283,6 +275,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     fsb.createNoticeFile();
     initGameFolder();
     System.out.println("Program Launched with all assets launched.");
+    new Runner().run();
     // constants
     while (true) {
       Thread.sleep(4000);
@@ -345,22 +338,6 @@ public class Runner extends JPanel implements ActionListener, Runnable {
 
         otherInfo.setText("Saved.");
 
-      } else if (ex.getSource() == RESETDATA) {
-        // this method reset all the data and deletes all files with data
-        mainLabel = 0;
-        multX = 1;
-        objNum = 50;
-        multCost = 100;
-        display.setText("Current Count: " + mainLabel);
-        multiplier.setText("Current Upgrade: " + multX);
-        nextMultX.setText("Upgrade Cost: " + multCost);
-        objec.setText("Current Objective: " + objNum);
-
-        if (fsr.resetData())
-          System.out.println("\nALL DATA RESET");
-        else
-          System.out.println("\nError Encountered while reseting");
-
       } else if (ex.getSource() == EXP) {
         try {
           new Help().askRun();
@@ -421,13 +398,10 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     new Runner().MAINX.setBorderPainted(false);
     new Runner().UPGRADEA.setOpaque(true);
     new Runner().UPGRADEA.setBorderPainted(false);
-    new Runner().RESETDATA.setOpaque(true);
-    new Runner().RESETDATA.setBorderPainted(false);
     new Runner().SAVX.setOpaque(true);
     new Runner().SAVX.setBorderPainted(false);
     new Runner().MAINX.setBackground(color);
     new Runner().EXP.setBackground(color);
-    new Runner().RESETDATA.setBackground(color);
     new Runner().SETTINGS.setBackground(color);
     new Runner().SAVX.setBackground(color);
     if (new Runner().UPGRADEA.isVisible())

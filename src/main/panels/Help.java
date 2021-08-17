@@ -64,6 +64,7 @@ public class Help extends JPanel implements Runnable, ActionListener {
 
     public Help() {
         frame = new JFrame("Help Menu");
+        frame.setResizable(false);
         URL vM = ClassLoader.getSystemResource("assets/help_panel/browser_click_button.png");
         Icon VMENU = new ImageIcon(vM);
 
