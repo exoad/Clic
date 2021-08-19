@@ -46,7 +46,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Objects;
 
-import src.main.Runner;
+import main.Runner;
 
 public class ActionLogger {
   private final File fr;

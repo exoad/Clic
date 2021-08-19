@@ -80,11 +80,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import src.main.elementsInfoBox;
-import src.main.panels.Help;
-import src.main.panels.Settings;
-import src.main.schedulers.ActionLogger;
-import src.main.schedulers.FileScheduler;
+import main.elementsInfoBox;
+import main.panels.Help;
+import main.panels.Settings;
+import main.schedulers.ActionLogger;
+import main.schedulers.FileScheduler;
 
 public class Runner extends JPanel implements ActionListener, Runnable {
   public JFrame frame;
@@ -102,7 +102,6 @@ public class Runner extends JPanel implements ActionListener, Runnable {
   public static int gotUpgrade;
   public static int upgradeCost2;
   protected final static FileScheduler fsr = new FileScheduler();
-
   /**
    * @Test Runner main
    */

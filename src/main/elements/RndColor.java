@@ -37,7 +37,7 @@
  * 
  */
 
-package clic.elements;
+package main.elements;
 
 import java.awt.Color;
 

@@ -37,7 +37,7 @@
  * 
  */
 
-package clic.elements;
+package main.elements;
 
 public enum DefaultValues {
   // 225, 229, 230

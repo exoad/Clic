@@ -37,7 +37,7 @@
  * 
  */
 
-package clic.schedulers;
+package main.schedulers;
 
 import clic.Runner;
 

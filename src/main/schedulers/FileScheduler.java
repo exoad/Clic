@@ -37,7 +37,7 @@
  * 
  */
 
-package clic.schedulers;
+package main.schedulers;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -48,7 +48,7 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Stream;
 
-import clic.Runner;
+import main.Runner;
 
 public class FileScheduler {
   private final String fileDir = "click_game/";

@@ -37,7 +37,7 @@
  * 
  */
 
-package clic.handler;
+package main.handler;
 
 public class InputChoiceHandler {
   public InputChoiceHandler() {

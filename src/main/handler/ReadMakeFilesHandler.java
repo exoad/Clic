@@ -37,11 +37,11 @@
  * 
  */
 
-package clic.handler;
+package main.handler;
 
 import java.io.File;
 
-import clic.Runner;
+import main.Runner;
 
 public class ReadMakeFilesHandler {
   private final File gp;
