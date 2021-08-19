@@ -1,0 +1,23 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+repositories {
+  mavenCentral()
+}
+
+mainClassName = 'src.main.Runner'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    implementation "joda-time:joda-time:2.2"
+    testImplementation "junit:junit:4.12"
+}
+
+//tag::jar[]
+jar {
+    archiveBaseName = 'clic'
+    archiveVersion =  '0.1.0'
+}
+//end::jar[]
