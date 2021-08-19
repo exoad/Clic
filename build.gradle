@@ -1,17 +1,18 @@
 apply plugin: 'java'
 
-repositories { 
-    mavenCentral() 
+repositories {
+  mavenCentral()
 }
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-jar {
-    archiveBaseName = 'clic'
-    archiveVersion =  '1.2.1'
+dependencies {
+    implementation "joda-time:joda-time:2.2"
+    testImplementation "junit:junit:4.12"
 }
 
-dependencies {
-    implementation 'com.formdev:flatlaf:1.5'
+jar {
+    archiveBaseName = 'gs-gradle'
+    archiveVersion =  '0.1.0'
 }
