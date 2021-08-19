@@ -1,5 +1,5 @@
 # Clic
-![](https://img.shields.io/github/languages/code-size/exoad/Clic?style=flat-square)![](https://img.shields.io/github/repo-size/exoad/Clic?style=flat-square)![](https://img.shields.io/github/issues/exoad/Clic?style=flat-square)![](https://img.shields.io/github/languages/top/exoad/Clic?style=flat-square)
+![](https://img.shields.io/github/languages/code-size/exoad/Clic?style=flat-square)![](https://img.shields.io/github/repo-size/exoad/Clic?style=flat-square)![](https://img.shields.io/github/issues/exoad/Clic?style=flat-square)![](https://img.shields.io/github/languages/top/exoad/Clic?style=flat-square)![](https://img.shields.io/badge/Current%20Version-1.2.EXP-green)
 
 ___
 Clic is WIP (Work in Progress) little Clicker Game I made.
