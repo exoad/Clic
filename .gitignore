@@ -9,4 +9,5 @@
 .settings
 gradlew.bat
 gradlew.sh
+/shell/
 
