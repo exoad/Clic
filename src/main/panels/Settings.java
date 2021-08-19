@@ -46,6 +46,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Savepoint;
 
 import javax.swing.BoxLayout;
 import javax.swing.Icon;
@@ -58,18 +59,19 @@ import src.main.schedulers.ActionLogger;
 import src.main.Runner;
 import src.main.schedulers.FileScheduler;
 
-public class Settings extends src.main.Runner implements ActionListener {
+public class Settings extends JPanel implements ActionListener, Runnable {
   private final JFrame frame;
-  private final JButton WIPELOGS, HELPMENU, RESETDATA;
+  private final JButton WIPELOGS, HELPMENU, RESETDATA, SAVEDATA;
 
 
   public Settings() {
-    JPanel jp = new JPanel();
     URL windowIMG = ClassLoader.getSystemResource("assets/settings_panel/settings_icon.png");
     URL resetIMG = ClassLoader.getSystemResource("assets/runner_panel/reset_save_click_button.png");
+    URL saveIMG = ClassLoader.getSystemResource("assets/runner_panel/save_click_button.png");
 
     ImageIcon window_frame_icon = new ImageIcon(windowIMG);
     Icon resetIcon = new ImageIcon(resetIMG);
+    Icon saveIcon = new ImageIcon(saveIMG);
 
     frame = new JFrame("Clic - Settings");
     WIPELOGS = new JButton("Destroy logs");
@@ -92,14 +94,19 @@ public class Settings extends src.main.Runner implements ActionListener {
     HELPMENU.setBackground(Color.orange);
     RESETDATA.setBackground(Color.red);
     
+    SAVEDATA = new JButton("Save", saveIcon);
+    SAVEDATA.setBackground(Color.blue);
+    SAVEDATA.setAlignmentX(Component.CENTER_ALIGNMENT);
+    SAVEDATA.addActionListener(this);
 
-    jp.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-    jp.setPreferredSize(new Dimension(300, 150));
-    jp.add(WIPELOGS);
-    jp.add(HELPMENU);
-    jp.add(RESETDATA);
+    setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+    setPreferredSize(new Dimension(300, 150));
+    add(WIPELOGS);
+    add(HELPMENU);
+    add(RESETDATA);
+    add(SAVEDATA);
 
-    frame.add(jp);
+    frame.add(this);
     frame.setAlwaysOnTop(true);
   }
 
@@ -113,8 +120,15 @@ public class Settings extends src.main.Runner implements ActionListener {
     new Settings().run();
   }
 
+  
   @Override
+  /**
+   * @param e : The Action being either sent by `this` panel or the panel outside, ig Runner panel
+   */
   public void actionPerformed(ActionEvent e) {
+    /**
+     * @exoad : delete code that is unnn
+     */
     if (e.getSource() == WIPELOGS) {
       try {
         new ActionLogger().wipeLogs();
@@ -123,7 +137,10 @@ public class Settings extends src.main.Runner implements ActionListener {
       }
     } else if(e.getSource() == HELPMENU) {
       new src.main.panels.Help().askRun();
-    } else if(e.getSource() == RESETDATA) {
+    } else if(e.getSource() == SAVEDATA) {
+
+    }
+    /*else if(e.getSource() == RESETDATA) {
       mainLabel = 0;
       multX = 1;
       multCost = 100;
@@ -139,5 +156,6 @@ public class Settings extends src.main.Runner implements ActionListener {
       else
         System.out.println("\nError Encountered while reseting");
     }
+    */
   }
 }

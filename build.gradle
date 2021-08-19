@@ -1,0 +1,17 @@
+apply plugin: 'java'
+
+repositories { 
+    mavenCentral() 
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+jar {
+    archiveBaseName = 'clic'
+    archiveVersion =  '1.2.1'
+}
+
+dependencies {
+    implementation 'com.formdev:flatlaf:1.5'
+}
