@@ -10,7 +10,13 @@ The Kotlin Version is more of a work in progress as I figure out how to use Kotl
 
 It's main framework is based on a project I made for a class at GNSHS 2020-2021 (Check out branch [original](https://github.com/exoad/Clic/tree/original)).
 
-It currently doesn't have many features and this is what the `master` branch is for. For me to make the previous/original program much better and have a much better format so it wouldn't be lame to use/play.
+It currently doesn't have many features and this is what the `production` branch is for. For me to make the previous/original program much better and have a much better format so it wouldn't be lame to use/play.
+
+**Gradle:**
+
+Currently I am working on implementing and adding dependencies to add to the experience. To see the current Gradle Wrapper used (see below). 
+
+For now, you can use `gradlew run` to run the project / binary.
 
 ## How to run
 1. Go to the release section on the sidebar
@@ -37,6 +43,10 @@ It currently doesn't have many features and this is what the `master` branch is 
 | Manjaro (Arch) | y |
 | Debian | y |
 | MacOS | y |
+
+| Gradle | Version | 
+| ------ | ------- | 
+| 7.1.1  | `Supported`|
 
 *If your OS is able to use Java16 or Java11, you can most likely run this program*
 
