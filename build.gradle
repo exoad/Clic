@@ -5,19 +5,20 @@ repositories {
   mavenCentral()
 }
 
-mainClassName = 'src.main.Runner'
+mainClassName = 'clic.Runner'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
     implementation "joda-time:joda-time:2.2"
+    implementation 'com.formdev:flatlaf:1.5'
     testImplementation "junit:junit:4.12"
 }
 
 //tag::jar[]
 jar {
-    archiveBaseName = 'clic'
-    archiveVersion =  '0.1.0'
+    archiveBaseName = 'clic' as Property<String>
+    archiveVersion = '0.1.0' as Property<String>
 }
 //end::jar[]
