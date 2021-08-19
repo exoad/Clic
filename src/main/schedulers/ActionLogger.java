@@ -37,7 +37,7 @@
  * 
  */
 
-package clic.schedulers;
+package main.schedulers;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -46,7 +46,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Objects;
 
-import clic.Runner;
+import src.main.Runner;
 
 public class ActionLogger {
   private final File fr;

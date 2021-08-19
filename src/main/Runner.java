@@ -1,4 +1,4 @@
-package clic;
+package main;
 
 /**
  *           _____                    _____            _____                    _____
@@ -80,11 +80,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import clic.elements.InfoBox;
-import clic.panels.Help;
-import clic.panels.Settings;
-import clic.schedulers.ActionLogger;
-import clic.schedulers.FileScheduler;
+import src.main.elementsInfoBox;
+import src.main.panels.Help;
+import src.main.panels.Settings;
+import src.main.schedulers.ActionLogger;
+import src.main.schedulers.FileScheduler;
 
 public class Runner extends JPanel implements ActionListener, Runnable {
   public JFrame frame;
