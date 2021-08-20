@@ -1,0 +1,20 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'main.Runner'
+
+repositories {
+  mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    testImplementation "junit:junit:4.12"
+}
+
+jar {
+    archiveBaseName = 'clic'
+    archiveVersion =  '1.2.EXP'
+}
