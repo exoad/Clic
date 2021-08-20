@@ -54,7 +54,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import schedulers.ActionLogger;
+import src.main.schedulers.ActionLogger;
 
 public class Settings extends JPanel implements ActionListener, Runnable {
   private final JFrame frame;

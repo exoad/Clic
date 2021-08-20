@@ -41,7 +41,7 @@ package src.main.handler;
 
 import java.io.File;
 
-import main.Runner;
+import src.main.Runner;
 
 public class ReadMakeFilesHandler {
   private final File gp;

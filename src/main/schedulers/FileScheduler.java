@@ -39,7 +39,7 @@
 
 package src.main.schedulers;
 
-import main.Runner;
+import src.main.Runner;
 
 import java.io.File;
 import java.io.FileWriter;
