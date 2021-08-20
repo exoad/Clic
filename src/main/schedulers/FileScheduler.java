@@ -44,6 +44,7 @@ import src.main.Runner;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.io.Char
 import java.nio.file.Paths;
@@ -104,7 +105,10 @@ public class FileScheduler {
     fw.close();
   }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f2ed73e8ba22b9b83cc7f51ebc89d7a493f0aef3
   /**
    * @param number is the line number to be read
    * @param typ the file directory to be read, specifically the directory

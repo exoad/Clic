@@ -91,7 +91,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
   public static int multCost;
   public static int gotUpgrade;
   public static int upgradeCost2;
-  private final static FileScheduler fsr = new FileScheduler();
+  protected final static FileScheduler fsr = new FileScheduler();
 
   public Runner() {
     URL MAIN_CLICK = ClassLoader.getSystemResource("assets/runner_panel/main_click_button.png");
