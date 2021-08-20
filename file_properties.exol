@@ -1,0 +1,40 @@
+<< !HEADER_COMMENT : [This is a language I temporarily made for my db to be able to handle these files and the assets required when running this program on my side. This means this file when downloaded
+is not necessary and is just a plain TXT file if you do not have the compiler and drivers to run it] : HEADER_COMMENT_END >>
+
+!<<< :bunt, "0.2.0", "951c6e801e8b1d2cbe58ebbd3e616a869061ddadcc4863d0a2182541acae9a38", [:mix], [], "hexpm", "7af5c7e09fe1d40f76c8e4f9dd2be7cebd83909f31fee7cd0e9eadc567da8353" >>>! 
+<<<
+
+[file]
+
+clicks.txt (0) = clicks_file
+multiplier.txt (1) = mult_file
+m_cost.txt (2) = multcost_file
+objs.txt (3) = objs_file
+
+[save]
+
+obj n : saves.file
+
+[note: line numbers start at 0]
+
+line (1) AT n = clicks
+line (2) AT n = mult
+line (3) AT n = multcost
+line (4) AT n = objNum
+
+[assets handlers, idrk]
+
+pathvar assets : <src/main/assets/RunnerPanel...> || !src.main.assets.[] [@JAVA]
+
+MAIN : main_click_button.png AT.path(assets.mention) = main_click_button
+RND : random_color_click_button.png AT.path(assets.mention) = random_color_click_button
+SAVE : save.click_button.png AT.path(assets.mention) = save_click_button
+RST : reset_save_click_button.png AT.path(assets.mention) = reset_save_click_button
+URG : upgrade_click_button.png AT.path(assets.mention) = upgrade_click_button
+
+[main frame icons handlers]
+
+FRAMEKEY : assets.mention OF (TYPE: FRAME) AT.path(assets.mention + <mainframe.icon.png>) = MAIN_FRAME_KEY
+
+>>>
+!<<<:certifi, "2.5.3", "70bdd7e7188c804f3a30ee0e7c99655bc35d8ac41c23e12325f36ab449b70651", [:rebar3], [{:parse_trans, "~>3.3", [hex: :parse_trans, repo: "hexpm", optional: false]}], "hexpm", "ed516acb3929b101208a9d700062d520f3953da3b6b918d866106ffa980e1c10">>>!
