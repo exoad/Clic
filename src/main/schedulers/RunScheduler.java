@@ -39,7 +39,7 @@
 
 package main.schedulers;
 
-import clic.Runner;
+import main.Runner;
 
 public class RunScheduler extends Runner {
   public RunScheduler() {

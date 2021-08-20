@@ -133,7 +133,7 @@ public class Settings extends JPanel implements ActionListener, Runnable {
         ex.printStackTrace();
       }
     } else if(e.getSource() == HELPMENU) {
-      new clic.panels.Help().askRun();
+      new main.panels.Help().askRun();
     } else if(e.getSource() == SAVEDATA) {
 
     }

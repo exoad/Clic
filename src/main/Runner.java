@@ -80,7 +80,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import main.elementsInfoBox;
+import main.elements.InfoBox;
 import main.panels.Help;
 import main.panels.Settings;
 import main.schedulers.ActionLogger;
@@ -243,7 +243,6 @@ public class Runner extends JPanel implements ActionListener, Runnable {
       @Override
       public void windowClosed(WindowEvent e) {
       }
-
       @Override
       public void windowIconified(WindowEvent e) {
       }
