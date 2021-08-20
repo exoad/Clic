@@ -39,16 +39,16 @@
 
 package src.main.schedulers;
 
+import src.main.Runner;
+
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.io.Char
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Stream;
-import java.io.FileWriter;
-import java.nio.charset.Charset;
-
-import src.main.Runner;
 
 public class FileScheduler {
   private final String fileDir = "click_game/";
@@ -66,8 +66,8 @@ public class FileScheduler {
    */
   public void write(int clicks, int mult, int multCost, int objs, int displayUpgrade) throws IOException {
     if (new File(fileDir).isDirectory()) {
-      String msg = Integer.toString(clicks) + "\n" + Integer.toString(mult) + "\n" + Integer.toString(multCost) + "\n"
-          + Integer.toString(objs) + "\n" + Integer.toString(displayUpgrade) + "\n";
+      String msg = clicks + "\n" + mult + "\n" + multCost + "\n"
+          + objs + "\n" + displayUpgrade + "\n";
       Files.write(Paths.get(fileDir + "saves"), msg.getBytes());
     }
   }
@@ -78,9 +78,7 @@ public class FileScheduler {
       try (Stream<String> lines = Files.lines(Paths.get(fileDir + "saves"))) {
         t = lines.skip(number).findFirst().get();
         List<String> f = Files.readAllLines(Paths.get(fileDir + "saves"), Charset.defaultCharset());
-        f.forEach((m) -> {
-          System.out.print("\nSuccess on reading: " + m + "\n");
-        });
+        f.forEach((m) -> System.out.print("\nSuccess on reading: " + m + "\n"));
       } catch (IOException e) {
         e.printStackTrace();
       }
@@ -106,4 +104,24 @@ public class FileScheduler {
     fw.close();
   }
 
+
+  /**
+   * @param number is the line number to be read
+   * @param typ the file directory to be read, specifically the directory
+   * @return the final value
+   */
+  public String readLineNumber(int number, File typ) {
+    if (typ.exists()) {
+      String t = "";
+      try (Stream<String> lines = Files.lines(Paths.get(typ.toString()))) {
+        t = lines.skip(number).findFirst().get();
+        List<String> f = Files.readAllLines(Paths.get(typ.toString()), Charset.defaultCharset());
+        f.forEach((m) -> System.out.print("\nSuccess on reading: " + m + "\n"));
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+      return t;
+    }
+    return "0";
+  }
 }

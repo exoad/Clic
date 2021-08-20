@@ -55,9 +55,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import src.main.schedulers.ActionLogger;
-import src.main.Runner;
-import src.main.schedulers.FileScheduler;
-
 public class Settings extends JPanel implements Runnable, ActionListener {
   private final JFrame frame;
   private final JButton WIPELOGS, HELPMENU, RESETDATA;
@@ -67,9 +64,11 @@ public class Settings extends JPanel implements Runnable, ActionListener {
   public Settings() {
     URL windowIMG = ClassLoader.getSystemResource("assets/settings_panel/settings_icon.png");
     URL resetIMG = ClassLoader.getSystemResource("assets/runner_panel/reset_save_click_button.png");
+    URL saveIMG = ClassLoader.getSystemResource("assets/runner_panel/save_click_button.png");
 
     ImageIcon window_frame_icon = new ImageIcon(windowIMG);
     Icon resetIcon = new ImageIcon(resetIMG);
+    Icon saveIcon = new ImageIcon(saveIMG);
 
     frame = new JFrame("Clic - Settings");
     WIPELOGS = new JButton("Destroy logs");
@@ -93,12 +92,23 @@ public class Settings extends JPanel implements Runnable, ActionListener {
     HELPMENU.setBackground(Color.orange);
     RESETDATA.setBackground(Color.red);
     
+<<<<<<< HEAD
+    SAVEDATA = new JButton("Save", saveIcon);
+    SAVEDATA.setBackground(Color.blue);
+    SAVEDATA.setAlignmentX(Component.CENTER_ALIGNMENT);
+    SAVEDATA.addActionListener(this);
+=======
+>>>>>>> parent of 956c4a7 (add reset to settings frame)
 
     setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     setPreferredSize(new Dimension(300, 150));
     add(WIPELOGS);
     add(HELPMENU);
     add(RESETDATA);
+<<<<<<< HEAD
+    add(SAVEDATA);
+=======
+>>>>>>> parent of 956c4a7 (add reset to settings frame)
 
     frame.add(this);
     frame.setAlwaysOnTop(true);
@@ -114,8 +124,15 @@ public class Settings extends JPanel implements Runnable, ActionListener {
     new Settings().run();
   }
 
+  
   @Override
+  /**
+   * @param e : The Action being either sent by `this` panel or the panel outside, ig Runner panel
+   */
   public void actionPerformed(ActionEvent e) {
+    /**
+     * @exoad : delete code that is unnn
+     */
     if (e.getSource() == WIPELOGS) {
       try {
         new ActionLogger().wipeLogs();
@@ -123,6 +140,22 @@ public class Settings extends JPanel implements Runnable, ActionListener {
         ex.printStackTrace();
       }
     } else if(e.getSource() == HELPMENU) {
+<<<<<<< HEAD
+      new main.panels.Help().askRun();
+    } else if(e.getSource() == SAVEDATA) {
+
+    }
+    /*else if(e.getSource() == RESETDATA) {
+      mainLabel = 0;
+      multX = 1;
+      multCost = 100;
+      objNum = 50;
+      gotUpgrade = 0;
+      display.setText("Current Count: " + mainLabel);
+      multiplier.setText("Current Upgrade: " + multX);
+      nextMultX.setText("Upgrade Cost: " + multCost);
+      objec.setText("Current Objective: " + objNum);
+=======
       new src.main.panels.Help().askRun();
     } else if(e.getSource() == RESETDATA) {
       float newMainx = 0;
@@ -133,11 +166,13 @@ public class Settings extends JPanel implements Runnable, ActionListener {
       rr.multiplier.setText("Current Upgrade: " + newMult);
       rr.nextMultX.setText("Upgrade Cost: " + newMultCost);
       rr.objec.setText("Current Objective: " + newObjNum);
+>>>>>>> parent of 956c4a7 (add reset to settings frame)
 
       if (fsr.resetData())
         System.out.println("\nALL DATA RESET");
       else
         System.out.println("\nError Encountered while reseting");
     }
+    */
   }
 }

@@ -39,14 +39,9 @@
 
 package src.main.handler;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileWriter;
-import java.nio.file.Files;
-import java.io.FileReader;
 
 import src.main.Runner;
-import src.main.elements.DefaultValues;
 
 public class ReadMakeFilesHandler {
   private final File gp;
@@ -58,7 +53,7 @@ public class ReadMakeFilesHandler {
   public boolean defFileExists() {
     try {
       if (gp.exists() || !new File("/click_game").isDirectory()) {
-        new src.main.Runner();
+        new Runner();
         Runner.initGameFolder();
         return true;
       }

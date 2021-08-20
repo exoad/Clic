@@ -4,3 +4,11 @@
 .idea
 .vscode
 /click_game/
+/build/
+.gradle
+.settings
+gradlew.bat
+gradlew.sh
+/shell/
+/bin/
+/out/

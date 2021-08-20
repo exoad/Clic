@@ -1,25 +1,27 @@
+package src.main;
+
 /**
- *           _____                    _____            _____                    _____          
- *          /\    \                  /\    \          /\    \                  /\    \         
- *         /::\    \                /::\____\        /::\    \                /::\    \        
- *        /::::\    \              /:::/    /        \:::\    \              /::::\    \       
- *       /::::::\    \            /:::/    /          \:::\    \            /::::::\    \      
- *      /:::/\:::\    \          /:::/    /            \:::\    \          /:::/\:::\    \     
- *     /:::/  \:::\    \        /:::/    /              \:::\    \        /:::/  \:::\    \    
- *    /:::/    \:::\    \      /:::/    /               /::::\    \      /:::/    \:::\    \   
- *   /:::/    / \:::\    \    /:::/    /       ____    /::::::\    \    /:::/    / \:::\    \  
- *  /:::/    /   \:::\    \  /:::/    /       /\   \  /:::/\:::\    \  /:::/    /   \:::\    \ 
+ *           _____                    _____            _____                    _____
+ *          /\    \                  /\    \          /\    \                  /\    \
+ *         /::\    \                /::\____\        /::\    \                /::\    \
+ *        /::::\    \              /:::/    /        \:::\    \              /::::\    \
+ *       /::::::\    \            /:::/    /          \:::\    \            /::::::\    \
+ *      /:::/\:::\    \          /:::/    /            \:::\    \          /:::/\:::\    \
+ *     /:::/  \:::\    \        /:::/    /              \:::\    \        /:::/  \:::\    \
+ *    /:::/    \:::\    \      /:::/    /               /::::\    \      /:::/    \:::\    \
+ *   /:::/    / \:::\    \    /:::/    /       ____    /::::::\    \    /:::/    / \:::\    \
+ *  /:::/    /   \:::\    \  /:::/    /       /\   \  /:::/\:::\    \  /:::/    /   \:::\    \
  * /:::/____/     \:::\____\/:::/____/       /::\   \/:::/  \:::\____\/:::/____/     \:::\____\
  * \:::\    \      \::/    /\:::\    \       \:::\  /:::/    \::/    /\:::\    \      \::/    /
- *  \:::\    \      \/____/  \:::\    \       \:::\/:::/    / \/____/  \:::\    \      \/____/ 
- *   \:::\    \               \:::\    \       \::::::/    /            \:::\    \             
- *    \:::\    \               \:::\    \       \::::/____/              \:::\    \            
- *     \:::\    \               \:::\    \       \:::\    \               \:::\    \           
- *      \:::\    \               \:::\    \       \:::\    \               \:::\    \          
- *       \:::\    \               \:::\    \       \:::\    \               \:::\    \         
- *        \:::\____\               \:::\____\       \:::\____\               \:::\____\        
- *         \::/    /                \::/    /        \::/    /                \::/    /        
- *          \/____/                  \/____/          \/____/                  \/____/       
+ *  \:::\    \      \/____/  \:::\    \       \:::\/:::/    / \/____/  \:::\    \      \/____/
+ *   \:::\    \               \:::\    \       \::::::/    /            \:::\    \
+ *    \:::\    \               \:::\    \       \::::/____/              \:::\    \
+ *     \:::\    \               \:::\    \       \:::\    \               \:::\    \
+ *      \:::\    \               \:::\    \       \:::\    \               \:::\    \
+ *       \:::\    \               \:::\    \       \:::\    \               \:::\    \
+ *        \:::\____\               \:::\____\       \:::\____\               \:::\____\
+ *         \::/    /                \::/    /        \::/    /                \::/    /
+ *          \/____/                  \/____/          \/____/                  \/____/
  * A simple Clicker game.
  *
  * @author Jack Meng
@@ -57,11 +59,15 @@
  *
  *
  */
-package src.main;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
+import src.main.elements.InfoBox;
+import src.main.panels.Help;
+import src.main.panels.Settings;
+import src.main.schedulers.ActionLogger;
+import src.main.schedulers.FileScheduler;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -69,21 +75,6 @@ import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-
-import javax.swing.BoxLayout;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
-import src.main.elements.InfoBox;
-import src.main.panels.Help;
-import src.main.panels.Settings;
-import src.main.schedulers.ActionLogger;
-import src.main.schedulers.FileScheduler;
 
 public class Runner extends JPanel implements ActionListener, Runnable {
   public JFrame frame;
@@ -102,9 +93,6 @@ public class Runner extends JPanel implements ActionListener, Runnable {
   public static int upgradeCost2;
   private final static FileScheduler fsr = new FileScheduler();
 
-  /**
-   * @Test Runner main
-   */
   public Runner() {
     URL MAIN_CLICK = ClassLoader.getSystemResource("assets/runner_panel/main_click_button.png");
     URL UPD_CLICK = ClassLoader.getSystemResource("assets/runner_panel/upgrade_click_button.png");
@@ -123,7 +111,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
     UPGRADEA.addActionListener(this);
     UPGRADEA.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-    //deprecatd for now
+    //deprecated for now
     UPGRAD2 = new JButton("Upgrade 2 (Random) Cost: ");
 
     // settings all the variables and components
@@ -243,7 +231,6 @@ public class Runner extends JPanel implements ActionListener, Runnable {
       @Override
       public void windowClosed(WindowEvent e) {
       }
-
       @Override
       public void windowIconified(WindowEvent e) {
       }

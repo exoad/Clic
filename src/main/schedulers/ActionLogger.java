@@ -37,7 +37,9 @@
  * 
  */
 
-package src.main.schedulers;
+package schedulers;
+
+import src.main.Runner;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -46,24 +48,22 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Objects;
 
-import src.main.Runner;
-
 public class ActionLogger {
-  private File fr;
-  private LocalDate now = LocalDate.now();
-  private final String date, cT;
+  private final File fr;
+  private final String cT;
   public boolean Wiped = false;
-  private LocalTime rn = LocalTime.now();
 
   public ActionLogger() throws IOException {
     super();
-    date = now.toString();
+    LocalDate now = LocalDate.now();
+    String date = now.toString();
+    LocalTime rn = LocalTime.now();
     cT = rn.toString();
     fr = new File("click_game/logs/" + date + ".log");
     fr.createNewFile();
     Log("Created Log file");
     if (!new File("click_game/logs/").isDirectory()) {
-      new src.main.Runner();
+      new Runner();
       Runner.initGameFolder();
     } else if (!new File("click_game/logs/" + date + ".log").exists()) {
       fr.createNewFile();
