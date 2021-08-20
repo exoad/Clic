@@ -37,7 +37,7 @@
  * 
  */
 
-package panels;
+package src.main.panels;
 
 import java.awt.Color;
 import java.awt.Component;

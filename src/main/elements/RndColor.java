@@ -37,7 +37,7 @@
  * 
  */
 
-package elements;
+package src.main.elements;
 
 import java.awt.Color;
 

@@ -37,7 +37,7 @@
  * 
  */
 
-package elements;
+package src.main.elements;
 
 import java.util.Random;
 public class InfoBox {

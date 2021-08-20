@@ -37,7 +37,7 @@
  * 
  */
 
-package panels;
+package src.main.panels;
 
 import javax.swing.*;
 import java.awt.*;
