@@ -37,7 +37,7 @@
  * 
  */
 
-package main.panels;
+package panels;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -54,7 +54,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import main.schedulers.ActionLogger;
+import schedulers.ActionLogger;
 
 public class Settings extends JPanel implements ActionListener, Runnable {
   private final JFrame frame;

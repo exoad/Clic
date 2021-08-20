@@ -1,4 +1,4 @@
-package main;
+package src.main;
 
 /**
  *           _____                    _____            _____                    _____

@@ -37,7 +37,7 @@
  * 
  */
 
-package main.elements;
+package elements;
 
 public enum DefaultValues {
   // 225, 229, 230

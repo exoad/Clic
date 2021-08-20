@@ -37,7 +37,7 @@
  * 
  */
 
-package main.handler;
+package handler;
 
 public class InputChoiceHandler {
   public InputChoiceHandler() {

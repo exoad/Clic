@@ -37,7 +37,7 @@
  * 
  */
 
-package main.handler;
+package handler;
 
 import java.io.File;
 

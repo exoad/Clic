@@ -37,7 +37,7 @@
  * 
  */
 
-package main.schedulers;
+package schedulers;
 
 import main.Runner;
 
