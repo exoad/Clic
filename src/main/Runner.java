@@ -1,4 +1,4 @@
-package src.main;
+package main;
 
 /**
  *           _____                    _____            _____                    _____
@@ -60,11 +60,11 @@ package src.main;
  *
  */
 
-import src.main.elements.InfoBox;
-import src.main.panels.Help;
-import src.main.panels.Settings;
-import src.main.schedulers.ActionLogger;
-import src.main.schedulers.FileScheduler;
+import main.elements.InfoBox;
+import main.panels.Help;
+import main.panels.Settings;
+import main.schedulers.ActionLogger;
+import main.schedulers.FileScheduler;
 
 import javax.swing.*;
 import java.awt.*;

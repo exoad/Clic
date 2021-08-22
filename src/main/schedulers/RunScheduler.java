@@ -37,9 +37,9 @@
  * 
  */
 
+package main.schedulers;
 
-
-import src.main.Runner;
+import main.Runner;
 
 public class RunScheduler extends Runner {
   public RunScheduler() {

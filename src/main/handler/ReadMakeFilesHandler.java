@@ -37,11 +37,11 @@
  * 
  */
 
-package src.main.handler;
+package main.handler;
 
 import java.io.File;
 
-import src.main.Runner;
+import main.Runner;
 
 public class ReadMakeFilesHandler {
   private final File gp;

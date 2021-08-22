@@ -37,7 +37,7 @@
  * 
  */
 
-package src.main.panels;
+package main.panels;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -54,13 +54,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import src.main.schedulers.ActionLogger;
-<<<<<<< HEAD
-public class Settings extends JPanel implements Runnable, ActionListener {
-=======
+import main.schedulers.ActionLogger;
 
 public class Settings extends JPanel implements ActionListener, Runnable {
->>>>>>> f2ed73e8ba22b9b83cc7f51ebc89d7a493f0aef3
   private final JFrame frame;
   private final JButton WIPELOGS, HELPMENU, RESETDATA, SAVEDATA;
 
@@ -95,33 +91,19 @@ public class Settings extends JPanel implements ActionListener, Runnable {
     HELPMENU.setBackground(Color.orange);
     RESETDATA.setBackground(Color.red);
     
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> f2ed73e8ba22b9b83cc7f51ebc89d7a493f0aef3
     SAVEDATA = new JButton("Save", saveIcon);
     SAVEDATA.setBackground(Color.blue);
     SAVEDATA.setAlignmentX(Component.CENTER_ALIGNMENT);
     SAVEDATA.addActionListener(this);
-<<<<<<< HEAD
-=======
->>>>>>> parent of 956c4a7 (add reset to settings frame)
-=======
->>>>>>> f2ed73e8ba22b9b83cc7f51ebc89d7a493f0aef3
 
     setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     setPreferredSize(new Dimension(300, 150));
     add(WIPELOGS);
     add(HELPMENU);
     add(RESETDATA);
-<<<<<<< HEAD
-<<<<<<< HEAD
     add(SAVEDATA);
-=======
->>>>>>> parent of 956c4a7 (add reset to settings frame)
-=======
+
     add(SAVEDATA);
->>>>>>> f2ed73e8ba22b9b83cc7f51ebc89d7a493f0aef3
 
     frame.add(this);
     frame.setAlwaysOnTop(true);
@@ -153,13 +135,9 @@ public class Settings extends JPanel implements ActionListener, Runnable {
         ex.printStackTrace();
       }
     } else if(e.getSource() == HELPMENU) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> f2ed73e8ba22b9b83cc7f51ebc89d7a493f0aef3
       new main.panels.Help().askRun();
     } else if(e.getSource() == SAVEDATA) {
-
+      System.out.println("idk");
     }
     /*else if(e.getSource() == RESETDATA) {
       mainLabel = 0;
@@ -171,8 +149,6 @@ public class Settings extends JPanel implements ActionListener, Runnable {
       multiplier.setText("Current Upgrade: " + multX);
       nextMultX.setText("Upgrade Cost: " + multCost);
       objec.setText("Current Objective: " + objNum);
-<<<<<<< HEAD
-=======
       new src.main.panels.Help().askRun();
     } else if(e.getSource() == RESETDATA) {
       float newMainx = 0;
@@ -183,9 +159,6 @@ public class Settings extends JPanel implements ActionListener, Runnable {
       rr.multiplier.setText("Current Upgrade: " + newMult);
       rr.nextMultX.setText("Upgrade Cost: " + newMultCost);
       rr.objec.setText("Current Objective: " + newObjNum);
->>>>>>> parent of 956c4a7 (add reset to settings frame)
-=======
->>>>>>> f2ed73e8ba22b9b83cc7f51ebc89d7a493f0aef3
 
       if (fsr.resetData())
         System.out.println("\nALL DATA RESET");
@@ -193,5 +166,6 @@ public class Settings extends JPanel implements ActionListener, Runnable {
         System.out.println("\nError Encountered while reseting");
     }
     */
+
   }
 }
