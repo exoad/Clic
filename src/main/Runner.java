@@ -90,6 +90,7 @@ public class Runner extends JPanel implements ActionListener, Runnable {
   public static int objNum;
   public static int multCost;
   public static int gotUpgrade;
+  public static int gotAutoUpgrade;
   public static int upgradeCost2;
   protected final static FileScheduler fsr = new FileScheduler();
 

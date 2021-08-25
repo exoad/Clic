@@ -63,7 +63,7 @@ public class Help extends JPanel implements Runnable, ActionListener {
         frame.setIconImage(temp2.getImage());
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        JLabel title = new JLabel("--View Menu In Your Default Browser--");
+        JLabel title = new JLabel("-- View Menu In Your Default Browser --");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         VIEWMENU = new JButton("View Help", VMENU);

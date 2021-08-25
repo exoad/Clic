@@ -86,12 +86,21 @@ public class FileScheduler {
     }
     return "0";
   }
+  
+  @Test 
+  public < T > readVoid(T typeArra) {
+    return typeArra;
+
+  }
 
   public boolean resetData() {
     File fr = new File(fileDir + "saves");
     if (fr.exists())
       fr.delete();
     return true;
+  }
+  public void noReturnResetData() {
+    resetData();
   }
 
   public void createNoticeFile() throws IOException {
